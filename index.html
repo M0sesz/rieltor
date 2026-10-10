@@ -1,0 +1,4545 @@
+<!DOCTYPE html>
+<html lang="ro">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+    />
+    <title>Lumen Estate | Închirieri Premium Sector 6 București</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      :root {
+        --bg: #090b0e;
+        --card: #12151c;
+        --card2: #181c26;
+        --card-hover: #1e2330;
+        --text: #f5f4f0;
+        --mute: #949ca8;
+        --gold: #c6a378;
+        --gold2: #e2be93;
+        --gold-glow: rgba(198, 163, 120, 0.25);
+        --line: rgba(255, 255, 255, 0.08);
+        --line-gold: rgba(198, 163, 120, 0.3);
+        --serif: "Cormorant Garamond", Georgia, serif;
+        --sans: "Plus Jakarta Sans", system-ui, -apple-system, sans-serif;
+        --ease: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        --ease-smooth: cubic-bezier(0.16, 1, 0.3, 1);
+      }
+
+      @keyframes pulse-pin {
+        0% {
+          box-shadow: 0 0 0 0 rgba(198, 163, 120, 0.6);
+        }
+        70% {
+          box-shadow: 0 0 0 12px rgba(198, 163, 120, 0);
+        }
+        100% {
+          box-shadow: 0 0 0 0 rgba(198, 163, 120, 0);
+        }
+      }
+
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      html {
+        scroll-behavior: smooth;
+        scroll-padding-top: 80px;
+        background: var(--bg);
+        color-scheme: dark;
+      }
+
+      body {
+        background: var(--bg);
+        color: var(--text);
+        font: 400 16px/1.6 var(--sans);
+        overflow-x: hidden;
+        width: 100%;
+        -webkit-font-smoothing: antialiased;
+      }
+
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+      button,
+      input,
+      select,
+      textarea {
+        font-family: inherit;
+      }
+
+      header {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 1000;
+        padding: 16px 5%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background: rgba(9, 11, 14, 0.88);
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+        border-bottom: 1px solid var(--line);
+        transition: var(--ease);
+      }
+
+      .logo {
+        font: 600 1.8rem var(--serif);
+        color: #fff;
+        letter-spacing: 0.5px;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+      }
+      .logo span {
+        font-style: italic;
+        color: var(--gold);
+        font-weight: 400;
+      }
+
+      nav ul {
+        display: flex;
+        gap: 24px;
+        list-style: none;
+      }
+      nav a {
+        color: var(--mute);
+        font-size: 0.82rem;
+        text-transform: uppercase;
+        letter-spacing: 1.5px;
+        font-weight: 500;
+        transition: var(--ease);
+      }
+      nav a:hover,
+      nav a.on {
+        color: var(--gold);
+      }
+
+      .hdr-right {
+        display: flex;
+        gap: 14px;
+        align-items: center;
+      }
+
+      .lang-btn {
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid var(--line-gold);
+        color: var(--text);
+        padding: 6px 14px;
+        border-radius: 30px;
+        font-size: 0.78rem;
+        font-weight: 600;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        transition: var(--ease);
+      }
+      .lang-btn:hover {
+        border-color: var(--gold);
+        color: var(--gold);
+      }
+
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        border: 1px solid var(--gold);
+        padding: 10px 22px;
+        border-radius: 40px;
+        color: var(--gold);
+        font-size: 0.8rem;
+        font-weight: 600;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        transition: var(--ease);
+        background: transparent;
+        cursor: pointer;
+      }
+      .btn:hover {
+        background: var(--gold);
+        color: var(--bg);
+        box-shadow: 0 4px 20px var(--gold-glow);
+        transform: translateY(-2px);
+      }
+      .btn.fill {
+        background: var(--gold);
+        color: var(--bg);
+      }
+      .btn.fill:hover {
+        background: var(--gold2);
+        border-color: var(--gold2);
+        transform: translateY(-2px);
+      }
+
+      .burger {
+        display: none;
+        background: none;
+        border: 1px solid var(--line);
+        color: #fff;
+        width: 42px;
+        height: 42px;
+        border-radius: 50%;
+        font-size: 1.2rem;
+        cursor: pointer;
+      }
+
+      .hero {
+        position: relative;
+        min-height: 100vh;
+        min-height: 100svh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 130px 20px 90px;
+        overflow: hidden;
+        background-color: #06070a;
+        perspective: 1200px;
+      }
+
+      .hero-bg-image {
+        position: absolute;
+        inset: -15%;
+        background-image: radial-gradient(
+            circle at 50% 30%,
+            rgba(198, 163, 120, 0.18) 0%,
+            transparent 60%
+          ),
+          linear-gradient(
+            180deg,
+            rgba(6, 7, 10, 0.45) 0%,
+            rgba(6, 7, 10, 0.85) 65%,
+            var(--bg) 100%
+          ),
+          url("https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=2200&q=85");
+        background-position: center;
+        background-size: cover;
+        background-repeat: no-repeat;
+        will-change: transform;
+        transform: translate3d(0, 0px, 0) scale(1.08);
+      }
+
+      .hero-canvas {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 1;
+        pointer-events: none;
+        opacity: 0.85;
+      }
+
+      .hero-spotlight {
+        position: absolute;
+        width: 700px;
+        height: 700px;
+        border-radius: 50%;
+        background: radial-gradient(
+          circle,
+          rgba(226, 190, 147, 0.22) 0%,
+          rgba(198, 163, 120, 0.08) 40%,
+          transparent 70%
+        );
+        pointer-events: none;
+        z-index: 1;
+        will-change: transform;
+        filter: blur(60px);
+        top: 10%;
+        left: 20%;
+      }
+
+      .hero-geo-lines {
+        position: absolute;
+        inset: 0;
+        z-index: 1;
+        pointer-events: none;
+        background-image: linear-gradient(
+            to right,
+            rgba(198, 163, 120, 0.04) 1px,
+            transparent 1px
+          ),
+          linear-gradient(
+            to bottom,
+            rgba(198, 163, 120, 0.04) 1px,
+            transparent 1px
+          );
+        background-size: 80px 80px;
+        mask-image: radial-gradient(
+          ellipse at center,
+          black 20%,
+          transparent 75%
+        );
+        -webkit-mask-image: radial-gradient(
+          ellipse at center,
+          black 20%,
+          transparent 75%
+        );
+      }
+
+      .hero-content {
+        position: relative;
+        z-index: 3;
+        max-width: 920px;
+        text-align: center;
+        margin: 0 auto;
+        will-change: transform, opacity;
+        transform-style: preserve-3d;
+      }
+
+      .tag {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 0.8rem;
+        text-transform: uppercase;
+        letter-spacing: 3px;
+        color: var(--gold2);
+        background: rgba(18, 21, 28, 0.7);
+        border: 1px solid var(--line-gold);
+        padding: 8px 20px;
+        border-radius: 30px;
+        margin-bottom: 24px;
+        backdrop-filter: blur(12px);
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+      }
+      .tag::before {
+        content: "";
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: var(--gold);
+        box-shadow: 0 0 8px var(--gold);
+      }
+
+      .hero-content h1 {
+        font: 400 clamp(2.8rem, 5.8vw, 5.4rem) / 1.06 var(--serif);
+        margin-bottom: 22px;
+        color: #fff;
+        text-shadow: 0 12px 35px rgba(0, 0, 0, 0.8);
+      }
+      .hero-content h1 em {
+        font-style: italic;
+        color: var(--gold);
+        font-weight: 400;
+      }
+
+      .hero-content p {
+        font-size: clamp(1.02rem, 1.8vw, 1.2rem);
+        color: #d1d6e0;
+        max-width: 660px;
+        margin: 0 auto 40px;
+        font-weight: 300;
+        text-shadow: 0 4px 16px rgba(0, 0, 0, 0.7);
+      }
+
+      .hs {
+        display: flex;
+        gap: 12px;
+        flex-wrap: wrap;
+        justify-content: center;
+        padding: 16px;
+        border-radius: 22px;
+        background: rgba(18, 21, 28, 0.88);
+        backdrop-filter: blur(24px);
+        -webkit-backdrop-filter: blur(24px);
+        border: 1px solid rgba(198, 163, 120, 0.4);
+        box-shadow: 0 25px 60px rgba(0, 0, 0, 0.7),
+          0 0 40px rgba(198, 163, 120, 0.15);
+        max-width: 840px;
+        margin: 0 auto;
+      }
+
+      .hs select {
+        flex: 1 1 180px;
+        padding: 14px 18px;
+        border-radius: 12px;
+        border: 1px solid var(--line);
+        background: rgba(9, 11, 14, 0.9);
+        color: #fff;
+        font: 400 0.9rem var(--sans);
+        outline: none;
+        cursor: pointer;
+        transition: var(--ease);
+      }
+      .hs select:focus {
+        border-color: var(--gold);
+      }
+
+      section {
+        position: relative;
+        z-index: 10;
+        padding: 110px 5%;
+        background: var(--bg);
+        overflow: hidden;
+        isolation: isolate;
+      }
+      section.alt {
+        background: var(--card);
+      }
+
+      .w {
+        max-width: 1280px;
+        margin: 0 auto;
+        width: 100%;
+      }
+      .sh {
+        margin-bottom: 46px;
+        position: relative;
+        z-index: 3;
+      }
+      .sn {
+        font-size: 0.85rem;
+        color: var(--gold);
+        letter-spacing: 2.5px;
+        display: block;
+        margin-bottom: 8px;
+        font-weight: 600;
+        text-transform: uppercase;
+      }
+      .st {
+        font: 400 clamp(2.2rem, 4.2vw, 3.6rem) / 1.08 var(--serif);
+        color: #fff;
+      }
+      .st em {
+        font-style: italic;
+        color: var(--gold);
+      }
+
+      .bignum {
+        position: absolute;
+        top: 20px;
+        z-index: 1;
+        font: 400 clamp(100px, 16vw, 220px) / 1 var(--serif);
+        color: transparent;
+        -webkit-text-stroke: 1px rgba(198, 163, 120, 0.14);
+        pointer-events: none;
+        user-select: none;
+        line-height: 0.8;
+      }
+
+      .rv {
+        opacity: 0;
+        transform: translateY(35px);
+        transition: opacity 0.85s var(--ease-smooth),
+          transform 0.85s var(--ease-smooth);
+      }
+      .rv:not(.in) {
+        will-change: opacity, transform;
+      }
+      .rv.rv-scale {
+        transform: scale(0.94) translateY(24px);
+      }
+      .rv.rv-left {
+        transform: translateX(-40px);
+      }
+      .rv.rv-right {
+        transform: translateX(40px);
+      }
+
+      .rv.in {
+        opacity: 1;
+        transform: none;
+      }
+
+      .rv-stagger:not(.in) > * {
+        opacity: 0;
+      }
+      @keyframes rise {
+        from {
+          opacity: 0;
+          transform: translateY(28px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      .rv-stagger.in > * {
+        animation: rise 0.85s var(--ease-smooth) backwards;
+        animation-delay: calc(var(--i, 0) * 80ms);
+      }
+
+      .stats {
+        position: relative;
+        z-index: 20;
+        padding: 0 5%;
+        margin-top: -30px;
+        margin-bottom: 30px;
+      }
+      .stats-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 1px;
+        background: var(--line-gold);
+        border: 1px solid var(--line-gold);
+        border-radius: 18px;
+        overflow: hidden;
+        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5);
+      }
+      .stat-card {
+        background: rgba(14, 17, 23, 0.95);
+        backdrop-filter: blur(16px);
+        padding: 22px 18px;
+        text-align: center;
+        transition: var(--ease);
+      }
+      .stat-card:hover {
+        background: rgba(24, 28, 38, 0.98);
+      }
+      .stat-info b {
+        display: block;
+        font: 400 clamp(2rem, 3.2vw, 2.8rem) / 1 var(--serif);
+        color: var(--gold);
+      }
+      .stat-info b[data-suffix]::after {
+        content: attr(data-suffix);
+        font-size: 0.85em;
+        color: var(--gold2);
+        margin-left: 2px;
+      }
+      .stat-info span {
+        display: block;
+        color: var(--mute);
+        font-size: 0.78rem;
+        letter-spacing: 0.8px;
+        margin-top: 6px;
+        text-transform: uppercase;
+      }
+
+      .ag-swipe-hint {
+        display: none;
+        justify-content: center;
+        align-items: center;
+        gap: 8px;
+        margin-top: 14px;
+        color: var(--gold);
+        font-size: 0.78rem;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+      }
+      .ag-swipe-hint span {
+        background: rgba(198, 163, 120, 0.1);
+        border: 1px solid var(--line-gold);
+        padding: 6px 16px;
+        border-radius: 20px;
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+      }
+
+      .show-more-wrap {
+        display: flex;
+        justify-content: center;
+        margin-top: 36px;
+      }
+
+      .rg-extra-wrap {
+        display: grid;
+        grid-template-rows: 0fr;
+        transition: grid-template-rows 0.55s var(--ease-smooth),
+          opacity 0.45s ease, margin-top 0.45s ease;
+        opacity: 0;
+        margin-top: 0;
+      }
+      .rg-extra-wrap.open {
+        grid-template-rows: 1fr;
+        opacity: 1;
+        margin-top: 28px;
+      }
+      .rg-extra-inner {
+        overflow: hidden;
+      }
+
+      .cg {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 50px;
+        align-items: center;
+        background: var(--card);
+        border-radius: 24px;
+        padding: 48px;
+        border: 1px solid var(--line);
+      }
+      .cg img {
+        width: 100%;
+        height: 420px;
+        border-radius: 18px;
+        object-fit: cover;
+        background: var(--card2);
+        border: 1px solid var(--line);
+      }
+      .cf {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 24px;
+        margin-top: 28px;
+      }
+      .cf h4 {
+        color: var(--gold);
+        font: 400 1.25rem var(--serif);
+        margin-bottom: 4px;
+      }
+      .cf p {
+        color: var(--mute);
+        font-size: 0.88rem;
+      }
+
+      .fbar {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(min(100%, 200px), 1fr));
+        gap: 20px;
+        padding: 26px;
+        border-radius: 20px;
+        background: var(--card);
+        border: 1px solid var(--line);
+        margin-bottom: 24px;
+      }
+      .fg label {
+        display: block;
+        font-size: 0.75rem;
+        text-transform: uppercase;
+        letter-spacing: 1.5px;
+        color: var(--mute);
+        margin-bottom: 10px;
+      }
+      .fg label b {
+        color: var(--gold);
+      }
+      .fg.wide {
+        grid-column: 1 / -1;
+      }
+      .fg select {
+        width: 100%;
+        padding: 12px 14px;
+        border-radius: 12px;
+        border: 1px solid var(--line);
+        background: var(--bg);
+        color: #fff;
+        font: 400 0.9rem var(--sans);
+        outline: none;
+      }
+      .fg input[type="range"] {
+        width: 100%;
+        accent-color: var(--gold);
+        cursor: pointer;
+      }
+      .chips {
+        display: flex;
+        gap: 8px;
+        flex-wrap: wrap;
+      }
+      .chip {
+        background: transparent;
+        border: 1px solid var(--line);
+        color: var(--mute);
+        padding: 7px 16px;
+        border-radius: 30px;
+        cursor: pointer;
+        transition: var(--ease);
+        font: 400 0.82rem var(--sans);
+      }
+      .chip:hover,
+      .chip.on {
+        background: var(--gold);
+        color: var(--bg);
+        border-color: var(--gold);
+        font-weight: 600;
+      }
+
+      .fm {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 28px;
+        color: var(--mute);
+        font-size: 0.9rem;
+        gap: 12px;
+        flex-wrap: wrap;
+      }
+      .fm button {
+        background: none;
+        border: 0;
+        color: var(--gold);
+        cursor: pointer;
+        text-decoration: underline;
+      }
+
+      .rg {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(min(100%, 320px), 1fr));
+        gap: 28px;
+      }
+      .rental-card {
+        background: var(--card);
+        border-radius: 18px;
+        overflow: hidden;
+        border: 1px solid var(--line);
+        transition: var(--ease);
+        cursor: pointer;
+        display: flex;
+        flex-direction: column;
+      }
+      .rental-card:hover {
+        transform: translateY(-8px);
+        border-color: var(--line-gold);
+        box-shadow: 0 16px 40px rgba(0, 0, 0, 0.4);
+        background: var(--card2);
+      }
+      .ph {
+        position: relative;
+        height: 230px;
+        background: var(--card2);
+        overflow: hidden;
+      }
+      .ph img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.8s var(--ease-smooth);
+      }
+      .rental-card:hover .ph img {
+        transform: scale(1.08);
+      }
+      .bdg {
+        position: absolute;
+        left: 14px;
+        top: 14px;
+        background: var(--gold);
+        color: var(--bg);
+        font-size: 0.7rem;
+        font-weight: 700;
+        padding: 4px 12px;
+        border-radius: 20px;
+        letter-spacing: 0.5px;
+        text-transform: uppercase;
+      }
+      .zn {
+        position: absolute;
+        right: 14px;
+        bottom: 12px;
+        background: rgba(9, 11, 14, 0.82);
+        backdrop-filter: blur(8px);
+        font-size: 0.75rem;
+        padding: 4px 12px;
+        border-radius: 20px;
+        color: #fff;
+        border: 1px solid var(--line);
+      }
+      .rb {
+        padding: 24px;
+        display: flex;
+        flex-direction: column;
+        flex: 1;
+      }
+      .rp {
+        font: 400 1.9rem var(--serif);
+        color: var(--gold);
+      }
+      .rp span {
+        font: 300 0.85rem var(--sans);
+        color: var(--mute);
+      }
+      .rb h3 {
+        font-size: 1.1rem;
+        font-weight: 500;
+        margin: 8px 0 12px;
+        color: #fff;
+      }
+      .rm {
+        display: flex;
+        gap: 14px;
+        flex-wrap: wrap;
+        color: var(--mute);
+        font-size: 0.82rem;
+        padding-top: 14px;
+        border-top: 1px solid var(--line);
+        margin-top: auto;
+      }
+      .tg {
+        display: flex;
+        gap: 6px;
+        flex-wrap: wrap;
+        margin-top: 12px;
+      }
+      .tg span {
+        font-size: 0.7rem;
+        padding: 3px 10px;
+        border-radius: 20px;
+        border: 1px solid var(--line);
+        color: #b9bec7;
+      }
+
+      .mapwrap {
+        position: relative;
+        width: 100%;
+      }
+      .cmap {
+        position: relative;
+        height: 620px;
+        width: 100%;
+        border-radius: 26px;
+        border: 1px solid var(--line-gold);
+        overflow: hidden;
+        background: #090c10;
+        box-shadow: 0 24px 60px rgba(0, 0, 0, 0.7),
+          0 0 30px rgba(198, 163, 120, 0.1);
+        cursor: grab;
+        touch-action: pan-y;
+        user-select: none;
+        -webkit-user-select: none;
+      }
+      .cmap.zoomed {
+        touch-action: none;
+      }
+      .cmap.drag {
+        cursor: grabbing;
+      }
+      .world {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 1000px;
+        height: 640px;
+        transform-origin: 0 0;
+        will-change: transform;
+      }
+      .world.anim {
+        transition: transform 0.7s var(--ease-smooth);
+      }
+      .world svg {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 1000px;
+        height: 640px;
+        display: block;
+      }
+      .pin {
+        position: absolute;
+        z-index: 2;
+        transform: translate(-50%, -100%) scale(var(--inv, 1));
+        transform-origin: 50% 100%;
+        background: rgba(18, 21, 28, 0.96);
+        border: 1.5px solid var(--gold);
+        color: var(--gold);
+        padding: 6px 12px;
+        border-radius: 20px;
+        font: 700 0.8rem var(--sans);
+        white-space: nowrap;
+        cursor: pointer;
+        box-shadow: 0 6px 18px rgba(0, 0, 0, 0.6);
+        transition: background 0.25s, color 0.25s;
+        animation: pinIn 0.6s var(--ease-smooth) backwards;
+        animation-delay: calc(var(--i, 0) * 60ms);
+      }
+      .pin::after {
+        content: "";
+        position: absolute;
+        left: 50%;
+        bottom: -6px;
+        width: 9px;
+        height: 9px;
+        margin-left: -5px;
+        background: inherit;
+        border: 1.5px solid var(--gold);
+        border-top: 0;
+        border-left: 0;
+        transform: rotate(45deg);
+      }
+      .pin:hover,
+      .pin:focus-visible {
+        background: var(--gold);
+        color: var(--bg);
+        z-index: 6;
+      }
+      .pin.on {
+        background: var(--gold);
+        color: var(--bg);
+        z-index: 7;
+        box-shadow: 0 0 0 0 var(--gold-glow);
+        animation: pulse-pin 2s infinite;
+      }
+      @keyframes pinIn {
+        from {
+          opacity: 0;
+          margin-top: -18px;
+        }
+      }
+      .mleg {
+        position: absolute;
+        left: 18px;
+        top: 18px;
+        z-index: 20;
+        display: flex;
+        gap: 8px 16px;
+        flex-wrap: wrap;
+        max-width: calc(100% - 90px);
+        font-size: 0.75rem;
+        color: var(--mute);
+        background: rgba(9, 11, 14, 0.88);
+        padding: 10px 16px;
+        border-radius: 16px;
+        border: 1px solid var(--line);
+        backdrop-filter: blur(10px);
+      }
+      .mleg i {
+        display: inline-block;
+        width: 9px;
+        height: 9px;
+        border-radius: 50%;
+        margin-right: 6px;
+        vertical-align: middle;
+      }
+      .mctl {
+        position: absolute;
+        right: 18px;
+        top: 18px;
+        z-index: 20;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
+      .mctl button {
+        width: 46px;
+        height: 46px;
+        border-radius: 50%;
+        background: rgba(18, 21, 28, 0.94);
+        border: 1px solid var(--line-gold);
+        color: #fff;
+        font-size: 1.25rem;
+        cursor: pointer;
+        transition: var(--ease);
+        display: grid;
+        place-items: center;
+      }
+      .mctl button:hover {
+        background: var(--gold);
+        color: var(--bg);
+        transform: scale(1.05);
+      }
+      .mhint {
+        position: absolute;
+        right: 18px;
+        bottom: 14px;
+        z-index: 10;
+        font-size: 0.75rem;
+        color: var(--mute);
+        background: rgba(9, 11, 14, 0.78);
+        padding: 6px 14px;
+        border-radius: 20px;
+        pointer-events: none;
+        backdrop-filter: blur(8px);
+      }
+      .mcard {
+        position: absolute;
+        left: 18px;
+        bottom: 18px;
+        z-index: 30;
+        width: min(360px, calc(100% - 36px));
+        display: none;
+        gap: 14px;
+        background: rgba(18, 21, 28, 0.98);
+        border: 1px solid var(--line-gold);
+        border-radius: 18px;
+        padding: 12px;
+        box-shadow: 0 20px 45px rgba(0, 0, 0, 0.7);
+        cursor: default;
+      }
+      .mcard.show {
+        display: flex;
+      }
+      .mcard img {
+        width: 96px;
+        height: 96px;
+        object-fit: cover;
+        border-radius: 12px;
+        flex: none;
+        background: var(--card2);
+      }
+      .mcard h4 {
+        font: 400 1.25rem/1.15 var(--serif);
+        color: #fff;
+        margin-right: 22px;
+      }
+      .mcard .pr {
+        color: var(--gold);
+        font-weight: 700;
+        margin: 3px 0;
+      }
+      .mcard .pr small {
+        color: var(--mute);
+        font-weight: 400;
+      }
+      .mcard .mm {
+        color: var(--mute);
+        font-size: 0.78rem;
+        margin-bottom: 8px;
+      }
+      .mcard button:not(.mx) {
+        padding: 8px 16px;
+        background: var(--gold);
+        color: var(--bg);
+        border: 0;
+        border-radius: 8px;
+        font-size: 0.78rem;
+        font-weight: 700;
+        cursor: pointer;
+      }
+      .mcard .mx {
+        position: absolute;
+        right: 8px;
+        top: 6px;
+        background: none;
+        border: 0;
+        color: #fff;
+        font-size: 1.3rem;
+        cursor: pointer;
+        width: 30px;
+        height: 30px;
+      }
+
+      .rc {
+        background: var(--card);
+        border-radius: 20px;
+        padding: 32px 24px;
+        text-align: center;
+        border: 1px solid var(--line);
+        transition: var(--ease);
+      }
+      .rc:hover {
+        border-color: var(--gold);
+        transform: translateY(-6px);
+      }
+
+      .rev-grid {
+        display: grid;
+        grid-template-columns: 0.8fr 1.4fr;
+        gap: 34px;
+        align-items: stretch;
+        width: 100%;
+        max-width: 100%;
+      }
+      .rev-grid > * {
+        min-width: 0;
+      }
+
+      .rev-sum {
+        background: var(--bg);
+        border: 1px solid var(--line-gold);
+        border-radius: 24px;
+        padding: 36px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        gap: 26px;
+      }
+      .rev-score {
+        font: 400 clamp(4rem, 8vw, 6.5rem) / 1 var(--serif);
+        color: var(--gold);
+      }
+      .stars {
+        color: var(--gold);
+        letter-spacing: 3px;
+      }
+      .rev-sum p {
+        color: var(--mute);
+        font-size: 0.92rem;
+      }
+      .stack {
+        display: flex;
+        margin-bottom: 12px;
+      }
+      .stack img {
+        width: 44px;
+        height: 44px;
+        border-radius: 50%;
+        object-fit: cover;
+        border: 2px solid var(--bg);
+        margin-left: -12px;
+        background: var(--card2);
+      }
+      .stack img:first-child {
+        margin-left: 0;
+      }
+
+      .rev-car {
+        position: relative;
+        overflow: hidden;
+        border-radius: 24px;
+        width: 100%;
+        max-width: 100%;
+      }
+      .rev-track {
+        display: flex;
+        transition: transform 0.7s var(--ease-smooth);
+        touch-action: pan-y;
+        width: 100%;
+      }
+      .rev-slide {
+        min-width: 100%;
+        max-width: 100%;
+        flex: 0 0 100%;
+        box-sizing: border-box;
+      }
+      .rev-card {
+        height: 100%;
+        background: var(--bg);
+        border: 1px solid var(--line);
+        border-radius: 24px;
+        padding: 34px;
+        display: flex;
+        flex-direction: column;
+        gap: 22px;
+        box-sizing: border-box;
+        width: 100%;
+        max-width: 100%;
+        overflow: hidden;
+      }
+      .rev-top {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        flex-wrap: wrap;
+      }
+      .av {
+        width: 56px;
+        height: 56px;
+        border-radius: 50%;
+        object-fit: cover;
+        border: 2px solid var(--gold);
+        background: var(--card2);
+        flex: none;
+      }
+      .av-i {
+        display: grid;
+        place-items: center;
+        color: var(--gold);
+        font: 600 1.3rem var(--serif);
+      }
+      .rev-top b {
+        display: block;
+        color: #fff;
+        font-weight: 600;
+      }
+      .rev-top span {
+        color: var(--mute);
+        font-size: 0.82rem;
+      }
+      .rev-top .stars {
+        margin-left: auto;
+        font-size: 0.9rem;
+        letter-spacing: 2px;
+      }
+      .rev-card blockquote {
+        font: 400 clamp(1.2rem, 2.1vw, 1.65rem) / 1.38 var(--serif);
+        color: #fff;
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+      }
+      .rev-apt {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin-top: auto;
+        padding: 10px;
+        border: 1px solid var(--line);
+        border-radius: 14px;
+        background: rgba(255, 255, 255, 0.03);
+        max-width: 100%;
+        overflow: hidden;
+      }
+      .rev-apt img {
+        width: 68px;
+        height: 50px;
+        object-fit: cover;
+        border-radius: 8px;
+        flex-shrink: 0;
+        background: var(--card2);
+      }
+      .rev-apt div {
+        min-width: 0;
+      }
+      .rev-apt small {
+        color: var(--mute);
+        display: block;
+        font-size: 0.74rem;
+      }
+      .rev-apt b {
+        color: var(--gold);
+        font-weight: 600;
+        font-size: 0.9rem;
+      }
+      .carousel-controls {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 16px;
+        margin-top: 22px;
+      }
+      .c-btn {
+        background: var(--bg);
+        border: 1px solid var(--line);
+        color: #fff;
+        width: 44px;
+        height: 44px;
+        border-radius: 50%;
+        cursor: pointer;
+        transition: var(--ease);
+        font-size: 1.1rem;
+      }
+      .c-btn:hover {
+        border-color: var(--gold);
+        color: var(--gold);
+      }
+      .dots {
+        display: flex;
+        gap: 8px;
+      }
+      .dot {
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background: var(--line);
+        border: 0;
+        padding: 0;
+        cursor: pointer;
+        transition: var(--ease);
+      }
+      .dot.act {
+        background: var(--gold);
+        width: 26px;
+        border-radius: 10px;
+      }
+
+      .agent-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 28px;
+        align-items: start;
+      }
+      .ag {
+        background: var(--card);
+        border: 1px solid var(--line);
+        border-radius: 26px;
+        overflow: hidden;
+        transition: var(--ease);
+      }
+      .ag:nth-child(2) {
+        margin-top: 48px;
+      }
+      .ag:hover {
+        border-color: var(--line-gold);
+        transform: translateY(-8px);
+        box-shadow: 0 24px 50px rgba(0, 0, 0, 0.45);
+      }
+      .ag-ph {
+        position: relative;
+        aspect-ratio: 4/4.3;
+        overflow: hidden;
+        background: var(--card2);
+      }
+      .ag-ph img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center 22%;
+        filter: grayscale(0.55) contrast(1.05);
+        transition: filter 0.6s, transform 1s var(--ease-smooth);
+      }
+      .ag:hover .ag-ph img {
+        filter: none;
+        transform: scale(1.05);
+      }
+      .ag-ph::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+          180deg,
+          transparent 45%,
+          rgba(18, 21, 28, 0.97)
+        );
+      }
+      .ag-lang {
+        position: absolute;
+        top: 16px;
+        left: 16px;
+        z-index: 2;
+        display: flex;
+        gap: 6px;
+      }
+      .ag-lang span {
+        background: rgba(9, 11, 14, 0.7);
+        backdrop-filter: blur(8px);
+        border: 1px solid var(--line);
+        border-radius: 20px;
+        padding: 3px 10px;
+        font-size: 0.7rem;
+        font-weight: 600;
+      }
+      .ag-name {
+        position: absolute;
+        left: 22px;
+        right: 22px;
+        bottom: 18px;
+        z-index: 2;
+      }
+      .ag-name h3 {
+        font: 400 1.8rem var(--serif);
+        color: #fff;
+      }
+      .ag-name .r {
+        color: var(--gold);
+        font-size: 0.85rem;
+        font-weight: 500;
+      }
+      .ag-b {
+        padding: 20px 22px 24px;
+      }
+      .ag-stats {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 8px;
+        text-align: center;
+        padding-bottom: 18px;
+        margin-bottom: 18px;
+        border-bottom: 1px solid var(--line);
+      }
+      .ag-stats b {
+        display: block;
+        font: 400 1.7rem var(--serif);
+        color: var(--gold);
+      }
+      .ag-stats small {
+        color: var(--mute);
+        font-size: 0.72rem;
+      }
+      .sb-group {
+        display: flex;
+        gap: 8px;
+      }
+      .sb {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        flex: 1;
+        min-height: 44px;
+        padding: 8px 14px;
+        border-radius: 22px;
+        background: rgba(255, 255, 255, 0.04);
+        color: #fff;
+        font-size: 0.8rem;
+        transition: var(--ease);
+        border: 1px solid var(--line);
+      }
+      .sb:hover {
+        background: var(--gold);
+        color: var(--bg);
+        border-color: var(--gold);
+      }
+      .sb.ic {
+        flex: 0 0 44px;
+        padding: 0;
+      }
+
+      .faq-wrap {
+        max-width: 860px;
+        margin: 0 auto;
+      }
+      .faq-item {
+        border-bottom: 1px solid var(--line);
+        transition: border-color 0.4s var(--ease-smooth);
+      }
+      .faq-item.open {
+        border-color: var(--line-gold);
+      }
+      .faq-q {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 18px;
+        padding: 22px 0;
+        background: none;
+        border: 0;
+        color: #fff;
+        font: 400 1.4rem/1.25 var(--serif);
+        text-align: left;
+        cursor: pointer;
+        transition: color 0.3s;
+        -webkit-tap-highlight-color: transparent;
+      }
+      .faq-q:hover {
+        color: var(--gold);
+      }
+      .faq-q:focus-visible {
+        outline: 2px solid var(--gold);
+        outline-offset: 2px;
+        border-radius: 8px;
+      }
+      .faq-qt {
+        flex: 1;
+        min-width: 0;
+      }
+      .faq-icon {
+        flex: none;
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        border: 1px solid var(--line-gold);
+        display: grid;
+        place-items: center;
+        color: var(--gold);
+        transition: transform 0.5s var(--ease-smooth), background 0.3s,
+          color 0.3s, border-color 0.3s;
+      }
+      .faq-icon svg {
+        width: 14px;
+        height: 14px;
+        display: block;
+        fill: none;
+        stroke: currentColor;
+        stroke-width: 2.4;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+      }
+      .faq-item.open .faq-icon {
+        transform: rotate(180deg);
+        background: var(--gold);
+        color: var(--bg);
+        border-color: var(--gold);
+      }
+      .faq-ans {
+        display: grid;
+        grid-template-rows: 0fr;
+        transition: grid-template-rows 0.5s var(--ease-smooth);
+      }
+      .faq-item.open .faq-ans {
+        grid-template-rows: 1fr;
+      }
+      .faq-ans-inner {
+        overflow: hidden;
+        min-height: 0;
+        visibility: hidden;
+        opacity: 0;
+        transform: translateY(-6px);
+        transition: opacity 0.3s ease, transform 0.45s var(--ease-smooth),
+          visibility 0s 0.5s;
+      }
+      .faq-item.open .faq-ans-inner {
+        visibility: visible;
+        opacity: 1;
+        transform: none;
+        transition: opacity 0.4s ease 0.08s, transform 0.5s var(--ease-smooth),
+          visibility 0s;
+      }
+      .faq-ans p {
+        color: var(--mute);
+        font-size: 0.95rem;
+        line-height: 1.65;
+        padding: 0 48px 22px 0;
+      }
+
+      footer {
+        background: #060709;
+        padding: 80px 5% 36px;
+        border-top: 1px solid var(--line);
+        position: relative;
+        overflow: hidden;
+      }
+      .fw {
+        display: grid;
+        grid-template-columns: 1fr 1.2fr;
+        gap: 60px;
+        max-width: 1280px;
+        margin: 0 auto;
+      }
+      .cf2 input,
+      .cf2 select,
+      .cf2 textarea {
+        width: 100%;
+        padding: 14px 16px;
+        margin-bottom: 14px;
+        background: var(--card);
+        border: 1px solid var(--line);
+        border-radius: 12px;
+        color: #fff;
+        font: 400 0.9rem var(--sans);
+        outline: none;
+      }
+      .cf2 input:focus,
+      .cf2 select:focus,
+      .cf2 textarea:focus {
+        border-color: var(--gold);
+      }
+      .cf2 .two {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 14px;
+      }
+      .ok {
+        display: none;
+        padding: 16px;
+        border-radius: 12px;
+        background: rgba(198, 163, 120, 0.15);
+        border: 1px solid var(--gold);
+        color: var(--gold2);
+        margin-top: 14px;
+        text-align: center;
+      }
+
+      dialog {
+        margin: auto;
+        border: 1px solid var(--line-gold);
+        background: var(--card);
+        color: var(--text);
+        border-radius: 24px;
+        padding: 0;
+        width: min(920px, 94vw);
+        max-height: 92vh;
+        overflow: auto;
+        box-shadow: 0 25px 60px rgba(0, 0, 0, 0.85);
+        opacity: 0;
+        transform: scale(0.92) translateY(24px);
+        transition: opacity 0.4s var(--ease-smooth),
+          transform 0.4s var(--ease-smooth), display 0.4s allow-discrete;
+      }
+      dialog[open] {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+      }
+      @starting-style {
+        dialog[open] {
+          opacity: 0;
+          transform: scale(0.92) translateY(24px);
+        }
+      }
+      dialog::backdrop {
+        background: rgba(0, 0, 0, 0.8);
+        backdrop-filter: blur(10px);
+        opacity: 0;
+        transition: opacity 0.4s var(--ease-smooth);
+      }
+      dialog[open]::backdrop {
+        opacity: 1;
+      }
+
+      .mg {
+        display: grid;
+        grid-template-columns: 1.1fr 1fr;
+      }
+      .mi {
+        min-height: 380px;
+        background: var(--card2);
+        position: relative;
+      }
+      .mi img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+      }
+      .mb {
+        padding: 36px;
+        position: relative;
+      }
+      .mb h3 {
+        font: 400 2.1rem/1.1 var(--serif);
+        margin: 10px 36px 8px 0;
+        color: #fff;
+      }
+      .mb > p {
+        color: var(--mute);
+        font-size: 0.92rem;
+        margin: 14px 0;
+      }
+     .x {
+    position: absolute;
+    right: 20px;
+    top: 18px;
+    width: 30px;
+    height: 30px;
+    padding: 0;
+    border-radius: 50%;
+    border: 1px solid var(--line);
+    background: rgba(255, 255, 255, 0.05);
+    color: #fff;
+    font-size: 1.3rem;
+    line-height: 1;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    transition: var(--ease);
+}
+      .x:hover {
+        background: var(--gold);
+        color: var(--bg);
+        transform: rotate(90deg);
+      }
+      dl {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 12px 16px;
+        margin: 20px 0;
+      }
+      dt {
+        font-size: 0.72rem;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        color: var(--mute);
+      }
+      dd {
+        font-size: 0.95rem;
+        color: #fff;
+        font-weight: 500;
+      }
+      .mbt {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+        margin-top: 24px;
+      }
+
+      .orb {
+        position: absolute;
+        border-radius: 50%;
+        background: var(--gold);
+        filter: blur(70px);
+        opacity: 0.12;
+        pointer-events: none;
+        will-change: transform;
+        z-index: 0;
+      }
+
+      @media (max-width: 900px) {
+        .burger {
+          display: block;
+        }
+        .hdr-right .btn {
+          display: none;
+        }
+        nav {
+          position: fixed;
+          inset: 72px 0 auto 0;
+          background: rgba(9, 11, 14, 0.96);
+          backdrop-filter: blur(20px);
+          padding: 26px 5% 36px;
+          border-bottom: 1px solid var(--line);
+          transform: translateY(-140%);
+          transition: transform 0.4s var(--ease-smooth);
+        }
+        nav.open {
+          transform: translateY(0);
+        }
+        nav ul {
+          flex-direction: column;
+          gap: 20px;
+        }
+        nav a {
+          font-size: 1.05rem;
+        }
+        .cg,
+        .fw,
+        .mg {
+          grid-template-columns: 1fr;
+        }
+        .cg {
+          padding: 28px;
+        }
+        .cg img {
+          height: 260px;
+        }
+        .mi {
+          min-height: 250px;
+        }
+        .cf2 .two {
+          grid-template-columns: 1fr;
+        }
+        header {
+          backdrop-filter: none;
+          -webkit-backdrop-filter: none;
+          background: rgba(9, 11, 14, 0.97);
+          padding: 12px 5%;
+          padding-top: calc(12px + env(safe-area-inset-top, 0px));
+        }
+        nav {
+          inset: auto;
+          top: calc(66px + env(safe-area-inset-top, 0px));
+          left: 0;
+          right: 0;
+          max-height: calc(100svh - 70px);
+          overflow: auto;
+        }
+        section {
+          padding: 76px 5%;
+        }
+        .sh {
+          margin-bottom: 30px;
+        }
+        .hero {
+          padding: 120px 18px 70px;
+        }
+        .hs select,
+        .hs .btn {
+          flex: 1 1 100%;
+          min-height: 48px;
+        }
+        .stats {
+          margin-top: -15px;
+          margin-bottom: 15px;
+        }
+        .stats-grid {
+          grid-template-columns: repeat(2, 1fr);
+          border-radius: 14px;
+        }
+        .stat-card {
+          padding: 14px 10px;
+        }
+        .stat-info span {
+          font-size: 0.7rem;
+          margin-top: 4px;
+        }
+        .ag-swipe-hint {
+          display: flex;
+        }
+        .rev-grid {
+          grid-template-columns: 1fr;
+          gap: 24px;
+        }
+        .rev-sum {
+          padding: 26px;
+        }
+        .agent-grid {
+          display: flex;
+          overflow-x: auto;
+          scroll-snap-type: x mandatory;
+          gap: 16px;
+          margin: 0 -5vw;
+          padding: 4px 5vw 18px;
+          scrollbar-width: none;
+        }
+        .agent-grid::-webkit-scrollbar {
+          display: none;
+        }
+        .ag {
+          flex: 0 0 82%;
+          scroll-snap-align: center;
+        }
+        .ag:nth-child(2) {
+          margin-top: 0;
+        }
+        .bignum {
+          font-size: 32vw;
+          top: 10px;
+        }
+        dialog {
+          width: 100%;
+          max-width: 100%;
+          margin: auto 0 0;
+          border-radius: 24px 24px 0 0;
+          max-height: 94svh;
+        }
+        .mi {
+          min-height: 220px;
+          height: 220px;
+        }
+        .mb {
+          padding: 24px;
+        }
+        .mb h3 {
+          font-size: 1.8rem;
+        }
+        .cmap {
+          height: 500px;
+        }
+      }
+      @media (max-width: 600px) {
+        .fbar {
+          grid-template-columns: 1fr;
+          padding: 18px;
+        }
+        .cf {
+          grid-template-columns: 1fr;
+        }
+        .chip {
+          min-height: 38px;
+        }
+        .cmap {
+          height: 460px;
+        }
+        .mcard img {
+          width: 76px;
+          height: 76px;
+        }
+        .mhint {
+          display: none;
+        }
+        .rev-card {
+          padding: 22px;
+        }
+        .rev-top .stars {
+          display: none;
+        }
+        .cg {
+          padding: 20px;
+        }
+        .cg img {
+          height: 220px;
+        }
+        .stats-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+      @media (max-width: 380px) {
+        .logo {
+          font-size: 1.45rem;
+        }
+        .lang-btn {
+          padding: 6px 10px;
+        }
+        .hdr-right {
+          gap: 8px;
+        }
+      }
+      @media (hover: none) {
+        .rental-card:hover,
+        .ag:hover,
+        .rc:hover {
+          transform: none;
+        }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        html {
+          scroll-behavior: auto;
+        }
+        .rv,
+        .rv-stagger > * {
+          opacity: 1 !important;
+          transform: none !important;
+          transition: none !important;
+          animation: none !important;
+        }
+        .pin,
+        .pin.on {
+          animation: none;
+        }
+      }
+
+      /* ===== ПЛАВНІСТЬ ===== */
+      .hero-dim {
+        position: absolute;
+        inset: 0;
+        z-index: 0;
+        background: #06070a;
+        opacity: 0;
+        pointer-events: none;
+      }
+      .stat-info b {
+        font-variant-numeric: tabular-nums;
+      }
+      @keyframes cardIn {
+        from {
+          opacity: 0;
+          transform: translateY(18px);
+        }
+      }
+      .rental-card {
+        animation: cardIn 0.55s var(--ease-smooth) backwards;
+        animation-delay: calc(var(--i, 0) * 55ms);
+      }
+      .noanim .rental-card,
+      .noanim .pin {
+        animation: none !important;
+      }
+      .rg-extra-inner {
+        padding: 14px;
+        margin: -14px;
+      }
+
+      /* ===== КАСТОМНІ ВИПАДАЮЧІ СПИСКИ ===== */
+      .csel {
+        position: relative;
+        min-width: 0;
+      }
+      .hs .csel {
+        flex: 1 1 180px;
+      }
+      .csel-native {
+        position: absolute !important;
+        opacity: 0 !important;
+        pointer-events: none !important;
+        width: 1px !important;
+        height: 1px !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        border: 0 !important;
+        overflow: hidden !important;
+      }
+      .csel-btn {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        padding: 14px 16px 14px 18px;
+        min-height: 48px;
+        border-radius: 14px;
+        border: 1px solid var(--line);
+        background: rgba(9, 11, 14, 0.88);
+        color: #fff;
+        font: 400 0.9rem var(--sans);
+        text-align: left;
+        cursor: pointer;
+        transition: border-color 0.3s, box-shadow 0.3s, background 0.3s;
+        -webkit-tap-highlight-color: transparent;
+      }
+      .csel-btn:hover {
+        border-color: var(--line-gold);
+      }
+      .csel-btn.open,
+      .csel-btn:focus-visible {
+        border-color: var(--gold);
+        box-shadow: 0 0 0 3px var(--gold-glow);
+        outline: none;
+      }
+      .csel-val {
+        flex: 1;
+        min-width: 0;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+      .csel-btn svg {
+        flex: none;
+        width: 18px;
+        height: 18px;
+        display: block;
+        fill: none;
+        stroke: var(--gold);
+        stroke-width: 2.2;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        transition: transform 0.35s var(--ease-smooth);
+      }
+      .csel-btn.open svg {
+        transform: rotate(180deg);
+      }
+      .fg .csel-btn {
+        background: var(--bg);
+        padding: 12px 14px 12px 16px;
+        min-height: 46px;
+      }
+      .csel-panel {
+        position: fixed;
+        z-index: 3000;
+        min-width: 200px;
+        max-width: calc(100vw - 24px);
+        background: rgba(18, 21, 28, 0.97);
+        -webkit-backdrop-filter: blur(18px);
+        backdrop-filter: blur(18px);
+        border: 1px solid var(--line-gold);
+        border-radius: 16px;
+        box-shadow: 0 24px 60px rgba(0, 0, 0, 0.7);
+        padding: 6px;
+        opacity: 0;
+        transform: translateY(-6px) scale(0.98);
+        transform-origin: top;
+        transition: opacity 0.2s, transform 0.28s var(--ease-smooth);
+      }
+      .csel-panel.up {
+        transform-origin: bottom;
+        transform: translateY(6px) scale(0.98);
+      }
+      .csel-panel.in {
+        opacity: 1;
+        transform: none;
+      }
+      .csel-list {
+        max-height: min(300px, 45vh);
+        overflow: auto;
+        overscroll-behavior: contain;
+        scrollbar-width: thin;
+        scrollbar-color: var(--line-gold) transparent;
+      }
+      .csel-opt {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 14px;
+        padding: 12px 14px;
+        border-radius: 10px;
+        cursor: pointer;
+        font-size: 0.92rem;
+        color: #d3d8e0;
+        transition: background 0.15s, color 0.15s;
+        user-select: none;
+        -webkit-user-select: none;
+      }
+      .csel-opt:hover,
+      .csel-opt.act {
+        background: rgba(198, 163, 120, 0.13);
+        color: #fff;
+      }
+      .csel-opt.sel {
+        color: var(--gold);
+        font-weight: 600;
+      }
+      .csel-opt svg {
+        flex: none;
+        width: 16px;
+        height: 16px;
+        fill: none;
+        stroke: var(--gold);
+        stroke-width: 2.6;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        opacity: 0;
+      }
+      .csel-opt.sel svg {
+        opacity: 1;
+      }
+      .csel-ov {
+        position: fixed;
+        inset: 0;
+        z-index: 2999;
+        background: rgba(0, 0, 0, 0.6);
+        -webkit-backdrop-filter: blur(4px);
+        backdrop-filter: blur(4px);
+        opacity: 0;
+        transition: opacity 0.25s;
+        touch-action: none;
+      }
+      .csel-ov.in {
+        opacity: 1;
+      }
+      .csel-title {
+        padding: 6px 14px 12px;
+        font: 400 1.35rem var(--serif);
+        color: #fff;
+        border-bottom: 1px solid var(--line);
+        margin-bottom: 6px;
+      }
+
+      /* ===== МОБІЛЬНІ ДОПРАВКИ ===== */
+      @media (max-width: 900px) {
+        .hs .csel {
+          flex: 1 1 100%;
+        }
+        .rv.rv-left:not(.in),
+        .rv.rv-right:not(.in) {
+          transform: translateY(28px);
+        }
+        .faq-q {
+          font-size: 1.25rem;
+          padding: 18px 0;
+        }
+        .faq-ans p {
+          padding-right: 0;
+        }
+      }
+      @media (max-width: 600px) {
+        .csel-panel.sheet {
+          left: 0 !important;
+          right: 0;
+          top: auto !important;
+          bottom: 0;
+          width: 100%;
+          max-width: 100%;
+          min-width: 0 !important;
+          border-radius: 22px 22px 0 0;
+          padding: 14px 14px calc(14px + env(safe-area-inset-bottom, 0px));
+          transform: translateY(100%);
+          transform-origin: bottom;
+        }
+        .csel-panel.sheet.in {
+          transform: none;
+        }
+        .csel-opt {
+          padding: 15px 14px;
+          font-size: 1rem;
+        }
+        .csel-list {
+          max-height: 55vh;
+        }
+      }
+      @media (hover: none) {
+        .hero {
+          perspective: none;
+        }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        .rental-card {
+          animation: none;
+        }
+        .faq-ans,
+        .faq-ans-inner,
+        .faq-icon {
+          transition: none;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <a href="#top" class="logo">Lumen <span>Estate</span></a>
+      <nav id="nav">
+        <ul>
+          <li><a href="#concept" data-i18n="nav_concept">Concept</a></li>
+          <li><a href="#rentals" data-i18n="nav_rentals">Chirii</a></li>
+          <li><a href="#locations" data-i18n="nav_map">Hartă & Zone</a></li>
+          <li><a href="#how" data-i18n="nav_how">Cum funcționează</a></li>
+          <li><a href="#agents" data-i18n="nav_agents">Agenți</a></li>
+          <li><a href="#testimonials" data-i18n="nav_reviews">Recenzii</a></li>
+          <li><a href="#faq" data-i18n="nav_faq">Întrebări</a></li>
+        </ul>
+      </nav>
+      <div class="hdr-right">
+        <button class="lang-btn" id="lang-toggle" aria-label="Schimbă Limba">
+          🌐 <span id="lang-curr">RO</span> |
+          <span style="opacity: 0.6">RU</span>
+        </button>
+        <a href="#contact" class="btn" data-i18n="btn_contact">Contact</a>
+        <button class="burger" id="bg" aria-label="Meniu" aria-expanded="false">
+          ☰
+        </button>
+      </div>
+    </header>
+
+    <div class="hero" id="top">
+      <div class="hero-bg-image" id="hero-bg"></div>
+      <div class="hero-geo-lines"></div>
+      <canvas class="hero-canvas" id="hero-canvas"></canvas>
+      <div class="hero-spotlight" id="hero-spotlight"></div>
+
+      <div class="hero-content" id="hero-hc">
+        <span class="tag" data-i18n="hero_tag">Sectorul 6 • București</span>
+        <h1 data-i18n="hero_title">
+          Închirieri premium în <em>Sectorul 6</em>
+        </h1>
+        <p data-i18n="hero_desc">
+          Apartamente moderne, confortabile și verificate în Drumul Taberei,
+          Cotroceni, Militari, Lujerului și Crângași, de la 320€/lună.
+        </p>
+        <div class="hs" id="hero-hs">
+          <select id="hz" aria-label="Zonă"></select>
+          <select id="hr" aria-label="Camere">
+            <option value="all" data-i18n="opt_all_rooms">
+              Orice număr de camere
+            </option>
+            <option value="1" data-i18n="opt_1_room">1 cameră</option>
+            <option value="2" data-i18n="opt_2_rooms">2 camere</option>
+            <option value="3" data-i18n="opt_3_rooms">3+ camere</option>
+          </select>
+          <select id="hp" aria-label="Buget">
+            <option value="700" data-i18n="opt_budget_all">
+              Buget nelimitat
+            </option>
+            <option value="400" data-i18n="opt_budget_400">până la 400€</option>
+            <option value="500" data-i18n="opt_budget_500">până la 500€</option>
+            <option value="600" data-i18n="opt_budget_600">până la 600€</option>
+          </select>
+          <button class="btn fill" id="hgo" data-i18n="btn_search">
+            Caută
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="stats">
+      <div class="w">
+        <div class="stats-grid">
+          <div class="stat-card rv" style="--i: 0">
+            <div class="stat-info">
+              <b data-to="380" data-suffix="+">0</b>
+              <span data-i18n="stat_rented">apartamente închiriate</span>
+            </div>
+          </div>
+          <div class="stat-card rv" style="--i: 1">
+            <div class="stat-info">
+              <b data-to="48" data-suffix="h">0</b>
+              <span data-i18n="stat_hours">ore, timp mediu de închiriere</span>
+            </div>
+          </div>
+          <div class="stat-card rv" style="--i: 2">
+            <div class="stat-info">
+              <b data-to="6">0</b>
+              <span data-i18n="stat_zones">zone acoperite în Sector 6</span>
+            </div>
+          </div>
+          <div class="stat-card rv" style="--i: 3">
+            <div class="stat-info">
+              <b data-to="99" data-suffix="%">0</b>
+              <span data-i18n="stat_happy">clienți mulțumiți</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <section id="concept">
+      <div
+        class="orb"
+        style="width: 360px; height: 360px; left: -120px; top: 10%"
+      ></div>
+      <span class="bignum" aria-hidden="true" style="right: 2%">01</span>
+      <div class="w">
+        <div class="sh rv">
+          <span class="sn" data-i18n="c_subtitle">01 / Conceptul 06</span>
+          <h2 class="st" data-i18n="c_title">
+            De ce să alegi <em>Sectorul 6?</em>
+          </h2>
+        </div>
+        <div class="cg rv rv-scale">
+          <div>
+            <p
+              style="color: var(--mute); font-size: 1.05rem"
+              data-i18n="c_text"
+            >
+              Sectorul 6 este una dintre cele mai dinamice și verzi zone din
+              București, oferind echilibrul perfect între parcuri,
+              infrastructură modernă și chirii accesibile.
+            </p>
+            <div class="cf rv-stagger">
+              <div>
+                <h4 data-i18n="c_f1_title">Parcuri & Natură</h4>
+                <p data-i18n="c_f1_desc">
+                  Parcul Drumul Taberei și Lacul Morii la câteva minute
+                  distanță.
+                </p>
+              </div>
+              <div>
+                <h4 data-i18n="c_f2_title">Transport rapid</h4>
+                <p data-i18n="c_f2_desc">
+                  Metrou M5 direct și tramvaiul 41 express către centru.
+                </p>
+              </div>
+              <div>
+                <h4 data-i18n="c_f3_title">Shopping & Lifestyle</h4>
+                <p data-i18n="c_f3_desc">
+                  AFI Cotroceni și Plaza România la îndemână.
+                </p>
+              </div>
+              <div>
+                <h4 data-i18n="c_f4_title">Prețuri corecte</h4>
+                <p data-i18n="c_f4_desc">
+                  Raport excelent calitate-preț pentru studenți și familii.
+                </p>
+              </div>
+            </div>
+          </div>
+          <img
+            src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=80"
+            alt="Apartament Sector 6"
+            loading="lazy"
+            class="rv rv-right"
+          />
+        </div>
+      </div>
+    </section>
+
+    <section id="rentals" class="alt">
+      <div
+        class="orb"
+        style="width: 360px; height: 360px; right: -120px; top: 40%"
+      ></div>
+      <span class="bignum" aria-hidden="true" style="left: 2%">02</span>
+      <div class="w">
+        <div class="sh rv">
+          <span class="sn" data-i18n="r_subtitle">02 / Oferte chirie</span>
+          <h2 class="st" data-i18n="r_title">
+            Apartamente <em>disponibile</em>
+          </h2>
+        </div>
+        <div class="fbar rv">
+          <div class="fg">
+            <label for="fz" data-i18n="fltr_zone">Zonă</label
+            ><select id="fz"></select>
+          </div>
+          <div class="fg">
+            <label data-i18n="fltr_rooms">Camere</label>
+            <div class="chips" id="fr">
+              <button class="chip on" data-r="all" data-i18n="chip_all">
+                Toate
+              </button>
+              <button class="chip" data-r="1">1</button>
+              <button class="chip" data-r="2">2</button>
+              <button class="chip" data-r="3">3+</button>
+            </div>
+          </div>
+          <div class="fg">
+            <label for="fp"
+              ><span data-i18n="fltr_price">Preț max:</span>
+              <b id="fpv">700€</b></label
+            >
+            <input
+              type="range"
+              id="fp"
+              min="300"
+              max="700"
+              step="10"
+              value="700"
+            />
+          </div>
+          <div class="fg">
+            <label for="fs" data-i18n="fltr_sort">Sortare</label>
+            <select id="fs">
+              <option value="new" data-i18n="sort_new">Cele mai noi</option>
+              <option value="pa" data-i18n="sort_pa">Preț crescător</option>
+              <option value="pd" data-i18n="sort_pd">Preț descrescător</option>
+              <option value="ma" data-i18n="sort_ma">Suprafață mare</option>
+            </select>
+          </div>
+          <div class="fg wide">
+            <label data-i18n="fltr_features">Facilități</label>
+            <div class="chips" id="ff">
+              <button class="chip" data-t="parcare" data-i18n="tag_parcare">
+                Parcare
+              </button>
+              <button class="chip" data-t="balcon" data-i18n="tag_balcon">
+                Balcon
+              </button>
+              <button class="chip" data-t="pet" data-i18n="tag_pet">
+                Pet friendly
+              </button>
+              <button class="chip" data-t="metrou" data-i18n="tag_metrou">
+                Lângă metrou
+              </button>
+              <button class="chip" data-t="centrala" data-i18n="tag_centrala">
+                Centrală proprie
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="fm">
+          <span id="cnt"></span
+          ><button id="rst" data-i18n="btn_reset">Resetează filtrele</button>
+        </div>
+
+        <div class="rg" id="rg"></div>
+        <div class="rg-extra-wrap" id="rg-extra-wrap">
+          <div class="rg-extra-inner">
+            <div class="rg" id="rg-extra"></div>
+          </div>
+        </div>
+
+        <div class="show-more-wrap" id="sm-wrap" style="display: none">
+          <button class="btn" id="btn-more" type="button">
+            Vezi mai multe apartamente
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <section id="locations">
+      <div
+        class="orb"
+        style="width: 360px; height: 360px; left: -120px; top: 30%"
+      ></div>
+      <span class="bignum" aria-hidden="true" style="right: 2%">03</span>
+      <div class="w">
+        <div class="sh rv">
+          <span class="sn" data-i18n="m_subtitle">03 / Locație & Hartă</span>
+          <h2 class="st" data-i18n="m_title">
+            Harta interactivă <em>Sector 6</em>
+          </h2>
+        </div>
+        <div
+          style="
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 16px;
+            margin-bottom: 24px;
+          "
+          class="rv"
+        >
+          <p style="color: var(--mute)" data-i18n="m_desc">
+            Explorează punctele noastre cheie și cartierele acoperite în
+            Sectorul 6 București.
+          </p>
+          <div class="chips" id="map-zone-filter">
+            <button class="chip on" data-zone="" data-i18n="all_zones">
+              Toate zonele
+            </button>
+            <button class="chip" data-zone="Drumul Taberei">
+              Drumul Taberei
+            </button>
+            <button class="chip" data-zone="Cotroceni">Cotroceni</button>
+            <button class="chip" data-zone="Lujerului">Lujerului</button>
+            <button class="chip" data-zone="Militari">Militari</button>
+            <button class="chip" data-zone="Crângași">Crângași</button>
+            <button class="chip" data-zone="Giulești">Giulești</button>
+          </div>
+        </div>
+        <div class="mapwrap rv rv-scale">
+          <div
+            id="cmap"
+            class="cmap"
+            role="application"
+            aria-label="Hartă"
+          ></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="how" class="alt">
+      <div
+        class="orb"
+        style="width: 360px; height: 360px; right: -120px; top: 10%"
+      ></div>
+      <span class="bignum" aria-hidden="true" style="left: 2%">04</span>
+      <div class="w">
+        <div class="sh rv">
+          <span class="sn" data-i18n="s_subtitle">04 / Proces</span>
+          <h2 class="st" data-i18n="s_title">
+            De la prima discuție <em>la chei</em>
+          </h2>
+        </div>
+        <div
+          class="cf rv-stagger"
+          style="
+            grid-template-columns: repeat(
+              auto-fit,
+              minmax(min(100%, 220px), 1fr)
+            );
+            gap: 24px;
+          "
+        >
+          <div class="rc">
+            <h4 style="font-size: 2rem; color: var(--gold); margin-bottom: 8px">
+              01
+            </h4>
+            <h3
+              style="
+                font: 400 1.4rem var(--serif);
+                color: #fff;
+                margin-bottom: 6px;
+              "
+              data-i18n="step1_title"
+            >
+              Alegi
+            </h3>
+            <p
+              style="color: var(--mute); font-size: 0.88rem"
+              data-i18n="step1_desc"
+            >
+              Filtrezi ofertele sau ne spui preferințele tale, iar noi îți
+              trimitem selecții potrivite.
+            </p>
+          </div>
+          <div class="rc">
+            <h4 style="font-size: 2rem; color: var(--gold); margin-bottom: 8px">
+              02
+            </h4>
+            <h3
+              style="
+                font: 400 1.4rem var(--serif);
+                color: #fff;
+                margin-bottom: 6px;
+              "
+              data-i18n="step2_title"
+            >
+              Vizionezi
+            </h3>
+            <p
+              style="color: var(--mute); font-size: 0.88rem"
+              data-i18n="step2_desc"
+            >
+              Programăm vizionarea la ora ideală pentru tine, inclusiv în
+              weekend.
+            </p>
+          </div>
+          <div class="rc">
+            <h4 style="font-size: 2rem; color: var(--gold); margin-bottom: 8px">
+              03
+            </h4>
+            <h3
+              style="
+                font: 400 1.4rem var(--serif);
+                color: #fff;
+                margin-bottom: 6px;
+              "
+              data-i18n="step3_title"
+            >
+              Semnezi
+            </h3>
+            <p
+              style="color: var(--mute); font-size: 0.88rem"
+              data-i18n="step3_desc"
+            >
+              Contract clar, transparent, fără comisioane sau clauze ascunse.
+            </p>
+          </div>
+          <div class="rc">
+            <h4 style="font-size: 2rem; color: var(--gold); margin-bottom: 8px">
+              04
+            </h4>
+            <h3
+              style="
+                font: 400 1.4rem var(--serif);
+                color: #fff;
+                margin-bottom: 6px;
+              "
+              data-i18n="step4_title"
+            >
+              Te muți
+            </h3>
+            <p
+              style="color: var(--mute); font-size: 0.88rem"
+              data-i18n="step4_desc"
+            >
+              Primești cheile și asistență continuă pe toată durata chiriei.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="agents">
+      <div
+        class="orb"
+        style="width: 360px; height: 360px; left: -120px; top: 10%"
+      ></div>
+      <span class="bignum" aria-hidden="true" style="right: 2%">05</span>
+      <div class="w">
+        <div class="sh rv">
+          <span class="sn" data-i18n="a_subtitle">05 / Echipa noastră</span>
+          <h2 class="st" data-i18n="a_title">Agenții <em>Lumen Estate</em></h2>
+        </div>
+        <div class="agent-grid rv-stagger">
+          <article class="ag">
+            <div class="ag-ph">
+              <img
+                src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=700&q=80"
+                alt="Elena Radu"
+                loading="lazy"
+              />
+              <div class="ag-lang">
+                <span>RO</span><span>EN</span><span>RU</span>
+              </div>
+              <div class="ag-name">
+                <h3>Elena Radu</h3>
+                <p class="r" data-i18n="ag1_role">
+                  Specialist Drumul Taberei & Cotroceni
+                </p>
+              </div>
+            </div>
+            <div class="ag-b">
+              <div class="ag-stats">
+                <div><b>6</b><small data-i18n="ag_years">ani exp.</small></div>
+                <div>
+                  <b>128</b><small data-i18n="ag_done">închirieri</small>
+                </div>
+                <div><b>4.9</b><small data-i18n="ag_rating">rating</small></div>
+              </div>
+              <div class="sb-group">
+                <a
+                  class="sb"
+                  href="https://t.me/"
+                  target="_blank"
+                  rel="noopener"
+                  >Telegram</a
+                ><a
+                  class="sb"
+                  href="https://wa.me/"
+                  target="_blank"
+                  rel="noopener"
+                  >WhatsApp</a
+                >
+              </div>
+            </div>
+          </article>
+          <article class="ag">
+            <div class="ag-ph">
+              <img
+                src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=700&q=80"
+                alt="Andrei Ionescu"
+                loading="lazy"
+              />
+              <div class="ag-lang">
+                <span>RO</span><span>EN</span><span>RU</span>
+              </div>
+              <div class="ag-name">
+                <h3>Andrei Ionescu</h3>
+                <p class="r" data-i18n="ag2_role">
+                  Specialist Lujerului & Militari
+                </p>
+              </div>
+            </div>
+            <div class="ag-b">
+              <div class="ag-stats">
+                <div><b>4</b><small data-i18n="ag_years">ani exp.</small></div>
+                <div>
+                  <b>96</b><small data-i18n="ag_done">închirieri</small>
+                </div>
+                <div><b>4.8</b><small data-i18n="ag_rating">rating</small></div>
+              </div>
+              <div class="sb-group">
+                <a
+                  class="sb"
+                  href="https://t.me/"
+                  target="_blank"
+                  rel="noopener"
+                  >Telegram</a
+                ><a
+                  class="sb"
+                  href="https://wa.me/"
+                  target="_blank"
+                  rel="noopener"
+                  >WhatsApp</a
+                >
+              </div>
+            </div>
+          </article>
+          <article class="ag">
+            <div class="ag-ph">
+              <img
+                src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=700&q=80"
+                alt="Matei Dumitrescu"
+                loading="lazy"
+              />
+              <div class="ag-lang">
+                <span>RO</span><span>EN</span><span>RU</span>
+              </div>
+              <div class="ag-name">
+                <h3>Matei Dumitrescu</h3>
+                <p class="r" data-i18n="ag3_role">
+                  Consultant Crângași & Ciurel
+                </p>
+              </div>
+            </div>
+            <div class="ag-b">
+              <div class="ag-stats">
+                <div><b>8</b><small data-i18n="ag_years">ani exp.</small></div>
+                <div>
+                  <b>154</b><small data-i18n="ag_done">închirieri</small>
+                </div>
+                <div><b>5.0</b><small data-i18n="ag_rating">rating</small></div>
+              </div>
+              <div class="sb-group">
+                <a
+                  class="sb"
+                  href="https://t.me/"
+                  target="_blank"
+                  rel="noopener"
+                  >Telegram</a
+                ><a
+                  class="sb"
+                  href="https://wa.me/"
+                  target="_blank"
+                  rel="noopener"
+                  >WhatsApp</a
+                >
+              </div>
+            </div>
+          </article>
+        </div>
+        <div class="ag-swipe-hint">
+          <span data-i18n="ag_swipe_hint"
+            >← Glisează pentru a vedea agenții →</span
+          >
+        </div>
+      </div>
+    </section>
+
+    <section id="testimonials" class="alt">
+      <div
+        class="orb"
+        style="width: 360px; height: 360px; right: -120px; top: 10%"
+      ></div>
+      <span class="bignum" aria-hidden="true" style="left: 2%">06</span>
+      <div class="w">
+        <div class="sh rv">
+          <span class="sn" data-i18n="t_subtitle">06 / Recenzii</span>
+          <h2 class="st" data-i18n="t_title">
+            Ce spun <em>chiriașii noștri</em>
+          </h2>
+        </div>
+        <div class="rev-grid">
+          <div class="rev-sum rv rv-left">
+            <div>
+              <div class="rev-score">4.9</div>
+              <div class="stars">★★★★★</div>
+              <p data-i18n="t_score_label">din 5 · 214 recenzii verificate</p>
+            </div>
+            <div>
+              <div class="stack">
+                <img
+                  src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=120&q=80"
+                  alt=""
+                  loading="lazy"
+                />
+                <img
+                  src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=120&q=80"
+                  alt=""
+                  loading="lazy"
+                />
+                <img
+                  src="https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=120&q=80"
+                  alt=""
+                  loading="lazy"
+                />
+                <img
+                  src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=120&q=80"
+                  alt=""
+                  loading="lazy"
+                />
+              </div>
+              <p data-i18n="t_join">Alătură-te celor 380+ chiriași mulțumiți</p>
+            </div>
+          </div>
+          <div class="rv rv-right">
+            <div class="rev-car" id="rev-car">
+              <div class="rev-track" id="rev-track">
+                <div class="rev-slide">
+                  <div class="rev-card">
+                    <div class="rev-top">
+                      <img
+                        class="av"
+                        src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=150&q=80"
+                        alt="Ioana M."
+                        loading="lazy"
+                      />
+                      <div>
+                        <b>Ioana M.</b
+                        ><span data-i18n="tst1_role"
+                          >Studentă la Politehnică</span
+                        >
+                      </div>
+                      <div class="stars">★★★★★</div>
+                    </div>
+                    <blockquote data-i18n="tst1_text">
+                      "Am găsit garsoniera perfectă în Drumul Taberei în doar 2
+                      zile! Echipa a fost extrem de amabilă și profesionistă."
+                    </blockquote>
+                    <div class="rev-apt">
+                      <img
+                        src="https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?auto=format&fit=crop&w=200&q=70"
+                        alt=""
+                        loading="lazy"
+                      />
+                      <div>
+                        <small data-i18n="rev_rented">Închiriat în</small
+                        ><b>Drumul Taberei · 350€</b>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="rev-slide">
+                  <div class="rev-card">
+                    <div class="rev-top">
+                      <img
+                        class="av"
+                        src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=150&q=80"
+                        alt="Mihai & Ana"
+                        loading="lazy"
+                      />
+                      <div>
+                        <b>Mihai & Ana</b
+                        ><span data-i18n="tst2_role"
+                          >Chiriași în Lujerului</span
+                        >
+                      </div>
+                      <div class="stars">★★★★★</div>
+                    </div>
+                    <blockquote data-i18n="tst2_text">
+                      "Fără surprize, fără costuri ascunse. Contractul a fost
+                      semnat rapid și pozele au corespuns 100% cu realitatea."
+                    </blockquote>
+                    <div class="rev-apt">
+                      <img
+                        src="https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?auto=format&fit=crop&w=200&q=70"
+                        alt=""
+                        loading="lazy"
+                      />
+                      <div>
+                        <small data-i18n="rev_rented">Închiriat în</small
+                        ><b>Lujerului · 400€</b>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="rev-slide">
+                  <div class="rev-card">
+                    <div class="rev-top">
+                      <img
+                        class="av"
+                        src="https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=150&q=80"
+                        alt="Elena & Victor"
+                        loading="lazy"
+                      />
+                      <div>
+                        <b>Elena & Victor</b
+                        ><span data-i18n="tst3_role"
+                          >Chiriași în Cotroceni</span
+                        >
+                      </div>
+                      <div class="stars">★★★★★</div>
+                    </div>
+                    <blockquote data-i18n="tst3_text">
+                      "Ne-au găsit un apartament superb în Cotroceni care a
+                      acceptat și pisica noastră. Recomand cu încredere!"
+                    </blockquote>
+                    <div class="rev-apt">
+                      <img
+                        src="https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?auto=format&fit=crop&w=200&q=70"
+                        alt=""
+                        loading="lazy"
+                      />
+                      <div>
+                        <small data-i18n="rev_rented">Închiriat în</small
+                        ><b>Cotroceni · 420€</b>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="carousel-controls">
+              <button class="c-btn" id="rev-prev" aria-label="Înapoi">←</button>
+              <div class="dots" id="rev-dots"></div>
+              <button class="c-btn" id="rev-next" aria-label="Înainte">
+                →
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="faq">
+      <div
+        class="orb"
+        style="width: 360px; height: 360px; left: -120px; top: 10%"
+      ></div>
+      <span class="bignum" aria-hidden="true" style="right: 2%">07</span>
+      <div class="w">
+        <div class="sh rv">
+          <span class="sn" data-i18n="f_subtitle"
+            >07 / Întrebări frecvente</span
+          >
+          <h2 class="st" data-i18n="f_title">
+            Răspunsuri la <em>întrebări</em>
+          </h2>
+        </div>
+        <div class="faq-wrap rv">
+          <div class="faq-item">
+            <button class="faq-q" type="button" aria-expanded="false">
+              <span class="faq-qt" data-i18n="faq1_q"
+                >Cât este garanția standard?</span
+              ><span class="faq-icon" aria-hidden="true"
+                ><svg viewBox="0 0 24 24">
+                  <polyline points="6 9 12 15 18 9" /></svg
+              ></span>
+            </button>
+            <div class="faq-ans" role="region">
+              <div class="faq-ans-inner">
+                <p data-i18n="faq1_a">
+                  De obicei este echivalentul unei luni de chirie, returnabilă
+                  la finalul contractului dacă proprietatea este predată în
+                  stare bună.
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-q" type="button" aria-expanded="false">
+              <span class="faq-qt" data-i18n="faq2_q"
+                >Există comision pentru chiriaș?</span
+              ><span class="faq-icon" aria-hidden="true"
+                ><svg viewBox="0 0 24 24">
+                  <polyline points="6 9 12 15 18 9" /></svg
+              ></span>
+            </button>
+            <div class="faq-ans" role="region">
+              <div class="faq-ans-inner">
+                <p data-i18n="faq2_a">
+                  Ofertele noastre sunt transparente. Comisionul este specificat
+                  clar pentru fiecare proprietate în parte înainte de vizionare.
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-q" type="button" aria-expanded="false">
+              <span class="faq-qt" data-i18n="faq3_q"
+                >Pot închiria dacă am animale de companie?</span
+              ><span class="faq-icon" aria-hidden="true"
+                ><svg viewBox="0 0 24 24">
+                  <polyline points="6 9 12 15 18 9" /></svg
+              ></span>
+            </button>
+            <div class="faq-ans" role="region">
+              <div class="faq-ans-inner">
+                <p data-i18n="faq3_a">
+                  Da! Folosiți filtrul 'Pet friendly' din secțiunea de căutare
+                  pentru a vedea proprietățile care acceptă animale.
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-q" type="button" aria-expanded="false">
+              <span class="faq-qt" data-i18n="faq4_q"
+                >Se pot programa vizionări în weekend?</span
+              ><span class="faq-icon" aria-hidden="true"
+                ><svg viewBox="0 0 24 24">
+                  <polyline points="6 9 12 15 18 9" /></svg
+              ></span>
+            </button>
+            <div class="faq-ans" role="region">
+              <div class="faq-ans-inner">
+                <p data-i18n="faq4_a">
+                  Da, agenții noștri sunt disponibili și în weekend sau seara,
+                  cu o programare prealabilă.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer id="contact">
+      <div
+        class="orb"
+        style="width: 360px; height: 360px; left: -120px; top: 10%"
+      ></div>
+      <div class="fw">
+        <div>
+          <a href="#top" class="logo">Lumen <span>Estate</span></a>
+          <p
+            style="color: var(--mute); margin: 20px 0; max-width: 380px"
+            data-i18n="ft_desc"
+          >
+            Agenția ta imobiliară de încredere pentru închirierea rapidă și
+            sigură a apartamentelor din Sectorul 6, București.
+          </p>
+          <p style="color: var(--gold); font-size: 0.9rem">
+            📍 Bulevardul Timișoara 26, Sector 6, București
+          </p>
+          <p style="color: var(--mute); font-size: 0.85rem; margin-top: 6px">
+            📞 +40 721 000 000 · ✉️ contact@lumenestate.ro
+          </p>
+          <p
+            style="color: var(--mute); font-size: 0.85rem; margin-top: 6px"
+            data-i18n="ft_hours"
+          >
+            Luni - Sâmbătă: 09:00 - 20:00
+          </p>
+        </div>
+        <form class="cf2" id="cf">
+          <h3
+            style="
+              font: 400 2rem var(--serif);
+              margin-bottom: 20px;
+              color: #fff;
+            "
+            data-i18n="form_title"
+          >
+            Trimite o solicitare
+          </h3>
+          <div class="two">
+            <input
+              type="text"
+              placeholder="Numele tău"
+              data-i18n-ph="ph_name"
+              required
+            />
+            <input
+              type="tel"
+              placeholder="Telefon / WhatsApp"
+              data-i18n-ph="ph_phone"
+              required
+            />
+          </div>
+          <textarea
+            rows="3"
+            placeholder="Zonă preferată, data mutării, detalii..."
+            data-i18n-ph="ph_msg"
+          ></textarea>
+          <button
+            type="submit"
+            class="btn fill"
+            style="width: 100%; padding: 15px"
+            data-i18n="btn_send"
+          >
+            Trimite mesajul
+          </button>
+          <div class="ok" id="ok" data-i18n="form_success">
+            Mulțumim! Un agent Lumen Estate te va contacta în cel mai scurt
+            timp.
+          </div>
+        </form>
+      </div>
+    </footer>
+
+    <dialog id="dlg" aria-label="Detalii apartament"></dialog>
+
+    <script>
+      const i18n = {
+        ro: {
+          nav_concept: "Concept",
+          nav_rentals: "Chirii",
+          nav_map: "Hartă & Zone",
+          nav_how: "Cum funcționează",
+          nav_agents: "Agenți",
+          nav_reviews: "Recenzii",
+          nav_faq: "Întrebări",
+          btn_contact: "Contact",
+          hero_tag: "Sectorul 6 • București",
+          hero_title: "Închirieri premium în <em>Sectorul 6</em>",
+          hero_desc:
+            "Apartamente moderne, confortabile și verificate în Drumul Taberei, Cotroceni, Militari, Lujerului și Crângași, de la 320€/lună.",
+          opt_all_rooms: "Orice număr de camere",
+          opt_1_room: "1 cameră",
+          opt_2_rooms: "2 camere",
+          opt_3_rooms: "3+ camere",
+          opt_budget_all: "Buget nelimitat",
+          opt_budget_400: "până la 400€",
+          opt_budget_500: "până la 500€",
+          opt_budget_600: "până la 600€",
+          btn_search: "Caută",
+          stat_rented: "apartamente închiriate",
+          stat_hours: "ore, timp mediu de închiriere",
+          stat_zones: "zone acoperite în Sector 6",
+          stat_happy: "clienți mulțumiți",
+          c_subtitle: "01 / Conceptul 06",
+          c_title: "De ce să alegi <em>Sectorul 6?</em>",
+          c_text:
+            "Sectorul 6 este una dintre cele mai dinamice și verzi zone din București, oferind echilibrul perfect între parcuri, infrastructură modernă și chirii accesibile.",
+          c_f1_title: "Parcuri & Natură",
+          c_f1_desc:
+            "Parcul Drumul Taberei și Lacul Morii la câteva minute distanță.",
+          c_f2_title: "Transport rapid",
+          c_f2_desc: "Metrou M5 direct și tramvaiul 41 express către centru.",
+          c_f3_title: "Shopping & Lifestyle",
+          c_f3_desc: "AFI Cotroceni și Plaza România la îndemână.",
+          c_f4_title: "Prețuri corecte",
+          c_f4_desc:
+            "Raport excelent calitate-preț pentru studenți și familii.",
+          r_subtitle: "02 / Oferte chirie",
+          r_title: "Apartamente <em>disponibile</em>",
+          fltr_zone: "Zonă",
+          fltr_rooms: "Camere",
+          chip_all: "Toate",
+          fltr_price: "Preț max:",
+          fltr_sort: "Sortare",
+          sort_new: "Cele mai noi",
+          sort_pa: "Preț crescător",
+          sort_pd: "Preț descrescător",
+          sort_ma: "Suprafață mare",
+          fltr_features: "Facilități",
+          tag_parcare: "Parcare",
+          tag_balcon: "Balcon",
+          tag_pet: "Pet friendly",
+          tag_metrou: "Lângă metrou",
+          tag_centrala: "Centrală proprie",
+          btn_reset: "Resetează filtrele",
+          m_subtitle: "03 / Locație & Hartă",
+          m_title: "Harta interactivă <em>Sector 6</em>",
+          m_desc:
+            "Explorează punctele noastre cheie și cartierele acoperite în Sectorul 6 București.",
+          s_subtitle: "04 / Proces",
+          s_title: "De la prima discuție <em>la chei</em>",
+          step1_title: "Alegi",
+          step1_desc:
+            "Filtrezi ofertele sau ne spui preferințele tale, iar noi îți trimitem selecții potrivite.",
+          step2_title: "Vizionezi",
+          step2_desc:
+            "Programăm vizionarea la ora ideală pentru tine, inclusiv în weekend.",
+          step3_title: "Semnezi",
+          step3_desc:
+            "Contract clar, transparent, fără comisioane sau clauze ascunse.",
+          step4_title: "Te muți",
+          step4_desc:
+            "Primești cheile și asistență continuă pe toată durata chiriei.",
+          a_subtitle: "05 / Echipa noastră",
+          a_title: "Agenții <em>Lumen Estate</em>",
+          ag1_role: "Specialist Drumul Taberei & Cotroceni",
+          ag2_role: "Specialist Lujerului & Militari",
+          ag3_role: "Consultant Crângași & Ciurel",
+          t_subtitle: "06 / Recenzii",
+          t_title: "Ce spun <em>chiriașii noștri</em>",
+          tst1_text:
+            '"Am găsit garsoniera perfectă în Drumul Taberei în doar 2 zile! Echipa a fost extrem de amabilă și profesionistă."',
+          tst2_text:
+            '"Fără surprize, fără costuri ascunse. Contractul a fost semnat rapid și pozele au corespuns 100% cu realitatea."',
+          tst3_text:
+            '"Ne-au găsit un apartament superb în Cotroceni care a acceptat și pisica noastră. Recomand cu încredere!"',
+          f_subtitle: "07 / Întrebări frecvente",
+          f_title: "Răspunsuri la <em>întrebări</em>",
+          faq1_q: "Cât este garanția standard?",
+          faq1_a:
+            "De obicei este echivalentul unei luni de chirie, returnabilă la finalul contractului dacă proprietatea este predată în stare bună.",
+          faq2_q: "Există comision pentru chiriaș?",
+          faq2_a:
+            "Ofertele noastre sunt transparente. Comisionul este specificat clar pentru fiecare proprietate în parte înainte de vizionare.",
+          faq3_q: "Pot închiria dacă am animale de companie?",
+          faq3_a:
+            "Da! Folosiți filtrul 'Pet friendly' din secțiunea de căutare pentru a vedea proprietățile care acceptă animale.",
+          faq4_q: "Se pot programa vizionări în weekend?",
+          faq4_a:
+            "Da, agenții noștri sunt disponibili și în weekend sau seara, cu o programare prealabilă.",
+          ft_desc:
+            "Agenția ta imobiliară de încredere pentru închirierea rapidă și sigură a apartamentelor din Sectorul 6, București.",
+          ft_hours: "Luni - Sâmbătă: 09:00 - 20:00",
+          form_title: "Trimite o solicitare",
+          ph_name: "Numele tău",
+          ph_phone: "Telefon / WhatsApp",
+          ph_msg: "Zonă preferată, data mutării, detalii...",
+          btn_send: "Trimite mesajul",
+          form_success:
+            "Mulțumim! Un agent Lumen Estate te va contacta în cel mai scurt timp.",
+          all_zones: "Toate zonele",
+          ag_years: "ani exp.",
+          ag_done: "închirieri",
+          ag_rating: "rating",
+          t_score_label: "din 5 · 214 recenzii verificate",
+          t_join: "Alătură-te celor 380+ chiriași mulțumiți",
+          rev_rented: "Închiriat în",
+          tst1_role: "Studentă la Politehnică",
+          tst2_role: "Chiriași în Lujerului",
+          tst3_role: "Chiriași în Cotroceni",
+          tst4_role: "Chiriaș în Militari",
+          tst5_role: "Chiriașă în Crângași",
+          ag_swipe_hint: "← Glisează pentru a vedea agenții →",
+        },
+        ru: {
+          nav_concept: "Концепция",
+          nav_rentals: "Aренда",
+          nav_map: "Карта и Районы",
+          nav_how: "Как это работает",
+          nav_agents: "Риелторы",
+          nav_reviews: "Отзывы",
+          nav_faq: "Вопросы",
+          btn_contact: "Контакты",
+          hero_tag: "Сектор 6 • Бухарест",
+          hero_title: "Премиум аренда в <em>Секторе 6</em>",
+          hero_desc:
+            "Современные, уютные и проверенные квартиры в Drumul Taberei, Cotroceni, Militari, Lujerului и Crângași от 320€/месяц.",
+          opt_all_rooms: "Любое количество комнат",
+          opt_1_room: "1 комната",
+          opt_2_rooms: "2 комнаты",
+          opt_3_rooms: "3+ комнаты",
+          opt_budget_all: "Без ограничений",
+          opt_budget_400: "до 400€",
+          opt_budget_500: "до 500€",
+          opt_budget_600: "до 600€",
+          btn_search: "Искать",
+          stat_rented: "арендованных квартир",
+          stat_hours: "часов — среднее время сдачи",
+          stat_zones: "районов в Секторе 6",
+          stat_happy: "% довольных клиентов",
+          c_subtitle: "01 / Концепция 06",
+          c_title: "Почему стоит выбрать <em>Сектор 6?</em>",
+          c_text:
+            "Сектор 6 — один из самых динамичных и зеленых районов Бухареста, предлагающий идеальный баланс парков, транспорта и цен на жилье.",
+          c_f1_title: "Парки и Природа",
+          c_f1_desc:
+            "Парк Drumul Taberei и озеро Lacul Morii в нескольких минутах.",
+          c_f2_title: "Быстрый транспорт",
+          c_f2_desc: "Прямая ветка метро M5 и скоростной трамвай 41 в центр.",
+          c_f3_title: "Шопинг и Отдых",
+          c_f3_desc: "Торговые центры AFI Cotroceni и Plaza România под рукой.",
+          c_f4_title: "Честные цены",
+          c_f4_desc:
+            "Отличное соотношение цены и качества для студентов и семей.",
+          r_subtitle: "02 / Варианты аренды",
+          r_title: "Доступные <em>квартиры</em>",
+          fltr_zone: "Район",
+          fltr_rooms: "Комнаты",
+          chip_all: "Все",
+          fltr_price: "Макс. цена:",
+          fltr_sort: "Сортировка",
+          sort_new: "Сначала новые",
+          sort_pa: "Сначала дешевле",
+          sort_pd: "Сначала дороже",
+          sort_ma: "Большая площадь",
+          fltr_features: "Удобства",
+          tag_parcare: "Парковка",
+          tag_balcon: "Балкон",
+          tag_pet: "Можно с питомцами",
+          tag_metrou: "Рядом с метро",
+          tag_centrala: "Своё отопление",
+          btn_reset: "Сбросить фильтры",
+          m_subtitle: "03 / Локация и Карта",
+          m_title: "Интерактивная карта <em>Сектора 6</em>",
+          m_desc:
+            "Исследуйте ключевые точки и охваченные районы в 6-м секторе Бухареста.",
+          s_subtitle: "04 / Процесс",
+          s_title: "От первого звонка <em>до ключей</em>",
+          step1_title: "Выбираете",
+          step1_desc:
+            "Фильтруете варианты или говорите пожелания — мы присылаем подборку.",
+          step2_title: "Смотрите",
+          step2_desc:
+            "Назначаем просмотр в удобное время, включая вечер и выходные.",
+          step3_title: "Подписываете",
+          step3_desc: "Прозрачный договор, без скрытых комиссий и сюрпризов.",
+          step4_title: "Заезжаете",
+          step4_desc:
+            "Получаете ключи и постоянную поддержку на весь срок аренды.",
+          a_subtitle: "05 / Наша команда",
+          a_title: "Риелторы <em>Lumen Estate</em>",
+          ag1_role: "Специалист Drumul Taberei & Cotroceni",
+          ag2_role: "Специалист Lujerului & Militari",
+          ag3_role: "Консультант Crângași & Ciurel",
+          t_subtitle: "06 / Отзывы",
+          t_title: "Что говорят <em>наши клиенты</em>",
+          tst1_text:
+            '"Нашла отличную студию в Drumul Taberei всего за 2 дня! Команда была очень приветливой и профессиональной."',
+          tst2_text:
+            '"Никаких скрытых комиссий. Договор оформили быстро, фотографии на 100% соответствовали реальности."',
+          tst3_text:
+            '"Нашли потрясающую квартиру в Cotroceni, куда разрешили въехать с нашей кошкой. Очень рекомендую!"',
+          f_subtitle: "07 / Частые вопросы",
+          f_title: "Ответы на <em>вопросы</em>",
+          faq1_q: "Каков размер залога?",
+          faq1_a:
+            "Обычно это стоимость одного месяца аренды. Залог возвращается в конце срока при сдаче квартиры в хорошем состоянии.",
+          faq2_q: "Есть ли комиссия для арендатора?",
+          faq2_a:
+            "Все наши условия прозрачны. Комиссия указывается заранее до начала просмотра.",
+          faq3_q: "Можно ли с животными?",
+          faq3_a:
+            "Да! Используйте фильтр 'Можно с питомцами' в поиске, чтобы найти подходящие варианты.",
+          faq4_q: "Возможно ли посмотреть квартиру в выходные?",
+          faq4_a:
+            "Да, наши агенты проводят просмотры в вечернее время и по выходным дням.",
+          ft_desc:
+            "Ваше надежное агентство недвижимости для быстрой и безопасной аренды квартир в Секторе 6, Бухарест.",
+          ft_hours: "Понедельник - Суббота: 09:00 - 20:00",
+          form_title: "Оставить заявку",
+          ph_name: "Ваше имя",
+          ph_phone: "Телефон / WhatsApp",
+          ph_msg: "Предпочитаемый район, дата переезда, детали...",
+          btn_send: "Отправить заявку",
+          form_success:
+            "Спасибо! Агент Lumen Estate свяжется с вами в ближайшее время.",
+          all_zones: "Все районы",
+          ag_years: "лет опыта",
+          ag_done: "сделок",
+          ag_rating: "рейтинг",
+          t_score_label: "из 5 · 214 проверенных отзывов",
+          t_join: "Присоединяйтесь к 380+ довольным арендаторам",
+          rev_rented: "Арендовано в",
+          tst1_role: "Студентка Politehnica",
+          tst2_role: "Арендаторы в Lujerului",
+          tst3_role: "Арендаторы в Cotroceni",
+          tst4_role: "Арендатор в Militari",
+          tst5_role: "Арендаторша в Crângași",
+          ag_swipe_hint: "← Листайте, чтобы увидеть риелторов →",
+        },
+      };
+
+      let currentLang = "ro";
+      const T = (ro, ru) => (currentLang === "ro" ? ro : ru);
+      const $ = (s) => document.querySelector(s);
+      const $$ = (s) => [...document.querySelectorAll(s)];
+
+      const IM = [
+        "https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?auto=format&fit=crop&w=800&q=80",
+        "https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?auto=format&fit=crop&w=800&q=80",
+        "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?auto=format&fit=crop&w=800&q=80",
+        "https://images.unsplash.com/photo-1493809842364-78817add7ffb?auto=format&fit=crop&w=800&q=80",
+        "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=80",
+      ];
+
+      const L = [
+        {
+          n: { ro: "Garsonieră modernă", ru: "Современная студия" },
+          z: "Drumul Taberei",
+          lat: 44.4225,
+          lng: 26.0315,
+          r: 1,
+          m: 38,
+          p: 350,
+          f: "3/8",
+          t: ["metrou", "balcon", "centrala"],
+          img: IM[0],
+          x: {
+            ro: "Complet utilată și renovată, aproape de Parcul Moghioroș. Aer condiționat, mașină de spălat și internet fibră.",
+            ru: "С новым ремонтом возле парка Moghioroș. Кондиционер, стиральная машина, скоростной интернет.",
+          },
+        },
+        {
+          n: { ro: "Apartament 2 camere", ru: "2-комнатная квартира" },
+          z: "Lujerului",
+          lat: 44.4348,
+          lng: 26.0352,
+          r: 2,
+          m: 52,
+          p: 400,
+          f: "2/10",
+          t: ["metrou", "centrala"],
+          img: IM[1],
+          x: {
+            ro: "La 3 minute de metrou Lujerului și Cora. Bucătărie complet echipată, mobilier nou.",
+            ru: "В 3 минутах от метро Lujerului. Полностью оборудованная кухня, новая мебель.",
+          },
+        },
+        {
+          n: {
+            ro: "Apartament 2 camere, bloc nou",
+            ru: "2-комнатная в новостройке",
+          },
+          z: "Cotroceni",
+          lat: 44.4305,
+          lng: 26.0528,
+          r: 2,
+          m: 55,
+          p: 420,
+          f: "5/11",
+          t: ["parcare", "balcon", "centrala"],
+          img: IM[2],
+          x: {
+            ro: "Ansamblu rezidențial nou, loc de parcare inclus, lift modern și zonă securizată.",
+            ru: "Новый жилой комплекс, парковочное место включено, охраняемая территория.",
+          },
+        },
+        {
+          n: {
+            ro: "Apartament 3 camere, spațios",
+            ru: "Просторная 3-комнатная",
+          },
+          z: "Cotroceni",
+          lat: 44.433,
+          lng: 26.056,
+          r: 3,
+          m: 72,
+          p: 460,
+          f: "4/8",
+          t: ["balcon", "pet"],
+          img: IM[3],
+          x: {
+            ro: "Ideal pentru o familie sau studenți Politehnică. Două băi, balcon închis, pet friendly.",
+            ru: "Идеально для семьи или студентов. Два сан узла, застекленный балкон, можно с питомцами.",
+          },
+        },
+        {
+          n: { ro: "Studio în complex nou", ru: "Студия в новом ЖК" },
+          z: "Militari",
+          lat: 44.435,
+          lng: 26.012,
+          r: 1,
+          m: 34,
+          p: 330,
+          f: "1/4",
+          t: ["parcare", "centrala"],
+          img: IM[4],
+          x: {
+            ro: "Studio compact și luminos, în complex rezidențial cu parcare și loc de joacă.",
+            ru: "Светлая уютная студия в новом жилом комплексе с парковкой.",
+          },
+        },
+        {
+          n: { ro: "Garsonieră lângă lac", ru: "Студия у озера" },
+          z: "Crângași",
+          lat: 44.453,
+          lng: 26.042,
+          r: 1,
+          m: 32,
+          p: 320,
+          f: "6/10",
+          t: ["metrou"],
+          img: IM[0],
+          x: {
+            ro: "Aproape de metrou Crângași și Lacul Morii, ideală pentru o persoană sau un cuplu.",
+            ru: "Рядом с метро Crângași и озером Lacul Morii. Идеально для одного или пары.",
+          },
+        },
+        {
+          n: { ro: "Apartament 2 camere premium", ru: "Премиум 2-комнатная" },
+          z: "Drumul Taberei",
+          lat: 44.425,
+          lng: 26.021,
+          r: 2,
+          m: 60,
+          p: 480,
+          f: "7/10",
+          t: ["parcare", "balcon", "metrou", "centrala"],
+          img: IM[1],
+          x: {
+            ro: "Finisaje premium, living deschis, vedere spre parc, parcare subterană.",
+            ru: "Премиальная отделка, вид на парк, подземный паркинг.",
+          },
+        },
+        {
+          n: {
+            ro: "Apartament 3 camere cu parcare",
+            ru: "3-комнатная с парковкой",
+          },
+          z: "Giulești",
+          lat: 44.46,
+          lng: 26.038,
+          r: 3,
+          m: 80,
+          p: 520,
+          f: "3/6",
+          t: ["parcare", "pet", "centrala"],
+          img: IM[2],
+          x: {
+            ro: "Apartament mare, într-un bloc liniștit, cu parcare și acceptă animale de companie.",
+            ru: "Большая квартира в тихом доме, есть парковка, разрешены животные.",
+          },
+        },
+        {
+          n: { ro: "Loft 2 camere", ru: "Лофт, 2 комнаты" },
+          z: "Cotroceni",
+          lat: 44.4285,
+          lng: 26.048,
+          r: 2,
+          m: 64,
+          p: 560,
+          f: "2/5",
+          t: ["balcon", "pet", "metrou"],
+          img: IM[3],
+          x: {
+            ro: "Spațiu industrial amenajat modern, tavane înalte și multă lumină naturală.",
+            ru: "Современный лофт с высокими потолками и множеством естественного света.",
+          },
+        },
+        {
+          n: { ro: "Penthouse 3 camere", ru: "Пентхаус, 3 комнаты" },
+          z: "Lujerului",
+          lat: 44.4385,
+          lng: 26.0415,
+          r: 3,
+          m: 95,
+          p: 690,
+          f: "12/12",
+          t: ["parcare", "balcon", "metrou", "centrala"],
+          img: IM[4],
+          x: {
+            ro: "Terasă mare, vedere panoramică, două locuri de parcare și finisaje de lux.",
+            ru: "Большая терраса, панорамный вид, два парковочных места и премиальная отделка.",
+          },
+        },
+        {
+          n: { ro: "Garsonieră cu balcon", ru: "Студия с балконом" },
+          z: "Militari",
+          lat: 44.429,
+          lng: 26.0055,
+          r: 1,
+          m: 36,
+          p: 340,
+          f: "5/9",
+          t: ["balcon"],
+          img: IM[0],
+          x: {
+            ro: "Mobilată complet, balcon spre curtea interioară, la 5 minute de stația de tramvai.",
+            ru: "Полностью меблирована, балкон во двор, 5 минут до трамвая.",
+          },
+        },
+        {
+          n: { ro: "Apartament 2 camere cu vedere", ru: "2-комнатная с видом" },
+          z: "Crângași",
+          lat: 44.4465,
+          lng: 26.033,
+          r: 2,
+          m: 58,
+          p: 450,
+          f: "8/10",
+          t: ["parcare", "metrou"],
+          img: IM[2],
+          x: {
+            ro: "Vedere spre lac, parcare în spate și metrou Crângași la câțiva pași.",
+            ru: "Вид на озеро, парковка во дворе, метро Crângași в нескольких шагах.",
+          },
+        },
+      ];
+
+      const S = { z: "", r: "all", p: 700, t: new Set(), s: "new" };
+      let showAllListings = false;
+      const zones = [...new Set(L.map((x) => x.z))].sort();
+
+      function applyLang(lang) {
+        currentLang = lang;
+        $("#lang-curr").textContent = lang.toUpperCase();
+        $$("[data-i18n]").forEach((el) => {
+          const key = el.dataset.i18n;
+          if (i18n[lang][key]) el.innerHTML = i18n[lang][key];
+        });
+        $$("[data-i18n-ph]").forEach((el) => {
+          const key = el.dataset.i18nPh;
+          if (i18n[lang][key]) el.placeholder = i18n[lang][key];
+        });
+        fillZones();
+        mapTexts();
+        renderListings();
+        if (window.refreshSelects) refreshSelects();
+      }
+
+      $("#lang-toggle").onclick = () =>
+        applyLang(currentLang === "ro" ? "ru" : "ro");
+
+      function fillZones() {
+        const o =
+          `<option value="">${T("Toate zonele", "Все районы")}</option>` +
+          zones.map((z) => `<option value="${z}">${z}</option>`).join("");
+        ["#fz", "#hz"].forEach((s) => {
+          const v = $(s).value;
+          $(s).innerHTML = o;
+          $(s).value = v;
+        });
+        if (window.refreshSelects) refreshSelects();
+      }
+      fillZones();
+
+      const MP = {
+        s: 1,
+        s0: 1,
+        minS: 0.6,
+        maxS: 3.5,
+        x: 0,
+        y: 0,
+        sel: null,
+        moved: false,
+        init: 0,
+        el: null,
+        w: null,
+      };
+      const proj = (lat, lng) => [
+        ((lng - 25.995) / 0.08) * 1000,
+        ((44.468 - lat) / 0.056) * 640,
+      ];
+      const MAPL = {
+        "DRUMUL TABEREI": [385, 590],
+        COTROCENI: [790, 505],
+        LUJERULUI: [430, 292],
+        MILITARI: [150, 300],
+        CRÂNGAȘI: [715, 125],
+        GIULEȘTI: [715, 72],
+      };
+      const STN = [
+        ["Gorjului", 250, 352],
+        ["Lujerului", 500, 337],
+        ["Păcii", 610, 331],
+        ["Politehnica", 720, 323],
+        ["Petrache Poenaru", 840, 310],
+        ["Crângași", 588, 190],
+      ];
+
+      function mapSVG() {
+        let r = 7;
+        const rnd = () => (r = (r * 16807) % 2147483647) / 2147483647;
+        let st = "";
+        for (let i = 0; i < 48; i++) {
+          const x = rnd() * 900 + 50,
+            y = rnd() * 540 + 50,
+            hz = rnd() < 0.5;
+          st += `<path d="M${x | 0} ${y | 0}l${
+            hz ? (rnd() * 140 + 40) | 0 : 0
+          } ${hz ? 0 : (rnd() * 110 + 30) | 0}"/>`;
+        }
+        return `<svg viewBox="0 0 1000 640" aria-hidden="true"><defs><pattern id="gr" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M40 0H0V40" fill="none" stroke="#ffffff08"/></pattern></defs>
+<rect width="1000" height="640" fill="#0c0f14"/><rect width="1000" height="640" fill="url(#gr)"/>
+<path d="M70 150L300 45L620 30L900 105L960 300L905 520L700 610L380 622L150 545L58 350Z" fill="#10141b" stroke="#c6a378" stroke-opacity=".45" stroke-dasharray="7 7"/>
+<g stroke="#1a202b" stroke-width="2" fill="none" stroke-linecap="round">${st}</g>
+<path d="M960 250C905 330 885 380 825 430C765 480 745 560 695 625" fill="none" stroke="#18304a" stroke-width="16" stroke-linecap="round" opacity=".8"/>
+<path d="M330 95C360 52 470 48 522 80C562 106 520 138 458 132C398 142 338 132 330 95Z" fill="#16283a" stroke="#27455f"/>
+<g fill="#12201a" stroke="#1d3529"><ellipse cx="385" cy="480" rx="78" ry="48" transform="rotate(-18 385 480)"/><ellipse cx="250" cy="425" rx="42" ry="28"/><ellipse cx="822" cy="385" rx="58" ry="40"/><ellipse cx="648" cy="215" rx="48" ry="30"/></g>
+<g fill="none" stroke="#2a3140" stroke-linecap="round" stroke-width="7"><path d="M60 330C300 362 500 332 960 300"/><path d="M540 30L585 330L560 630"/><path d="M60 250L400 230L700 200L960 170"/><path d="M240 640L330 455L445 335"/><path d="M150 560C400 604 700 600 880 482"/></g>
+<g fill="none" stroke="#c6a378" stroke-opacity=".6" stroke-width="3" stroke-dasharray="2 8" stroke-linecap="round"><path d="M110 362C250 350 380 346 520 336S780 322 900 300"/><path d="M592 150L582 330L566 560"/></g>
+<g fill="#0c0f14" stroke="#c6a378" stroke-width="2">${STN.map(
+          (s) => `<circle cx="${s[1]}" cy="${s[2]}" r="5"/>`
+        ).join("")}</g>
+<g font-family="Plus Jakarta Sans,sans-serif" font-size="11" fill="#7f8899">${STN.map(
+          (s) => `<text x="${s[1] + 9}" y="${s[2] + 18}">${s[0]}</text>`
+        ).join("")}</g>
+<g font-family="Plus Jakarta Sans,sans-serif" font-size="11" font-style="italic" fill="#4d7391"><text x="395" y="100">Lacul Morii</text></g>
+<g font-family="Plus Jakarta Sans,sans-serif" font-size="11" fill="#4f7a64"><text x="330" y="484">Parcul Drumul Taberei</text><text x="775" y="388">Parc Cotroceni</text></g>
+<g font-family="Cormorant Garamond,serif" font-size="30" fill="#c6a378" fill-opacity=".3" letter-spacing="6" text-anchor="middle">${Object.entries(
+          MAPL
+        )
+          .map(([n, p]) => `<text x="${p[0]}" y="${p[1]}">${n}</text>`)
+          .join("")}</g></svg>`;
+      }
+
+      function mapTexts() {
+        if (!MP.el) return;
+        $("#mleg").innerHTML = `<span><i style="background:var(--gold)"></i>${T(
+          "Apartamente",
+          "Квартиры"
+        )}</span><span><i style="border:1.5px dashed var(--gold)"></i>${T(
+          "Metrou",
+          "Метро"
+        )}</span><span><i style="background:#2a5a43"></i>${T(
+          "Parc",
+          "Парк"
+        )}</span><span><i style="background:#27455f"></i>${T(
+          "Lac",
+          "Озеро"
+        )}</span>`;
+        $("#mhint").textContent = T(
+          "Trage harta · Ctrl + scroll sau butoane pentru zoom",
+          "Двигайте карту · Ctrl + колесо или кнопки для зума"
+        );
+      }
+
+      function mapApply(anim) {
+        const el = MP.el,
+          W = el.clientWidth,
+          H = el.clientHeight;
+        const minX = W - 1000 * MP.s;
+        const minY = H - 640 * MP.s;
+
+        MP.x = Math.min(Math.max(minX, MP.x), 0);
+        MP.y = Math.min(Math.max(minY, MP.y), 0);
+
+        MP.w.classList.toggle("anim", !!anim);
+        MP.w.style.transform = `translate(${MP.x}px,${MP.y}px) scale(${MP.s})`;
+        MP.w.style.setProperty("--inv", (1 / MP.s).toFixed(3));
+        el.classList.toggle("zoomed", MP.s > MP.s0 * 1.05);
+      }
+
+      function mapFit() {
+        const el = MP.el,
+          W = el.clientWidth,
+          H = el.clientHeight;
+        MP.s0 = Math.max(W / 1000, H / 640);
+        MP.minS = MP.s0 * 0.8;
+        MP.maxS = MP.s0 * 3.5;
+
+        if (!MP.init) {
+          MP.s = MP.s0 * 1.35;
+          MP.x = (W - 1000 * MP.s) / 2;
+          MP.y = (H - 640 * MP.s) / 2;
+          MP.init = 1;
+        }
+        MP.s = Math.min(MP.maxS, Math.max(MP.minS, MP.s));
+        mapApply(1);
+      }
+
+      function mapFocus(wx, wy, s) {
+        MP.s = Math.min(MP.maxS, Math.max(MP.minS, s));
+        MP.x = MP.el.clientWidth / 2 - wx * MP.s;
+        MP.y = MP.el.clientHeight / 2 - wy * MP.s;
+        mapApply(1);
+      }
+
+      function mapZoom(k) {
+        const cx = MP.el.clientWidth / 2,
+          cy = MP.el.clientHeight / 2;
+        const s2 = Math.min(MP.maxS, Math.max(MP.minS, MP.s * k));
+        const f = s2 / MP.s;
+        MP.x = cx - (cx - MP.x) * f;
+        MP.y = cy - (cy - MP.y) * f;
+        MP.s = s2;
+        mapApply(1);
+      }
+
+      function focusZone(z) {
+        if (!MP.el) return;
+        const it = L.filter((x) => x.z === z);
+        if (!z || !it.length) {
+          MP.init = 0;
+          mapFit();
+          return;
+        }
+        const p = it.map((x) => proj(x.lat, x.lng));
+        mapFocus(
+          p.reduce((a, b) => a + b[0], 0) / p.length,
+          p.reduce((a, b) => a + b[1], 0) / p.length,
+          MP.s0 * 1.85
+        );
+      }
+
+      function showCard(id, noFocus) {
+        const c = $("#mcard"),
+          x = L[id];
+        MP.sel = x ? id : null;
+        $$(".pin").forEach((p) =>
+          p.classList.toggle("on", +p.dataset.id === id)
+        );
+        if (!x) {
+          c.classList.remove("show");
+          return;
+        }
+        c.innerHTML = `<img src="${x.img}" alt=""><div><h4>${
+          x.n[currentLang]
+        }</h4><div class="pr">${x.p}€ <small>/ ${T(
+          "lună",
+          "мес."
+        )}</small></div><div class="mm">${x.r} ${T("cam.", "комн.")} · ${
+          x.m
+        } m² · ${x.z}</div><button type="button" onclick="openModal(${id})">${T(
+          "Vezi detalii",
+          "Подробнее"
+        )}</button></div><button type="button" class="mx" aria-label="×" onclick="showCard(null)">×</button>`;
+        c.classList.add("show");
+        if (!noFocus) {
+          const [px, py] = proj(x.lat, x.lng);
+          mapFocus(px, py, Math.max(MP.s, MP.s0 * 1.5));
+        }
+      }
+
+      function initMap() {
+        const el = $("#cmap");
+        if (!el || MP.el) return;
+        MP.el = el;
+        el.innerHTML = `<div class="world" id="world">${mapSVG()}<div id="pins"></div></div><div class="mleg" id="mleg"></div><div class="mctl"><button type="button" data-z="1.4" aria-label="Zoom +">+</button><button type="button" data-z="0.7" aria-label="Zoom −">−</button><button type="button" data-z="0" aria-label="Reset">⟲</button></div><div class="mhint" id="mhint"></div><div class="mcard" id="mcard"></div>`;
+        MP.w = $("#world");
+        mapTexts();
+        mapFit();
+        let _mw = innerWidth;
+        addEventListener("resize", () => {
+          if (innerWidth !== _mw) {
+            _mw = innerWidth;
+            mapFit();
+          }
+        });
+
+        el.querySelectorAll(".mctl button").forEach(
+          (b) =>
+            (b.onclick = () => {
+              const k = +b.dataset.z;
+              if (k) mapZoom(k);
+              else {
+                MP.init = 0;
+                mapFit();
+              }
+            })
+        );
+
+        el.addEventListener(
+          "wheel",
+          (e) => {
+            if (!(e.ctrlKey || e.metaKey)) return;
+            e.preventDefault();
+            const factor = e.deltaY < 0 ? 1.15 : 0.85;
+            const rect = el.getBoundingClientRect();
+            const cx = e.clientX - rect.left;
+            const cy = e.clientY - rect.top;
+            const s2 = Math.min(MP.maxS, Math.max(MP.minS, MP.s * factor));
+            const f = s2 / MP.s;
+            MP.x = cx - (cx - MP.x) * f;
+            MP.y = cy - (cy - MP.y) * f;
+            MP.s = s2;
+            mapApply(0);
+          },
+          { passive: false }
+        );
+
+        let d = null;
+        el.addEventListener("pointerdown", (e) => {
+          if (e.target.closest(".mctl,.mcard")) return;
+          d = { x: e.clientX, y: e.clientY, mx: MP.x, my: MP.y };
+          MP.moved = false;
+        });
+        el.addEventListener("pointermove", (e) => {
+          if (!d) return;
+          const dx = e.clientX - d.x,
+            dy = e.clientY - d.y;
+          if (Math.abs(dx) + Math.abs(dy) > 6) {
+            MP.moved = true;
+            el.classList.add("drag");
+          }
+          if (MP.moved) {
+            MP.x = d.mx + dx;
+            MP.y = d.my + dy;
+            mapApply();
+          }
+        });
+        const end = () => {
+          d = null;
+          el.classList.remove("drag");
+          setTimeout(() => (MP.moved = false), 0);
+        };
+        ["pointerup", "pointercancel", "pointerleave"].forEach((t) =>
+          el.addEventListener(t, end)
+        );
+        $("#pins").addEventListener("click", (e) => {
+          const p = e.target.closest(".pin");
+          if (p && !MP.moved) showCard(+p.dataset.id);
+        });
+      }
+
+      function updateMapMarkers(list) {
+        if (!MP.el) return;
+        const box = $("#pins"),
+          have = new Map([...box.children].map((p) => [+p.dataset.id, p])),
+          keep = new Set();
+        list.forEach((it, n) => {
+          keep.add(it.id);
+          let p = have.get(it.id);
+          if (!p) {
+            p = document.createElement("button");
+            p.type = "button";
+            p.className = "pin";
+            p.dataset.id = it.id;
+            p.style.setProperty("--i", n % 8);
+            box.appendChild(p);
+          }
+          const [x, y] = proj(it.lat, it.lng);
+          p.style.left = x.toFixed(0) + "px";
+          p.style.top = y.toFixed(0) + "px";
+          p.textContent = it.p + "€";
+          p.setAttribute("aria-label", `${it.n[currentLang]}, ${it.p}€`);
+          p.classList.toggle("on", MP.sel === it.id);
+        });
+        have.forEach((p, id) => {
+          if (!keep.has(id)) p.remove();
+        });
+        if (MP.sel !== null) {
+          if (list.some((i) => i.id === MP.sel)) showCard(MP.sel, true);
+          else showCard(null);
+        }
+      }
+
+      function buildCardHTML(x, idx) {
+        return `
+    <article class="rental-card" style="--i:${
+      idx % 6
+    }" tabindex="0" role="button" onkeydown="if(event.key==='Enter')openModal(${
+          x.id
+        })" onclick="openModal(${x.id})">
+      <div class="ph">
+        <img src="${x.img}" alt="${x.n[currentLang]}" loading="lazy">
+        <span class="bdg">${T("Verificat", "Проверено")}</span>
+        <span class="zn">${x.z}</span>
+      </div>
+      <div class="rb">
+        <div class="rp">${x.p}€ <span>/ ${
+          currentLang === "ro" ? "lună" : "мес."
+        }</span></div>
+        <h3>${x.n[currentLang]}</h3>
+        <div class="rm">
+          <span>${x.r} ${
+          x.r === 1
+            ? currentLang === "ro"
+              ? "cameră"
+              : "комната"
+            : currentLang === "ro"
+            ? "camere"
+            : "комнаты"
+        }</span>
+          <span>${x.m} m²</span>
+          <span>${T("Etaj", "Этаж")} ${x.f}</span>
+        </div>
+        <div class="tg">
+          ${x.t
+            .map((t) => `<span>${i18n[currentLang]["tag_" + t] || t}</span>`)
+            .join("")}
+        </div>
+      </div>
+    </article>
+  `;
+      }
+
+      function renderListings() {
+        let filtered = L.map((x, i) => ({ ...x, id: i })).filter(
+          (x) =>
+            (!S.z || x.z === S.z) &&
+            (S.r === "all" || (S.r === "3" ? x.r >= 3 : x.r == S.r)) &&
+            x.p <= S.p &&
+            [...S.t].every((t) => x.t.includes(t))
+        );
+
+        const sortFns = {
+          pa: (a, b) => a.p - b.p,
+          pd: (a, b) => b.p - a.p,
+          ma: (a, b) => b.m - a.m,
+        };
+        if (sortFns[S.s]) filtered.sort(sortFns[S.s]);
+
+        $("#fpv").textContent =
+          S.p >= 700 ? (currentLang === "ro" ? "orice" : "любая") : S.p + "€";
+        $("#cnt").innerHTML = `<b>${filtered.length}</b> ${
+          currentLang === "ro" ? "apartamente găsite" : "найдено квартир"
+        }`;
+
+        const isMobile = window.innerWidth <= 768;
+        const initialLimit = isMobile ? 4 : 6;
+
+        const mainList = filtered.slice(0, initialLimit);
+        const extraList = filtered.slice(initialLimit);
+
+        const mainGrid = $("#rg");
+        const extraGrid = $("#rg-extra");
+        const extraWrap = $("#rg-extra-wrap");
+        const smWrap = $("#sm-wrap");
+        const btnMore = $("#btn-more");
+
+        if (filtered.length) {
+          mainGrid.innerHTML = mainList
+            .map((x, idx) => buildCardHTML(x, idx))
+            .join("");
+
+          if (extraList.length) {
+            extraGrid.innerHTML = extraList
+              .map((x, idx) => buildCardHTML(x, idx + initialLimit))
+              .join("");
+            smWrap.style.display = "flex";
+
+            if (showAllListings) {
+              extraWrap.classList.add("open");
+              btnMore.textContent =
+                currentLang === "ro" ? "Arată mai puține" : "Свернуть";
+            } else {
+              extraWrap.classList.remove("open");
+              btnMore.textContent =
+                currentLang === "ro"
+                  ? `Vezi încă ${extraList.length} apartamente`
+                  : `Показать ещё ${extraList.length} квартир`;
+            }
+          } else {
+            extraGrid.innerHTML = "";
+            extraWrap.classList.remove("open");
+            smWrap.style.display = "none";
+          }
+        } else {
+          mainGrid.innerHTML = `<div style="grid-column: 1/-1; text-align: center; padding: 40px; color: var(--mute);">${
+            currentLang === "ro"
+              ? "Nu am găsit apartamente conform filtrelor."
+              : "Квартир по вашему запросу не найдено."
+          }</div>`;
+          extraGrid.innerHTML = "";
+          extraWrap.classList.remove("open");
+          smWrap.style.display = "none";
+        }
+
+        updateMapMarkers(filtered);
+      }
+
+      $("#btn-more").onclick = () => {
+        showAllListings = !showAllListings;
+        const extraWrap = $("#rg-extra-wrap");
+        const btnMore = $("#btn-more");
+        const filteredCount = L.filter(
+          (x) =>
+            (!S.z || x.z === S.z) &&
+            (S.r === "all" || (S.r === "3" ? x.r >= 3 : x.r == S.r)) &&
+            x.p <= S.p &&
+            [...S.t].every((t) => x.t.includes(t))
+        ).length;
+        const isMobile = window.innerWidth <= 768;
+        const initialLimit = isMobile ? 4 : 6;
+        const extraCount = filteredCount - initialLimit;
+
+        if (showAllListings) {
+          extraWrap.classList.add("open");
+          btnMore.textContent =
+            currentLang === "ro" ? "Arată mai puține" : "Свернуть";
+        } else {
+          extraWrap.classList.remove("open");
+          btnMore.textContent =
+            currentLang === "ro"
+              ? `Vezi încă ${extraCount} apartamente`
+              : `Показать ещё ${extraCount} квартир`;
+          $("#rentals").scrollIntoView({ behavior: "smooth" });
+        }
+      };
+
+      function syncFilters() {
+        showAllListings = false;
+        $("#fz").value = S.z;
+        $("#fp").value = S.p;
+        $("#fs").value = S.s;
+        if (window.refreshSelects) refreshSelects();
+        $$("#fr .chip").forEach((c) =>
+          c.classList.toggle("on", c.dataset.r === S.r)
+        );
+        $$("#ff .chip").forEach((c) =>
+          c.classList.toggle("on", S.t.has(c.dataset.t))
+        );
+        renderListings();
+      }
+
+      $("#fz").onchange = (e) => {
+        S.z = e.target.value;
+        renderListings();
+      };
+      let _na;
+      $("#fp").oninput = (e) => {
+        S.p = +e.target.value;
+        document.body.classList.add("noanim");
+        clearTimeout(_na);
+        _na = setTimeout(() => document.body.classList.remove("noanim"), 500);
+        renderListings();
+      };
+      $("#fs").onchange = (e) => {
+        S.s = e.target.value;
+        renderListings();
+      };
+      $$("#fr .chip").forEach(
+        (c) =>
+          (c.onclick = () => {
+            S.r = c.dataset.r;
+            syncFilters();
+          })
+      );
+      $$("#ff .chip").forEach(
+        (c) =>
+          (c.onclick = () => {
+            S.t.has(c.dataset.t)
+              ? S.t.delete(c.dataset.t)
+              : S.t.add(c.dataset.t);
+            syncFilters();
+          })
+      );
+      $("#rst").onclick = () => {
+        Object.assign(S, { z: "", r: "all", p: 700, s: "new" });
+        S.t.clear();
+        syncFilters();
+      };
+      $("#hgo").onclick = () => {
+        S.z = $("#hz").value;
+        S.r = $("#hr").value;
+        S.p = +$("#hp").value;
+        syncFilters();
+        $("#rentals").scrollIntoView();
+      };
+
+      $$("#map-zone-filter .chip").forEach((btn) => {
+        btn.onclick = () => {
+          $$("#map-zone-filter .chip").forEach((c) => c.classList.remove("on"));
+          btn.classList.add("on");
+          S.z = btn.dataset.zone;
+          syncFilters();
+          focusZone(S.z);
+        };
+      });
+
+      $$(".faq-item").forEach((it) => {
+        const b = it.querySelector(".faq-q");
+        b.onclick = () => {
+          const willOpen = !it.classList.contains("open");
+          $$(".faq-item.open").forEach((o) => {
+            o.classList.remove("open");
+            o.querySelector(".faq-q").setAttribute("aria-expanded", "false");
+          });
+          if (willOpen) {
+            it.classList.add("open");
+            b.setAttribute("aria-expanded", "true");
+          }
+        };
+      });
+
+      const dlg = $("#dlg");
+      window.openModal = function (id) {
+        const x = L[id];
+        dlg.innerHTML = `
+    <div class="mg">
+      <div class="mi"><img src="${x.img}" alt="${x.n[currentLang]}"></div>
+      <div class="mb">
+        <button class="x" type="button" aria-label="${T(
+          "Închide",
+          "Закрыть"
+        )}" onclick="dlg.close()">×</button>
+        <span class="sn">${x.z}, Sector 6</span>
+        <h3>${x.n[currentLang]}</h3>
+        <div class="rp">${x.p}€ <span>/ ${T("lună", "мес.")}</span></div>
+        <p>${x.x[currentLang]}</p>
+        <dl>
+          <div><dt>${T("Camere", "Комнаты")}</dt><dd>${x.r}</dd></div>
+          <div><dt>${T("Suprafață", "Площадь")}</dt><dd>${x.m} m²</dd></div>
+          <div><dt>${T("Etaj", "Этаж")}</dt><dd>${x.f}</dd></div>
+          <div><dt>${T("Garanție", "Залог")}</dt><dd>${T(
+          "1 lună",
+          "1 месяц"
+        )}</dd></div>
+        </dl>
+        <div class="tg">${x.t
+          .map((t) => `<span>${i18n[currentLang]["tag_" + t] || t}</span>`)
+          .join("")}</div>
+        <div class="mbt">
+          <a class="btn fill" href="#contact" onclick="dlg.close()">${T(
+            "Programează vizionare",
+            "Записаться на просмотр"
+          )}</a>
+          <a class="btn" href="https://t.me/" target="_blank" rel="noopener">Telegram</a>
+          <a class="btn" href="https://wa.me/" target="_blank" rel="noopener">WhatsApp</a>
+        </div>
+      </div>
+    </div>`;
+        dlg.showModal();
+      };
+
+      dlg.onclick = (e) => {
+        if (e.target === dlg) dlg.close();
+      };
+
+      (function () {
+        const track = $("#rev-track"),
+          slides = $$(".rev-slide"),
+          dots = $("#rev-dots"),
+          car = $("#rev-car");
+        let i = 0,
+          timer,
+          sx = null;
+        slides.forEach((_, k) => {
+          const d = document.createElement("button");
+          d.type = "button";
+          d.className = "dot" + (k ? "" : " act");
+          d.setAttribute("aria-label", "Slide " + (k + 1));
+          d.onclick = () => {
+            go(k);
+            play();
+          };
+          dots.appendChild(d);
+        });
+        function go(n) {
+          i = (n + slides.length) % slides.length;
+          track.style.transform = `translateX(-${i * 100}%)`;
+          [...dots.children].forEach((d, k) =>
+            d.classList.toggle("act", k === i)
+          );
+          slides.forEach((s, k) => s.setAttribute("aria-hidden", k !== i));
+        }
+        function play() {
+          clearInterval(timer);
+          timer = setInterval(() => {
+            if (!document.hidden) go(i + 1);
+          }, 6500);
+        }
+        $("#rev-next").onclick = () => {
+          go(i + 1);
+          play();
+        };
+        $("#rev-prev").onclick = () => {
+          go(i - 1);
+          play();
+        };
+        car.addEventListener("pointerdown", (e) => {
+          sx = e.clientX;
+        });
+        car.addEventListener("pointerup", (e) => {
+          if (sx === null) return;
+          const d = e.clientX - sx;
+          sx = null;
+          if (Math.abs(d) > 50) {
+            go(i + (d < 0 ? 1 : -1));
+            play();
+          }
+        });
+        car.addEventListener("pointercancel", () => {
+          sx = null;
+        });
+        car.addEventListener("mouseenter", () => clearInterval(timer));
+        car.addEventListener("mouseleave", play);
+        go(0);
+        play();
+      })();
+
+      const io = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("in");
+              io.unobserve(entry.target);
+              const b = entry.target.querySelector("b[data-to]");
+              if (b) {
+                const to = +b.dataset.to;
+                let start = null;
+                function step(timestamp) {
+                  if (!start) start = timestamp;
+                  const prog = Math.min((timestamp - start) / 1200, 1);
+                  b.textContent = Math.round(to * (1 - Math.pow(1 - prog, 3)));
+                  if (prog < 1) requestAnimationFrame(step);
+                }
+                requestAnimationFrame(step);
+              }
+            }
+          });
+        },
+        { threshold: 0, rootMargin: "0px 0px -8% 0px" }
+      );
+
+      $$(".rv, .rv-stagger").forEach((el) => io.observe(el));
+
+      const nav = $("#nav"),
+        bg = $("#bg");
+      bg.onclick = () => {
+        const open = nav.classList.toggle("open");
+        bg.setAttribute("aria-expanded", open);
+      };
+      $$("#nav a").forEach(
+        (a) => (a.onclick = () => nav.classList.remove("open"))
+      );
+
+      $("#cf").onsubmit = (e) => {
+        e.preventDefault();
+        $("#ok").style.display = "block";
+        e.target.reset();
+      };
+
+      const canvas = $("#hero-canvas");
+      const ctx = canvas ? canvas.getContext("2d") : null;
+      let particles = [];
+
+      function initParticles() {
+        if (!canvas) return;
+        canvas.width = canvas.offsetWidth;
+        canvas.height = canvas.offsetHeight;
+        particles = [];
+        const count = Math.min(Math.floor(canvas.width / 24), 60);
+        for (let i = 0; i < count; i++) {
+          particles.push({
+            x: Math.random() * canvas.width,
+            y: Math.random() * canvas.height,
+            size: Math.random() * 2 + 0.8,
+            vx: (Math.random() - 0.5) * 0.35,
+            vy: -Math.random() * 0.4 - 0.15,
+            alpha: Math.random() * 0.6 + 0.2,
+          });
+        }
+      }
+
+      function drawParticles(mX, mY) {
+        if (!ctx || !canvas) return;
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        particles.forEach((p) => {
+          p.x += p.vx + mX * 0.2;
+          p.y += p.vy + mY * 0.2;
+
+          if (p.x < 0) p.x = canvas.width;
+          if (p.x > canvas.width) p.x = 0;
+          if (p.y < 0) p.y = canvas.height;
+
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+          ctx.fillStyle = `rgba(226, 190, 147, ${p.alpha})`;
+          ctx.fill();
+        });
+      }
+
+      let _pw = innerWidth,
+        _pt;
+      window.addEventListener("resize", () => {
+        clearTimeout(_pt);
+        _pt = setTimeout(() => {
+          if (innerWidth !== _pw) {
+            _pw = innerWidth;
+            initParticles();
+          }
+        }, 200);
+      });
+      initParticles();
+
+      const heroBg = $("#hero-bg"),
+        heroHc = $("#hero-hc"),
+        heroSpotlight = $("#hero-spotlight"),
+        heroHs = $("#hero-hs"),
+        heroEl = $("#top");
+      const reduceMotion = matchMedia(
+        "(prefers-reduced-motion: reduce)"
+      ).matches;
+      const finePointer = matchMedia(
+        "(hover: hover) and (pointer: fine)"
+      ).matches;
+      const heroDim = document.createElement("div");
+      heroDim.className = "hero-dim";
+      heroBg.after(heroDim);
+      let mouseX = 0,
+        mouseY = 0,
+        tX = 0,
+        tY = 0,
+        heroVisible = true,
+        rafId = 0,
+        frameN = 0;
+
+      function heroFrame() {
+        rafId = 0;
+        if (!heroVisible) return;
+        const sy = window.scrollY,
+          H = heroEl.offsetHeight || window.innerHeight;
+        const p = Math.min(sy / H, 1);
+        mouseX += (tX - mouseX) * 0.06;
+        mouseY += (tY - mouseY) * 0.06;
+        if (finePointer || !(frameN++ & 1)) drawParticles(mouseX, mouseY);
+        heroBg.style.transform = `translate3d(${(mouseX * 22).toFixed(1)}px, ${(
+          sy * 0.4 +
+          mouseY * 22
+        ).toFixed(1)}px, 0) scale(${(1.08 + p * 0.15).toFixed(3)})`;
+        heroDim.style.opacity = (p * 0.6).toFixed(3);
+        heroHc.style.transform = finePointer
+          ? `translate3d(${(mouseX * -14).toFixed(1)}px, ${(
+              sy * 0.24 +
+              mouseY * -12
+            ).toFixed(1)}px, 0) rotateX(${(mouseY * -6).toFixed(
+              2
+            )}deg) rotateY(${(mouseX * 7).toFixed(2)}deg)`
+          : `translate3d(0, ${(sy * 0.24).toFixed(1)}px, 0)`;
+        heroHc.style.opacity = Math.max(0, 1 - p * 1.4).toFixed(2);
+        heroSpotlight.style.transform = `translate3d(${(
+          mouseX * 80 +
+          window.innerWidth * 0.2
+        ).toFixed(1)}px, ${(mouseY * 60 + sy * 0.2).toFixed(1)}px, 0)`;
+        if (finePointer && heroHs)
+          heroHs.style.transform = `translate3d(${(mouseX * -8).toFixed(
+            1
+          )}px, ${(mouseY * -8).toFixed(1)}px, 0)`;
+        rafId = requestAnimationFrame(heroFrame);
+      }
+      function heroKick() {
+        if (!rafId && heroVisible) rafId = requestAnimationFrame(heroFrame);
+      }
+
+      if (!reduceMotion) {
+        if (finePointer)
+          window.addEventListener(
+            "mousemove",
+            (e) => {
+              tX = (e.clientX / window.innerWidth - 0.5) * 2;
+              tY = (e.clientY / window.innerHeight - 0.5) * 2;
+            },
+            { passive: true }
+          );
+        window.addEventListener(
+          "scroll",
+          () => {
+            heroVisible =
+              window.scrollY <
+              (heroEl.offsetHeight || window.innerHeight) * 1.3;
+            heroKick();
+          },
+          { passive: true }
+        );
+        heroKick();
+      }
+
+      // ===== Кастомні випадаючі списки =====
+      (function () {
+        const CHEV =
+          '<svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>';
+        const CHECK =
+          '<svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>';
+        const esc = (s) => s.replace(/&/g, "&amp;").replace(/</g, "&lt;");
+        const mq = matchMedia("(max-width: 600px)");
+        let cur = null,
+          panel = null,
+          ov = null,
+          act = -1,
+          swallow = false;
+
+        const labelOf = (sel) => {
+          const l = sel.id && document.querySelector(`label[for="${sel.id}"]`);
+          return (
+            (l ? l.textContent.replace(/[:\s]+$/, "").trim() : "") ||
+            sel.getAttribute("aria-label") ||
+            ""
+          );
+        };
+        function sync(sel) {
+          const o = sel.options[sel.selectedIndex];
+          sel._v.textContent = o ? o.text : "";
+          sel._b.setAttribute("aria-label", labelOf(sel));
+        }
+        function place() {
+          if (!panel || mq.matches) return;
+          const r = cur._b.getBoundingClientRect();
+          panel.style.minWidth = r.width + "px";
+          const ph = panel.offsetHeight,
+            pw = panel.offsetWidth;
+          const below = innerHeight - r.bottom - 12,
+            above = r.top - 12,
+            up = ph > below && above > below;
+          panel.classList.toggle("up", up);
+          panel.style.left =
+            Math.min(Math.max(12, r.left), innerWidth - pw - 12) + "px";
+          panel.style.top =
+            (up ? Math.max(12, r.top - 8 - ph) : r.bottom + 8) + "px";
+        }
+        function setAct(i) {
+          act = i;
+          const os = panel.querySelectorAll(".csel-opt");
+          os.forEach((o, k) => o.classList.toggle("act", k === i));
+          if (os[i]) os[i].scrollIntoView({ block: "nearest" });
+        }
+        function pick(i) {
+          const s = cur;
+          s.selectedIndex = i;
+          s.dispatchEvent(new Event("change", { bubbles: true }));
+          sync(s);
+          closeDD(true);
+        }
+        function closeDD(focus) {
+          if (!cur) return;
+          const b = cur._b,
+            p = panel,
+            o = ov;
+          b.classList.remove("open");
+          b.setAttribute("aria-expanded", "false");
+          cur = panel = ov = null;
+          p.classList.remove("in");
+          if (o) o.classList.remove("in");
+          setTimeout(() => {
+            p.remove();
+            if (o) o.remove();
+          }, 280);
+          if (focus) b.focus({ preventScroll: true });
+        }
+        function openDD(sel) {
+          if (cur === sel) return closeDD();
+          closeDD();
+          cur = sel;
+          const b = sel._b,
+            sheet = mq.matches;
+          b.classList.add("open");
+          b.setAttribute("aria-expanded", "true");
+          panel = document.createElement("div");
+          panel.className = "csel-panel" + (sheet ? " sheet" : "");
+          panel.setAttribute("role", "listbox");
+          panel.innerHTML =
+            (sheet
+              ? `<div class="csel-title">${esc(labelOf(sel))}</div>`
+              : "") +
+            '<div class="csel-list">' +
+            [...sel.options]
+              .map(
+                (o, i) =>
+                  `<div class="csel-opt${
+                    i === sel.selectedIndex ? " sel" : ""
+                  }" role="option" aria-selected="${
+                    i === sel.selectedIndex
+                  }" data-i="${i}"><span>${esc(o.text)}</span>${CHECK}</div>`
+              )
+              .join("") +
+            "</div>";
+          if (sheet) {
+            ov = document.createElement("div");
+            ov.className = "csel-ov";
+            ov.onclick = () => closeDD();
+            document.body.appendChild(ov);
+          }
+          document.body.appendChild(panel);
+          panel.addEventListener("click", (e) => {
+            const o = e.target.closest(".csel-opt");
+            if (o) pick(+o.dataset.i);
+          });
+          place();
+          requestAnimationFrame(() => {
+            if (!panel) return;
+            panel.classList.add("in");
+            if (ov) ov.classList.add("in");
+          });
+          setAct(Math.max(0, sel.selectedIndex));
+        }
+        function build(sel) {
+          if (sel._b) return;
+          sel.classList.add("csel-native");
+          sel.tabIndex = -1;
+          sel.setAttribute("aria-hidden", "true");
+          const w = document.createElement("div");
+          w.className = "csel";
+          const b = document.createElement("button");
+          b.type = "button";
+          b.className = "csel-btn";
+          b.setAttribute("aria-haspopup", "listbox");
+          b.setAttribute("aria-expanded", "false");
+          b.innerHTML = '<span class="csel-val"></span>' + CHEV;
+          sel.parentNode.insertBefore(w, sel);
+          w.appendChild(sel);
+          w.appendChild(b);
+          sel._b = b;
+          sel._v = b.firstChild;
+          const lab =
+            sel.id && document.querySelector(`label[for="${sel.id}"]`);
+          if (lab)
+            lab.addEventListener("click", (e) => {
+              e.preventDefault();
+              b.focus();
+            });
+          b.addEventListener("click", () => openDD(sel));
+          b.addEventListener("keydown", (e) => {
+            if (!cur && (e.key === "ArrowDown" || e.key === "ArrowUp")) {
+              e.preventDefault();
+              openDD(sel);
+            }
+          });
+          sync(sel);
+        }
+        document.addEventListener("keydown", (e) => {
+          if (!cur) return;
+          const n = cur.options.length;
+          if (e.key === "Escape") {
+            e.preventDefault();
+            closeDD(true);
+          } else if (e.key === "ArrowDown") {
+            e.preventDefault();
+            setAct((act + 1) % n);
+          } else if (e.key === "ArrowUp") {
+            e.preventDefault();
+            setAct((act - 1 + n) % n);
+          } else if (e.key === "Home") {
+            e.preventDefault();
+            setAct(0);
+          } else if (e.key === "End") {
+            e.preventDefault();
+            setAct(n - 1);
+          } else if (e.key === "Enter" || e.key === " ") {
+            e.preventDefault();
+            swallow = e.key === " ";
+            pick(act);
+          } else if (e.key === "Tab") closeDD();
+        });
+        document.addEventListener("keyup", (e) => {
+          if (swallow && e.key === " ") {
+            e.preventDefault();
+            swallow = false;
+          }
+        });
+        document.addEventListener(
+          "pointerdown",
+          (e) => {
+            if (
+              cur &&
+              !e.target.closest(".csel-panel") &&
+              !cur._b.contains(e.target)
+            )
+              closeDD();
+          },
+          true
+        );
+        addEventListener(
+          "scroll",
+          (e) => {
+            if (
+              cur &&
+              !mq.matches &&
+              !(e.target.closest && e.target.closest(".csel-panel"))
+            )
+              closeDD();
+          },
+          true
+        );
+        addEventListener("resize", () => {
+          if (cur) {
+            if (mq.matches) closeDD();
+            else place();
+          }
+        });
+        window.refreshSelects = () => {
+          if (cur) closeDD();
+          $$("select.csel-native").forEach(sync);
+        };
+        $$("select").forEach(build);
+      })();
+
+      window.addEventListener("load", () => {
+        initMap();
+        renderListings();
+      });
+    </script>
+  </body>
+</html>
