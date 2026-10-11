@@ -6,7 +6,7 @@
       name="viewport"
       content="width=device-width, initial-scale=1.0, viewport-fit=cover"
     />
-    <title>Lumen Estate | Închirieri Premium Sector 6 București</title>
+    <title>Lumen Estate | Închirieri Premium Sector 6 București & Admin</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -16,12 +16,13 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
     <script>
-      /* Leaflet займає глобальну змінну L, а в цьому файлі L — масив квартир. Зберігаємо Leaflet окремо. */
+      /* Leaflet займає глобальну змінну L, зберігаємо Leaflet окремо */
       window.LF = window.L;
       try { delete window.L; } catch (e) {}
     </script>
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css" />
+    
     <style>
       :root {
         --bg: #090b0e;
@@ -47,6 +48,8 @@
         --sans: "Plus Jakarta Sans", system-ui, -apple-system, sans-serif;
         --ease: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
         --ease-smooth: cubic-bezier(0.16, 1, 0.3, 1);
+        --danger: #e54d42;
+        --success: #2ecc71;
       }
 
       /* Light Theme Adaptations */
@@ -241,6 +244,14 @@
         border-color: var(--gold2);
         transform: translateY(-2px);
       }
+      .btn.admin-toggle-btn {
+        background: rgba(198, 163, 120, 0.15);
+        border-color: var(--gold);
+      }
+      .btn.admin-toggle-btn:hover {
+        background: var(--gold);
+        color: #090b0e;
+      }
 
       .burger {
         display: none;
@@ -256,7 +267,7 @@
 
       .hero-scroll-wrapper {
         position: relative;
-        height: 260vh; /* Scroll distance for full depth transition */
+        height: 260vh;
         background: var(--bg-alt);
       }
 
@@ -272,7 +283,6 @@
         perspective: 1200px;
       }
 
-      /* Cinematic Multi-Layer Layers */
       .hero-layer {
         position: absolute;
         inset: 0;
@@ -282,7 +292,6 @@
         pointer-events: none;
       }
 
-      /* Layer 1: Dark Evening Sky & Twilight Ambient Glow */
       .hero-sky-layer {
         z-index: 1;
         background: radial-gradient(circle at 50% 30%, rgba(226, 190, 147, 0.22) 0%, rgba(20, 24, 33, 0.85) 50%, rgba(5, 7, 9, 0.98) 100%),
@@ -291,7 +300,6 @@
         background-position: center;
       }
 
-      /* Animated Evening Glow Spheres for warm Militari lighting ambiance */
       .sky-glow-orb {
         position: absolute;
         top: 25%;
@@ -311,7 +319,6 @@
         100% { transform: translate(-50%, -50%) scale(1.1); opacity: 1; }
       }
 
-      /* Layer 2: Real Militari Residence Facade with Warm Lit Windows */
       .hero-facade-layer {
         z-index: 2;
         background-image: linear-gradient(180deg, rgba(9, 11, 14, 0.1) 0%, rgba(9, 11, 14, 0.75) 90%),
@@ -322,7 +329,6 @@
         filter: brightness(0.92) contrast(1.08);
       }
 
-      /* Dark Vignette Frame Overlay on Buildings */
       .hero-vignette {
         position: absolute;
         inset: 0;
@@ -331,7 +337,6 @@
         pointer-events: none;
       }
 
-      /* Layer 3: Warm Luxury Interior Emergence Layer */
       .hero-interior-layer {
         z-index: 4;
         background-image: linear-gradient(180deg, rgba(9, 11, 14, 0.15) 0%, rgba(9, 11, 14, 0.8) 100%),
@@ -355,7 +360,6 @@
         pointer-events: none;
       }
 
-      /* Hero Content Box */
       .hero-content {
         position: relative;
         z-index: 10;
@@ -427,7 +431,6 @@
         text-shadow: 0 4px 16px var(--shadow-color);
       }
 
-      /* Hero Glass Search Bar */
       .hs {
         display: flex;
         gap: 12px;
@@ -457,7 +460,6 @@
         transition: var(--ease);
       }
 
-      /* Scroll Hint Floating Indicator */
       .scroll-indicator {
         position: absolute;
         bottom: 24px;
@@ -850,8 +852,6 @@
       }
       .rg-extra-inner { overflow: hidden; }
 
-      /* Map: див. блок «РЕАЛЬНА КАРТА» нижче */
-
       /* Process Steps */
       .rc {
         background: var(--card);
@@ -956,7 +956,6 @@
       .ag-actions { display: flex; gap: 10px; }
       .ag-actions .btn { flex: 1; min-height: 46px; padding: 10px 12px; font-size: .78rem; }
 
-
       /* FAQ Accordion Styling */
       .faq-wrap { max-width: 860px; margin: 0 auto; }
       .faq-item { border-bottom: 1px solid var(--line); }
@@ -1056,6 +1055,7 @@
       @media (max-width: 900px) {
         .burger { display: block; }
         .hdr-right .btn { display: none; }
+        .hdr-right .btn.admin-toggle-btn { display: inline-flex; }
         nav {
           position: fixed;
           inset: 72px 0 auto 0;
@@ -1068,267 +1068,558 @@
         nav.open { transform: translateY(0); }
         nav ul { flex-direction: column; gap: 18px; }
         .cg, .fw, .mg { grid-template-columns: 1fr; }
-        .floating-card { display: none; }
         .stats-grid { grid-template-columns: repeat(2, 1fr); }
         .agent-grid { grid-template-columns: 1fr; }
         .rev-grid { grid-template-columns: 1fr; }
       }
     
-/* ============ HERO v2 ============ */
-.hero-scroll-wrapper { height: 230vh; background: #06080b; }
-.hero-sticky-container { height: 100vh; height: 100svh; }
-.hero-facade-layer { transform-origin: 50% 44%; }
-.hero-interior-layer { background: none !important; border-radius: 0; box-shadow: none; filter: none; opacity: 0; transform: none; clip-path: inset(26% 32% round 22px); }
-.interior-img { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(9,11,14,.08) 0%, rgba(9,11,14,.65) 100%), url("https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=2200&q=85") center / cover no-repeat; transform: scale(1.2); will-change: transform; }
-.hero-window-frame { position: absolute; inset: 26% 32%; z-index: 5; pointer-events: none; border-radius: 22px; border: 1px solid rgba(240,207,159,.75); box-shadow: 0 0 0 1px rgba(240,207,159,.12), 0 0 70px rgba(240,160,80,.38), inset 0 0 50px rgba(240,160,80,.22); opacity: 0; }
-.hero-window-frame::before, .hero-window-frame::after { content: ""; position: absolute; background: rgba(240,207,159,.35); }
-.hero-window-frame::before { left: 50%; top: 0; bottom: 0; width: 1px; }
-.hero-window-frame::after { top: 62%; left: 0; right: 0; height: 1px; }
-.hero-scrim { position: absolute; inset: 0; z-index: 6; pointer-events: none; background: radial-gradient(75% 60% at 50% 50%, rgba(6,8,12,.70) 0%, rgba(6,8,12,.38) 55%, transparent 100%), linear-gradient(180deg, rgba(6,8,12,.55) 0%, transparent 28%, transparent 62%, rgba(6,8,12,.75) 100%); }
-.hero-canvas-3d { z-index: 5; }
-.hero-content { max-width: 900px; padding: 0 24px; }
-.hero-content .tag-glow { background: rgba(10,12,16,.6); border-color: rgba(240,207,159,.45); color: #f0cf9f; margin-bottom: 22px; font-weight: 600; }
-.hero-content h1 { font: 500 clamp(2.6rem, 7.2vw, 5.8rem) / 1.02 var(--serif); letter-spacing: -.01em; color: #fff; text-shadow: 0 2px 28px rgba(0,0,0,.6), 0 1px 3px rgba(0,0,0,.7); margin-bottom: 20px; }
-.hero-content h1 em { background: none; -webkit-text-fill-color: #f3d5a6; color: #f3d5a6; font-weight: 500; }
-.hero-content p { color: #eef1f6; font-size: clamp(1.02rem, 2vw, 1.25rem); font-weight: 400; line-height: 1.55; max-width: 560px; margin: 0 auto; text-shadow: 0 1px 14px rgba(0,0,0,.75); }
-@keyframes heroIn { from { opacity: 0; transform: translateY(28px); filter: blur(10px); } to { opacity: 1; transform: none; filter: blur(0); } }
-.hero-content > * { animation: heroIn 1.1s var(--ease-smooth) both; }
-.hero-content > .tag-glow { animation-delay: .1s; }
-.hero-content > h1 { animation-delay: .25s; }
-.hero-content > p { animation-delay: .42s; }
-.hero-content > .hs { animation-delay: .6s; }
-.hs { display: flex; flex-wrap: nowrap; align-items: center; gap: 6px; max-width: 640px; margin: 36px auto 0; padding: 7px; border-radius: 999px; background: rgba(12,15,20,.66); backdrop-filter: blur(22px); -webkit-backdrop-filter: blur(22px); border: 1px solid rgba(240,207,159,.4); box-shadow: 0 24px 60px rgba(0,0,0,.5); }
-.hs .csel { flex: 1 1 0; }
-.hs .csel-btn { background: transparent; border: 0; color: #fff; font: 500 .95rem var(--sans); padding: 13px 18px; min-height: 52px; border-radius: 999px; box-shadow: none; }
-.hs .csel-btn:hover, .hs .csel-btn.open { background: rgba(255,255,255,.09); }
-.hs .csel-btn svg { stroke: #f0cf9f; }
-.hs-div { width: 1px; height: 26px; background: rgba(255,255,255,.22); flex: none; }
-.hs .btn { flex: none; min-height: 52px; padding: 0 28px; border-radius: 999px; gap: 8px; font-size: .85rem; border: 0; }
-.hs .btn svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 2.2; stroke-linecap: round; }
-.scroll-indicator { bottom: 22px; }
+      /* HERO v2 */
+      .hero-scroll-wrapper { height: 230vh; background: #06080b; }
+      .hero-sticky-container { height: 100vh; height: 100svh; }
+      .hero-facade-layer { transform-origin: 50% 44%; }
+      .hero-interior-layer { background: none !important; border-radius: 0; box-shadow: none; filter: none; opacity: 0; transform: none; clip-path: inset(26% 32% round 22px); }
+      .interior-img { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(9,11,14,.08) 0%, rgba(9,11,14,.65) 100%), url("https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=2200&q=85") center / cover no-repeat; transform: scale(1.2); will-change: transform; }
+      .hero-window-frame { position: absolute; inset: 26% 32%; z-index: 5; pointer-events: none; border-radius: 22px; border: 1px solid rgba(240,207,159,.75); box-shadow: 0 0 0 1px rgba(240,207,159,.12), 0 0 70px rgba(240,160,80,.38), inset 0 0 50px rgba(240,160,80,.22); opacity: 0; }
+      .hero-window-frame::before, .hero-window-frame::after { content: ""; position: absolute; background: rgba(240,207,159,.35); }
+      .hero-window-frame::before { left: 50%; top: 0; bottom: 0; width: 1px; }
+      .hero-window-frame::after { top: 62%; left: 0; right: 0; height: 1px; }
+      .hero-scrim { position: absolute; inset: 0; z-index: 6; pointer-events: none; background: radial-gradient(75% 60% at 50% 50%, rgba(6,8,12,.70) 0%, rgba(6,8,12,.38) 55%, transparent 100%), linear-gradient(180deg, rgba(6,8,12,.55) 0%, transparent 28%, transparent 62%, rgba(6,8,12,.75) 100%); }
+      .hero-canvas-3d { z-index: 5; }
+      .hero-content { max-width: 900px; padding: 0 24px; }
+      .hero-content .tag-glow { background: rgba(10,12,16,.6); border-color: rgba(240,207,159,.45); color: #f0cf9f; margin-bottom: 22px; font-weight: 600; }
+      .hero-content h1 { font: 500 clamp(2.6rem, 7.2vw, 5.8rem) / 1.02 var(--serif); letter-spacing: -.01em; color: #fff; text-shadow: 0 2px 28px rgba(0,0,0,.6), 0 1px 3px rgba(0,0,0,.7); margin-bottom: 20px; }
+      .hero-content h1 em { background: none; -webkit-text-fill-color: #f3d5a6; color: #f3d5a6; font-weight: 500; }
+      .hero-content p { color: #eef1f6; font-size: clamp(1.02rem, 2vw, 1.25rem); font-weight: 400; line-height: 1.55; max-width: 560px; margin: 0 auto; text-shadow: 0 1px 14px rgba(0,0,0,.75); }
+      @keyframes heroIn { from { opacity: 0; transform: translateY(28px); filter: blur(10px); } to { opacity: 1; transform: none; filter: blur(0); } }
+      .hero-content > * { animation: heroIn 1.1s var(--ease-smooth) both; }
+      .hero-content > .tag-glow { animation-delay: .1s; }
+      .hero-content > h1 { animation-delay: .25s; }
+      .hero-content > p { animation-delay: .42s; }
+      .hero-content > .hs { animation-delay: .6s; }
+      .hs { display: flex; flex-wrap: nowrap; align-items: center; gap: 6px; max-width: 640px; margin: 36px auto 0; padding: 7px; border-radius: 999px; background: rgba(12,15,20,.66); backdrop-filter: blur(22px); -webkit-backdrop-filter: blur(22px); border: 1px solid rgba(240,207,159,.4); box-shadow: 0 24px 60px rgba(0,0,0,.5); }
+      .hs .csel { flex: 1 1 0; }
+      .hs .csel-btn { background: transparent; border: 0; color: #fff; font: 500 .95rem var(--sans); padding: 13px 18px; min-height: 52px; border-radius: 999px; box-shadow: none; }
+      .hs .csel-btn:hover, .hs .csel-btn.open { background: rgba(255,255,255,.09); }
+      .hs .csel-btn svg { stroke: #f0cf9f; }
+      .hs-div { width: 1px; height: 26px; background: rgba(255,255,255,.22); flex: none; }
+      .hs .btn { flex: none; min-height: 52px; padding: 0 28px; border-radius: 999px; gap: 8px; font-size: .85rem; border: 0; }
+      .hs .btn svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 2.2; stroke-linecap: round; }
+      .scroll-indicator { bottom: 22px; }
 
-/* ============ ПРЕФЕРЕНЦІЇ У ФУТЕРІ / МЕНЮ ============ */
-.fprefs { max-width: 1280px; margin: 44px auto 0; padding-top: 24px; border-top: 1px solid var(--line); display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
-.fp-label { color: var(--mute); font-size: .85rem; }
-.fprefs .csel { width: 160px; }
-.nav-contact { display: none; }
+      .fprefs { max-width: 1280px; margin: 44px auto 0; padding-top: 24px; border-top: 1px solid var(--line); display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
+      .fp-label { color: var(--mute); font-size: .85rem; }
+      .fprefs .csel { width: 160px; }
+      .nav-contact { display: none; }
 
-/* ============ МОБІЛЬНА ВЕРСІЯ ============ */
-@media (max-width: 900px) {
-  html { scroll-padding-top: 70px; }
-  header { padding: 10px 5%; padding-top: calc(10px + env(safe-area-inset-top, 0px)); backdrop-filter: none; -webkit-backdrop-filter: none; background: var(--bg); }
-  .logo { font-size: 1.6rem; }
-  .lang-option { padding: 5px 11px; }
-  nav { inset: auto; top: calc(60px + env(safe-area-inset-top, 0px)); left: 0; right: 0; max-height: calc(100svh - 64px); overflow: auto; padding: 18px 5% 28px; box-shadow: 0 24px 40px var(--shadow-color); }
-  nav a { display: block; padding: 8px 0; font-size: 1rem; }
-  .nav-contact { display: block; margin-top: 8px; }
-  .nav-contact a { display: flex; justify-content: center; padding: 14px; border-radius: 40px; background: var(--gold); color: #090b0e; text-align: center; letter-spacing: 1px; }
-  section { padding: 72px 5%; }
-  .sh { margin-bottom: 30px; }
-  .bignum { font-size: 34vw; top: 8px; }
-  .cg > *, .fw > *, .rev-grid > * { min-width: 0; }
-  .cg { padding: 26px; gap: 26px; }
-  .cg img { height: 240px; }
-  .stats { margin-top: -30px; }
-  .stat-card { padding: 16px 10px; }
-  .stat-info span { font-size: .7rem; }
-  .rg { grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr)); gap: 20px; }
-  .cmap { height: 430px; }
-  .fw { gap: 36px; }
-  .cf2 .two { grid-template-columns: 1fr; }
-  .fprefs { margin-top: 32px; }
-  dialog { width: 100%; max-width: 100%; margin: auto 0 0; border-radius: 24px 24px 0 0; max-height: 94svh; }
-  .mi { height: 220px; min-height: 0; }
-  .mb { padding: 24px; }
+      /* Mobile styles */
+      @media (max-width: 900px) {
+        html { scroll-padding-top: 70px; }
+        header { padding: 10px 5%; padding-top: calc(10px + env(safe-area-inset-top, 0px)); backdrop-filter: none; -webkit-backdrop-filter: none; background: var(--bg); }
+        .logo { font-size: 1.6rem; }
+        .lang-option { padding: 5px 11px; }
+        nav { inset: auto; top: calc(60px + env(safe-area-inset-top, 0px)); left: 0; right: 0; max-height: calc(100svh - 64px); overflow: auto; padding: 18px 5% 28px; box-shadow: 0 24px 40px var(--shadow-color); }
+        nav a { display: block; padding: 8px 0; font-size: 1rem; }
+        .nav-contact { display: block; margin-top: 8px; }
+        .nav-contact a { display: flex; justify-content: center; padding: 14px; border-radius: 40px; background: var(--gold); color: #090b0e; text-align: center; letter-spacing: 1px; }
+        section { padding: 72px 5%; }
+        .sh { margin-bottom: 30px; }
+        .bignum { font-size: 34vw; top: 8px; }
+        .cg > *, .fw > *, .rev-grid > * { min-width: 0; }
+        .cg { padding: 26px; gap: 26px; }
+        .cg img { height: 240px; }
+        .stats { margin-top: -30px; }
+        .stat-card { padding: 16px 10px; }
+        .stat-info span { font-size: .7rem; }
+        .rg { grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr)); gap: 20px; }
+        .cmap { height: 430px; }
+        .fw { gap: 36px; }
+        .fprefs { margin-top: 32px; }
+        dialog { width: 100%; max-width: 100%; margin: auto 0 0; border-radius: 24px 24px 0 0; max-height: 94svh; }
+        .mi { height: 220px; min-height: 0; }
+        .mb { padding: 24px; }
 
-  /* hero */
-  .hero-scroll-wrapper { height: 190vh; }
-  .hero-content { padding: 0 18px; }
-  .hero-content h1 { font-size: clamp(2.3rem, 10.5vw, 3.4rem); }
-  .hero-content p { font-size: 1rem; }
-  .hs { flex-direction: column; align-items: stretch; border-radius: 24px; padding: 10px; gap: 6px; margin-top: 28px; }
-  .hs .csel { flex: none; width: 100%; }
-  .hs .csel-btn { background: rgba(255,255,255,.08); border-radius: 16px; min-height: 52px; }
-  .hs-div { display: none; }
-  .hs .btn { width: 100%; border-radius: 16px; min-height: 52px; }
+        .hero-scroll-wrapper { height: 190vh; }
+        .hero-content { padding: 0 18px; }
+        .hero-content h1 { font-size: clamp(2.3rem, 10.5vw, 3.4rem); }
+        .hero-content p { font-size: 1rem; }
+        .hs { flex-direction: column; align-items: stretch; border-radius: 24px; padding: 10px; gap: 6px; margin-top: 28px; }
+        .hs .csel { flex: none; width: 100%; }
+        .hs .csel-btn { background: rgba(255,255,255,.08); border-radius: 16px; min-height: 52px; }
+        .hs-div { display: none; }
+        .hs .btn { width: 100%; border-radius: 16px; min-height: 52px; }
 
-  /* ріелтори: гортання вбік */
-  .agent-grid { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; gap: 14px; margin: 0 -5vw; padding: 4px 5vw 22px; scrollbar-width: none; -webkit-overflow-scrolling: touch; }
-  .agent-grid::-webkit-scrollbar { display: none; }
-  .ag { flex: 0 0 82%; max-width: 360px; scroll-snap-align: center; }
-  .ag:nth-child(2) { margin-top: 0; }
-  .ag-b { padding: 18px 18px 20px; }
-  .ag-b h3 { font-size: 1.6rem; }
-}
-@media (max-width: 600px) {
-  .cf { grid-template-columns: 1fr; }
-  .fbar { grid-template-columns: 1fr; padding: 18px; }
-  .chip { min-height: 40px; }
-  .cmap { height: 400px; }
-  .rev-card { padding: 22px; }
-  .rev-sum { padding: 26px; }
-  .cg { padding: 20px; }
-  .cg img { height: 210px; }
-  .fm { flex-direction: column; align-items: flex-start; }
-  .csel-panel.sheet { left: 0 !important; right: 0; top: auto !important; bottom: 0; width: 100%; max-width: 100%; min-width: 0 !important; border-radius: 22px 22px 0 0; padding: 14px 14px calc(14px + env(safe-area-inset-bottom, 0px)); transform: translateY(100%); transform-origin: bottom; }
-  .csel-panel.sheet.in { transform: none; }
-  .csel-opt { padding: 15px 14px; font-size: 1rem; }
-  .csel-list { max-height: 55vh; }
-  .fprefs .csel { width: 100%; }
-}
-@media (max-width: 380px) { .logo { font-size: 1.4rem; } .lang-option { padding: 5px 9px; } }
-@media (max-height: 640px) and (max-width: 900px) { .hero-content p { display: none; } .scroll-indicator { display: none; } }
-@media (hover: none) { .rental-card:hover, .ag:hover, .rc:hover { transform: none; } }
-@media (prefers-reduced-motion: reduce) {
-  .hero-scroll-wrapper { height: 100vh; }
-  .hero-content > * { animation: none; }
-  .hero-interior-layer, .hero-window-frame { display: none; }
-}
+        .agent-grid { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; gap: 14px; margin: 0 -5vw; padding: 4px 5vw 22px; scrollbar-width: none; -webkit-overflow-scrolling: touch; }
+        .agent-grid::-webkit-scrollbar { display: none; }
+        .ag { flex: 0 0 82%; max-width: 360px; scroll-snap-align: center; }
+        .ag:nth-child(2) { margin-top: 0; }
+        .ag-b { padding: 18px 18px 20px; }
+        .ag-b h3 { font-size: 1.6rem; }
+      }
+      @media (max-width: 600px) {
+        .cf { grid-template-columns: 1fr; }
+        .fbar { grid-template-columns: 1fr; padding: 18px; }
+        .chip { min-height: 40px; }
+        .cmap { height: 400px; }
+        .rev-card { padding: 22px; }
+        .rev-sum { padding: 26px; }
+        .cg { padding: 20px; }
+        .cg img { height: 210px; }
+        .fm { flex-direction: column; align-items: flex-start; }
+        .csel-panel.sheet { left: 0 !important; right: 0; top: auto !important; bottom: 0; width: 100%; max-width: 100%; min-width: 0 !important; border-radius: 22px 22px 0 0; padding: 14px 14px calc(14px + env(safe-area-inset-bottom, 0px)); transform: translateY(100%); transform-origin: bottom; }
+        .csel-panel.sheet.in { transform: none; }
+        .csel-opt { padding: 15px 14px; font-size: 1rem; }
+        .csel-list { max-height: 55vh; }
+        .fprefs .csel { width: 100%; }
+      }
+      @media (max-width: 380px) { .logo { font-size: 1.4rem; } .lang-option { padding: 5px 9px; } }
+      @media (max-height: 640px) and (max-width: 900px) { .hero-content p { display: none; } .scroll-indicator { display: none; } }
+      @media (hover: none) { .rental-card:hover, .ag:hover, .rc:hover { transform: none; } }
+      @media (prefers-reduced-motion: reduce) {
+        .hero-scroll-wrapper { height: 100vh; }
+        .hero-content > * { animation: none; }
+        .hero-interior-layer, .hero-window-frame { display: none; }
+      }
 
-/* ===== ФІЛЬТРИ НА ВСЮ ШИРИНУ ===== */
-.fbar { grid-template-columns: 1.05fr 1.55fr 1.3fr 1.05fr .85fr; gap: 22px 28px; width: 100%; }
-.fbar .fg { min-width: 0; }
-@media (max-width: 1100px) { .fbar { grid-template-columns: repeat(3, 1fr); } }
-@media (max-width: 700px) { .fbar { grid-template-columns: repeat(2, 1fr); } }
-@media (max-width: 600px) { .fbar { grid-template-columns: 1fr; } }
+      /* Filter bar width */
+      .fbar { grid-template-columns: 1.05fr 1.55fr 1.3fr 1.05fr .85fr; gap: 22px 28px; width: 100%; }
+      .fbar .fg { min-width: 0; }
+      @media (max-width: 1100px) { .fbar { grid-template-columns: repeat(3, 1fr); } }
+      @media (max-width: 700px) { .fbar { grid-template-columns: repeat(2, 1fr); } }
+      @media (max-width: 600px) { .fbar { grid-template-columns: 1fr; } }
 
-/* ===== ІНФО В HERO ПІСЛЯ «ВХОДУ ЧЕРЕЗ ВІКНО» ===== */
-.hero-scroll-wrapper { height: 290vh; }
-.hero-reveal { position: absolute; z-index: 8; left: clamp(18px, 5vw, 80px); bottom: clamp(28px, 9vh, 90px); width: min(440px, calc(100% - 36px)); padding: 26px 28px; border-radius: 26px; background: rgba(10,12,16,.74); -webkit-backdrop-filter: blur(22px); backdrop-filter: blur(22px); border: 1px solid rgba(240,207,159,.4); box-shadow: 0 30px 70px rgba(0,0,0,.55); color: #fff; opacity: 0; pointer-events: none; will-change: transform, opacity; }
-.rv-tag { display: inline-flex; align-items: center; gap: 8px; font-size: .72rem; letter-spacing: 2.5px; text-transform: uppercase; font-weight: 600; color: #f0cf9f; margin-bottom: 12px; }
-.rv-tag::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: #f0cf9f; box-shadow: 0 0 10px #f0cf9f; }
-.hero-reveal h2 { font: 500 clamp(1.9rem, 3.4vw, 2.6rem) / 1.05 var(--serif); color: #fff; margin-bottom: 16px; }
-.hero-reveal h2 em { color: #f3d5a6; font-style: italic; }
-.rv-feats { list-style: none; display: grid; gap: 10px; margin-bottom: 20px; }
-.rv-feats li { display: flex; align-items: center; gap: 12px; font-size: .95rem; color: #eef1f6; }
-.rv-feats svg { flex: none; width: 22px; height: 22px; padding: 4px; border-radius: 50%; background: rgba(240,207,159,.18); fill: none; stroke: #f0cf9f; stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; }
-.rv-bottom { display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; padding-top: 18px; border-top: 1px solid rgba(255,255,255,.16); }
-.rv-price small { color: #c9d0dc; font-size: .8rem; }
-.rv-price b { font: 500 2rem / 1 var(--serif); color: #f3d5a6; margin: 0 4px; }
-.hero-reveal .btn { min-height: 46px; }
-@media (max-width: 900px) {
-  .hero-scroll-wrapper { height: 250vh; }
-  .hero-reveal { left: 14px; right: 14px; width: auto; bottom: calc(22px + env(safe-area-inset-bottom, 0px)); padding: 20px; border-radius: 22px; }
-  .hero-reveal h2 { font-size: 1.8rem; margin-bottom: 12px; }
-  .rv-feats { gap: 8px; margin-bottom: 14px; }
-  .rv-feats li { font-size: .9rem; }
-  .rv-bottom { padding-top: 14px; }
-  .hero-reveal .btn { flex: 1; }
-}
-@media (max-height: 700px) { .rv-feats li:nth-child(3) { display: none; } }
-@media (prefers-reduced-motion: reduce) { .hero-reveal { display: none; } }
+      /* Hero reveal overlay */
+      .hero-scroll-wrapper { height: 290vh; }
+      .hero-reveal { position: absolute; z-index: 8; left: clamp(18px, 5vw, 80px); bottom: clamp(28px, 9vh, 90px); width: min(440px, calc(100% - 36px)); padding: 26px 28px; border-radius: 26px; background: rgba(10,12,16,.74); -webkit-backdrop-filter: blur(22px); backdrop-filter: blur(22px); border: 1px solid rgba(240,207,159,.4); box-shadow: 0 30px 70px rgba(0,0,0,.55); color: #fff; opacity: 0; pointer-events: none; will-change: transform, opacity; }
+      .rv-tag { display: inline-flex; align-items: center; gap: 8px; font-size: .72rem; letter-spacing: 2.5px; text-transform: uppercase; font-weight: 600; color: #f0cf9f; margin-bottom: 12px; }
+      .rv-tag::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: #f0cf9f; box-shadow: 0 0 10px #f0cf9f; }
+      .hero-reveal h2 { font: 500 clamp(1.9rem, 3.4vw, 2.6rem) / 1.05 var(--serif); color: #fff; margin-bottom: 16px; }
+      .hero-reveal h2 em { color: #f3d5a6; font-style: italic; }
+      .rv-feats { list-style: none; display: grid; gap: 10px; margin-bottom: 20px; }
+      .rv-feats li { display: flex; align-items: center; gap: 12px; font-size: .95rem; color: #eef1f6; }
+      .rv-feats svg { flex: none; width: 22px; height: 22px; padding: 4px; border-radius: 50%; background: rgba(240,207,159,.18); fill: none; stroke: #f0cf9f; stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; }
+      .rv-bottom { display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; padding-top: 18px; border-top: 1px solid rgba(255,255,255,.16); }
+      .rv-price small { color: #c9d0dc; font-size: .8rem; }
+      .rv-price b { font: 500 2rem / 1 var(--serif); color: #f3d5a6; margin: 0 4px; }
+      .hero-reveal .btn { min-height: 46px; }
+      @media (max-width: 900px) {
+        .hero-scroll-wrapper { height: 250vh; }
+        .hero-reveal { left: 14px; right: 14px; width: auto; bottom: calc(22px + env(safe-area-inset-bottom, 0px)); padding: 20px; border-radius: 22px; }
+        .hero-reveal h2 { font-size: 1.8rem; margin-bottom: 12px; }
+        .rv-feats { gap: 8px; margin-bottom: 14px; }
+        .rv-feats li { font-size: .9rem; }
+        .rv-bottom { padding-top: 14px; }
+        .hero-reveal .btn { flex: 1; }
+      }
+      @media (max-height: 700px) { .rv-feats li:nth-child(3) { display: none; } }
+      @media (prefers-reduced-motion: reduce) { .hero-reveal { display: none; } }
 
-/* ===== РЕАЛЬНА КАРТА (Leaflet) ===== */
-.cmap-shell { position: relative; height: 620px; border-radius: 26px; border: 1px solid var(--line-gold); overflow: hidden; box-shadow: 0 24px 60px var(--shadow-color); background: var(--map-bg); isolation: isolate; }
-.cmap-shell::after { content: ""; position: absolute; inset: 0; z-index: 450; pointer-events: none; box-shadow: inset 0 0 110px rgba(0,0,0,.5); border-radius: inherit; }
-[data-theme="light"] .cmap-shell::after { box-shadow: inset 0 0 80px rgba(120,100,70,.18); }
-.cmap { height: 100% !important; width: 100%; border: 0 !important; border-radius: 0 !important; box-shadow: none !important; background: var(--map-bg); cursor: grab; }
-.cmap.leaflet-container { font-family: var(--sans); outline: 0; }
-.cmap.leaflet-dragging { cursor: grabbing; }
-@media (pointer: fine) { .cmap.leaflet-container { touch-action: none; } }
-@media (pointer: coarse) { .cmap.leaflet-container { touch-action: pan-x pan-y; } }
-[data-theme="dark"] .cmap .leaflet-tile-pane { filter: sepia(.2) saturate(.8) brightness(.97) contrast(1.05); }
-.cmap .leaflet-control-zoom { border: 0 !important; display: flex; flex-direction: column; gap: 8px; box-shadow: none !important; margin: 16px 16px 0 0 !important; }
-.cmap .leaflet-control-zoom a { width: 44px !important; height: 44px !important; line-height: 42px !important; border-radius: 50% !important; background: var(--glass-bg) !important; color: var(--text) !important; border: 1px solid var(--line-gold) !important; -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px); font: 400 1.3rem var(--sans) !important; transition: var(--ease); }
-.cmap .leaflet-control-zoom a:hover { background: var(--gold) !important; color: #090b0e !important; }
-.cmap .leaflet-control-zoom a.leaflet-disabled { opacity: .4; }
-.cmap .leaflet-control-attribution { background: var(--glass-bg) !important; color: var(--mute) !important; font-size: 10px; border-radius: 10px 0 0 0; -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); }
-.cmap .leaflet-control-attribution a { color: var(--gold2) !important; }
+      /* Leaflet Map */
+      .cmap-shell { position: relative; height: 620px; border-radius: 26px; border: 1px solid var(--line-gold); overflow: hidden; box-shadow: 0 24px 60px var(--shadow-color); background: var(--map-bg); isolation: isolate; }
+      .cmap-shell::after { content: ""; position: absolute; inset: 0; z-index: 450; pointer-events: none; box-shadow: inset 0 0 110px rgba(0,0,0,.5); border-radius: inherit; }
+      [data-theme="light"] .cmap-shell::after { box-shadow: inset 0 0 80px rgba(120,100,70,.18); }
+      .cmap { height: 100% !important; width: 100%; border: 0 !important; border-radius: 0 !important; box-shadow: none !important; background: var(--map-bg); cursor: grab; }
+      .cmap.leaflet-container { font-family: var(--sans); outline: 0; }
+      .cmap.leaflet-dragging { cursor: grabbing; }
+      @media (pointer: fine) { .cmap.leaflet-container { touch-action: none; } }
+      @media (pointer: coarse) { .cmap.leaflet-container { touch-action: pan-x pan-y; } }
+      [data-theme="dark"] .cmap .leaflet-tile-pane { filter: sepia(.2) saturate(.8) brightness(.97) contrast(1.05); }
+      .cmap .leaflet-control-zoom { border: 0 !important; display: flex; flex-direction: column; gap: 8px; box-shadow: none !important; margin: 16px 16px 0 0 !important; }
+      .cmap .leaflet-control-zoom a { width: 44px !important; height: 44px !important; line-height: 42px !important; border-radius: 50% !important; background: var(--glass-bg) !important; color: var(--text) !important; border: 1px solid var(--line-gold) !important; -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px); font: 400 1.3rem var(--sans) !important; transition: var(--ease); }
+      .cmap .leaflet-control-zoom a:hover { background: var(--gold) !important; color: #090b0e !important; }
+      .cmap .leaflet-control-zoom a.leaflet-disabled { opacity: .4; }
+      .cmap .leaflet-control-attribution { background: var(--glass-bg) !important; color: var(--mute) !important; font-size: 10px; border-radius: 10px 0 0 0; -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); }
+      .cmap .leaflet-control-attribution a { color: var(--gold2) !important; }
 
-[data-theme="dark"] .cmap.osm .leaflet-tile-pane { filter: invert(1) hue-rotate(180deg) brightness(.85) contrast(.92) saturate(.5) sepia(.18); }
-.lx-icon { background: none !important; border: 0 !important; }
-.lx-dot { position: absolute; left: -5px; top: -5px; width: 10px; height: 10px; border-radius: 50%; background: var(--gold); box-shadow: 0 0 0 4px rgba(198,163,120,.28), 0 0 18px var(--gold); }
-.lx-pin { position: absolute; left: 0; top: 0; transform: translate(-50%, calc(-100% - 12px)); display: flex; align-items: center; padding: 8px 15px; border-radius: 999px; background: linear-gradient(180deg, var(--card2), var(--card)); border: 1px solid var(--gold); color: var(--gold2); font: 600 1rem/1 var(--serif); font-feature-settings: "lnum"; letter-spacing: .3px; white-space: nowrap; cursor: pointer; box-shadow: 0 12px 28px var(--shadow-color), 0 0 0 3px rgba(198,163,120,.12), inset 0 1px 0 rgba(255,255,255,.08); transition: transform .35s var(--ease-smooth), background .25s, color .25s, box-shadow .25s; animation: lxIn .6s var(--ease-smooth) backwards; animation-delay: calc(var(--i, 0) * 45ms); }
-.lx-pin::after { content: ""; position: absolute; left: 50%; bottom: -6px; width: 10px; height: 10px; margin-left: -5px; background: var(--card); border: 1px solid var(--gold); border-top: 0; border-left: 0; transform: rotate(45deg); transition: background .25s; }
-.lx-icon:hover .lx-pin, .lx-icon:focus-visible .lx-pin { transform: translate(-50%, calc(-100% - 15px)) scale(1.07); background: var(--gold); color: #090b0e; box-shadow: 0 16px 34px var(--shadow-color), 0 0 24px var(--gold-glow); }
-.lx-icon:hover .lx-pin::after { background: var(--gold); }
-.lx-icon.on .lx-pin { transform: translate(-50%, calc(-100% - 15px)) scale(1.1); background: var(--gold); color: #090b0e; box-shadow: 0 16px 34px var(--shadow-color), 0 0 30px var(--gold-glow); }
-.lx-icon.on .lx-pin::after { background: var(--gold); }
-.lx-icon.on .lx-dot { animation: lxPulse 1.8s infinite; }
-@keyframes lxIn { from { opacity: 0; transform: translate(-50%, calc(-100% + 6px)) scale(.9); } }
-@keyframes lxPulse { 0% { box-shadow: 0 0 0 4px rgba(198,163,120,.35), 0 0 18px var(--gold); } 100% { box-shadow: 0 0 0 20px rgba(198,163,120,0), 0 0 18px var(--gold); } }
-.lx-zone { background: none !important; border: 0 !important; pointer-events: none; }
-.lx-zone span { position: absolute; transform: translate(-50%, 0); white-space: nowrap; font: 400 1.2rem var(--serif); letter-spacing: .38em; color: var(--gold); opacity: .6; text-shadow: 0 2px 14px rgba(0,0,0,.85); transition: opacity .4s; }
-[data-theme="light"] .lx-zone span { text-shadow: 0 1px 8px rgba(255,255,255,.9); color: var(--gold2); }
-.cmap.z-near .lx-zone span { opacity: 0; }
+      [data-theme="dark"] .cmap.osm .leaflet-tile-pane { filter: invert(1) hue-rotate(180deg) brightness(.85) contrast(.92) saturate(.5) sepia(.18); }
+      .lx-icon { background: none !important; border: 0 !important; }
+      .lx-dot { position: absolute; left: -5px; top: -5px; width: 10px; height: 10px; border-radius: 50%; background: var(--gold); box-shadow: 0 0 0 4px rgba(198,163,120,.28), 0 0 18px var(--gold); }
+      .lx-pin { position: absolute; left: 0; top: 0; transform: translate(-50%, calc(-100% - 12px)); display: flex; align-items: center; padding: 8px 15px; border-radius: 999px; background: linear-gradient(180deg, var(--card2), var(--card)); border: 1px solid var(--gold); color: var(--gold2); font: 600 1rem/1 var(--serif); font-feature-settings: "lnum"; letter-spacing: .3px; white-space: nowrap; cursor: pointer; box-shadow: 0 12px 28px var(--shadow-color), 0 0 0 3px rgba(198,163,120,.12), inset 0 1px 0 rgba(255,255,255,.08); transition: transform .35s var(--ease-smooth), background .25s, color .25s, box-shadow .25s; animation: lxIn .6s var(--ease-smooth) backwards; animation-delay: calc(var(--i, 0) * 45ms); }
+      .lx-pin::after { content: ""; position: absolute; left: 50%; bottom: -6px; width: 10px; height: 10px; margin-left: -5px; background: var(--card); border: 1px solid var(--gold); border-top: 0; border-left: 0; transform: rotate(45deg); transition: background .25s; }
+      .lx-icon:hover .lx-pin, .lx-icon:focus-visible .lx-pin { transform: translate(-50%, calc(-100% - 15px)) scale(1.07); background: var(--gold); color: #090b0e; box-shadow: 0 16px 34px var(--shadow-color), 0 0 24px var(--gold-glow); }
+      .lx-icon:hover .lx-pin::after { background: var(--gold); }
+      .lx-icon.on .lx-pin { transform: translate(-50%, calc(-100% - 15px)) scale(1.1); background: var(--gold); color: #090b0e; box-shadow: 0 16px 34px var(--shadow-color), 0 0 30px var(--gold-glow); }
+      .lx-icon.on .lx-pin::after { background: var(--gold); }
+      .lx-icon.on .lx-dot { animation: lxPulse 1.8s infinite; }
+      @keyframes lxIn { from { opacity: 0; transform: translate(-50%, calc(-100% + 6px)) scale(.9); } }
+      @keyframes lxPulse { 0% { box-shadow: 0 0 0 4px rgba(198,163,120,.35), 0 0 18px var(--gold); } 100% { box-shadow: 0 0 0 20px rgba(198,163,120,0), 0 0 18px var(--gold); } }
+      .lx-zone { background: none !important; border: 0 !important; pointer-events: none; }
+      .lx-zone span { position: absolute; transform: translate(-50%, 0); white-space: nowrap; font: 400 1.2rem var(--serif); letter-spacing: .38em; color: var(--gold); opacity: .6; text-shadow: 0 2px 14px rgba(0,0,0,.85); transition: opacity .4s; }
+      [data-theme="light"] .lx-zone span { text-shadow: 0 1px 8px rgba(255,255,255,.9); color: var(--gold2); }
+      .cmap.z-near .lx-zone span { opacity: 0; }
 
-.map-legend { position: absolute; left: 16px; top: 16px; z-index: 1100; display: flex; flex-wrap: wrap; gap: 6px 16px; padding: 10px 16px; border-radius: 16px; background: var(--glass-bg); border: 1px solid var(--line-gold); -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px); font-size: .78rem; color: var(--text-muted); max-width: calc(100% - 90px); }
-.map-legend b { color: var(--gold2); font-weight: 700; }
-.lg-dot, .lg-line { display: inline-block; vertical-align: middle; margin-right: 8px; }
-.lg-dot { width: 9px; height: 9px; border-radius: 50%; background: var(--gold); box-shadow: 0 0 10px var(--gold); }
-.lg-line { width: 18px; height: 0; border-top: 1.5px dashed var(--gold); }
-.map-reset { position: absolute; right: 16px; bottom: 34px; z-index: 1100; display: inline-flex; align-items: center; gap: 8px; padding: 0 18px; min-height: 44px; border-radius: 999px; background: var(--glass-bg); border: 1px solid var(--line-gold); color: var(--text); font: 600 .8rem var(--sans); cursor: pointer; -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px); transition: var(--ease); }
-.map-reset svg { width: 17px; height: 17px; fill: none; stroke: var(--gold); stroke-width: 2; stroke-linecap: round; }
-.map-reset:hover { background: var(--gold); color: #090b0e; }
-.map-reset:hover svg { stroke: #090b0e; }
-.map-hint { position: absolute; left: 50%; bottom: 12px; transform: translateX(-50%); z-index: 1100; padding: 6px 14px; border-radius: 999px; background: var(--glass-bg); color: var(--mute); font-size: .72rem; white-space: nowrap; pointer-events: none; -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); transition: opacity .3s; }
-.cmap-shell.has-card .map-hint { opacity: 0; }
-.mcard { position: absolute; left: 16px; bottom: 16px; z-index: 1200; width: min(400px, calc(100% - 32px)); display: none; gap: 14px; padding: 12px; border-radius: 22px; background: var(--glass-bg); border: 1px solid var(--line-gold); box-shadow: 0 24px 60px var(--shadow-color); -webkit-backdrop-filter: blur(20px); backdrop-filter: blur(20px); }
-.mcard.show { display: flex; animation: lxCard .45s var(--ease-smooth); }
-@keyframes lxCard { from { opacity: 0; transform: translateY(16px); } }
-.mcard img { width: 112px; height: 112px; object-fit: cover; border-radius: 16px; flex: none; background: var(--card2); }
-.mc-b { min-width: 0; flex: 1; padding-right: 22px; display: flex; flex-direction: column; }
-.mc-z { font-size: .68rem; letter-spacing: 2px; text-transform: uppercase; color: var(--gold2); font-weight: 600; }
-.mc-b h4 { font: 500 1.3rem/1.15 var(--serif); color: var(--text); margin: 3px 0 4px; }
-.mc-m { color: var(--mute); font-size: .78rem; }
-.mc-row { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-top: auto; padding-top: 8px; }
-.mc-row b { font: 600 1.35rem/1 var(--serif); font-feature-settings: "lnum"; color: var(--gold2); }
-.mc-row small { font: 400 .72rem var(--sans); color: var(--mute); }
-.mc-row .btn { min-height: 38px; padding: 8px 16px; font-size: .72rem; }
-.mc-x { position: absolute; right: 8px; top: 6px; width: 30px; height: 30px; border: 0; background: none; color: var(--text); font-size: 1.4rem; cursor: pointer; }
-.map-fallback { height: 100%; display: grid; place-items: center; text-align: center; padding: 30px; color: var(--mute); }
-@media (max-width: 900px) { .cmap-shell { height: 480px; } }
-@media (max-width: 600px) {
-  .cmap-shell { height: 460px; border-radius: 20px; }
-  .map-legend { left: 10px; top: 10px; padding: 8px 12px; font-size: .72rem; gap: 4px 12px; }
-  .map-reset { right: 10px; bottom: 28px; padding: 0 14px; }
-  .map-reset span { display: none; }
-  .map-reset { width: 44px; padding: 0; justify-content: center; }
-  .mcard { left: 10px; right: 10px; bottom: 10px; width: auto; padding: 10px; }
-  .mcard img { width: 88px; height: 88px; }
-  .lx-pin { padding: 7px 12px; font-size: .92rem; }
-}
+      .map-legend { position: absolute; left: 16px; top: 16px; z-index: 1100; display: flex; flex-wrap: wrap; gap: 6px 16px; padding: 10px 16px; border-radius: 16px; background: var(--glass-bg); border: 1px solid var(--line-gold); -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px); font-size: .78rem; color: var(--text-muted); max-width: calc(100% - 90px); }
+      .map-legend b { color: var(--gold2); font-weight: 700; }
+      .lg-dot, .lg-line { display: inline-block; vertical-align: middle; margin-right: 8px; }
+      .lg-dot { width: 9px; height: 9px; border-radius: 50%; background: var(--gold); box-shadow: 0 0 10px var(--gold); }
+      .lg-line { width: 18px; height: 0; border-top: 1.5px dashed var(--gold); }
+      .map-reset { position: absolute; right: 16px; bottom: 34px; z-index: 1100; display: inline-flex; align-items: center; gap: 8px; padding: 0 18px; min-height: 44px; border-radius: 999px; background: var(--glass-bg); border: 1px solid var(--line-gold); color: var(--text); font: 600 .8rem var(--sans); cursor: pointer; -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px); transition: var(--ease); }
+      .map-reset svg { width: 17px; height: 17px; fill: none; stroke: var(--gold); stroke-width: 2; stroke-linecap: round; }
+      .map-reset:hover { background: var(--gold); color: #090b0e; }
+      .map-reset:hover svg { stroke: #090b0e; }
+      .map-hint { position: absolute; left: 50%; bottom: 12px; transform: translateX(-50%); z-index: 1100; padding: 6px 14px; border-radius: 999px; background: var(--glass-bg); color: var(--mute); font-size: .72rem; white-space: nowrap; pointer-events: none; -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); transition: opacity .3s; }
+      .cmap-shell.has-card .map-hint { opacity: 0; }
+      .mcard { position: absolute; left: 16px; bottom: 16px; z-index: 1200; width: min(400px, calc(100% - 32px)); display: none; gap: 14px; padding: 12px; border-radius: 22px; background: var(--glass-bg); border: 1px solid var(--line-gold); box-shadow: 0 24px 60px var(--shadow-color); -webkit-backdrop-filter: blur(20px); backdrop-filter: blur(20px); }
+      .mcard.show { display: flex; animation: lxCard .45s var(--ease-smooth); }
+      @keyframes lxCard { from { opacity: 0; transform: translateY(16px); } }
+      .mcard img { width: 112px; height: 112px; object-fit: cover; border-radius: 16px; flex: none; background: var(--card2); }
+      .mc-b { min-width: 0; flex: 1; padding-right: 22px; display: flex; flex-direction: column; }
+      .mc-z { font-size: .68rem; letter-spacing: 2px; text-transform: uppercase; color: var(--gold2); font-weight: 600; }
+      .mc-b h4 { font: 500 1.3rem/1.15 var(--serif); color: var(--text); margin: 3px 0 4px; }
+      .mc-m { color: var(--mute); font-size: .78rem; }
+      .mc-row { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-top: auto; padding-top: 8px; }
+      .mc-row b { font: 600 1.35rem/1 var(--serif); font-feature-settings: "lnum"; color: var(--gold2); }
+      .mc-row small { font: 400 .72rem var(--sans); color: var(--mute); }
+      .mc-row .btn { min-height: 38px; padding: 8px 16px; font-size: .72rem; }
+      .mc-x { position: absolute; right: 8px; top: 6px; width: 30px; height: 30px; border: 0; background: none; color: var(--text); font-size: 1.4rem; cursor: pointer; }
+      .map-fallback { height: 100%; display: grid; place-items: center; text-align: center; padding: 30px; color: var(--mute); }
+      @media (max-width: 900px) { .cmap-shell { height: 480px; } }
+      @media (max-width: 600px) {
+        .cmap-shell { height: 460px; border-radius: 20px; }
+        .map-legend { left: 10px; top: 10px; padding: 8px 12px; font-size: .72rem; gap: 4px 12px; }
+        .map-reset { right: 10px; bottom: 28px; padding: 0 14px; }
+        .map-reset span { display: none; }
+        .map-reset { width: 44px; padding: 0; justify-content: center; }
+        .mcard { left: 10px; right: 10px; bottom: 10px; width: auto; padding: 10px; }
+        .mcard img { width: 88px; height: 88px; }
+        .lx-pin { padding: 7px 12px; font-size: .92rem; }
+      }
 
-/* ===== БІЛЬШЕ БЛОКІВ У HERO (інтер'єр) ===== */
-.rv-item { opacity: 0; pointer-events: none; will-change: transform, opacity; }
-.rv-live { position: absolute; z-index: 8; top: calc(92px + env(safe-area-inset-top, 0px)); right: clamp(18px, 5vw, 80px); display: inline-flex; align-items: center; gap: 10px; padding: 10px 18px; border-radius: 999px; background: rgba(10,12,16,.72); -webkit-backdrop-filter: blur(18px); backdrop-filter: blur(18px); border: 1px solid rgba(240,207,159,.38); color: #fff; font-size: .85rem; }
-.rv-live b { color: #f3d5a6; font-weight: 700; }
-.live-dot { width: 8px; height: 8px; border-radius: 50%; background: #7ddf9a; box-shadow: 0 0 0 0 rgba(125,223,154,.6); animation: liveP 2s infinite; }
-@keyframes liveP { 70% { box-shadow: 0 0 0 10px rgba(125,223,154,0); } 100% { box-shadow: 0 0 0 0 rgba(125,223,154,0); } }
-.rv-side { position: absolute; z-index: 8; right: clamp(18px, 5vw, 80px); bottom: clamp(28px, 9vh, 90px); width: 300px; display: flex; flex-direction: column; gap: 12px; pointer-events: none; }
-.rv-stat, .rv-zones { display: flex; background: rgba(10,12,16,.72); -webkit-backdrop-filter: blur(20px); backdrop-filter: blur(20px); border: 1px solid rgba(240,207,159,.32); border-radius: 20px; color: #fff; box-shadow: 0 20px 50px rgba(0,0,0,.45); }
-.rv-stat { align-items: center; gap: 14px; padding: 14px 18px; }
-.rv-ic { flex: none; width: 42px; height: 42px; border-radius: 50%; display: grid; place-items: center; background: rgba(240,207,159,.14); }
-.rv-ic svg { width: 20px; height: 20px; fill: none; stroke: #f0cf9f; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
-.rv-stat b { display: block; font: 500 1.55rem/1 var(--serif); font-feature-settings: "lnum"; color: #f3d5a6; }
-.rv-stat small { display: block; margin-top: 3px; color: #c9d0dc; font-size: .78rem; line-height: 1.3; }
-.rv-zones { flex-direction: column; gap: 10px; padding: 14px 16px; }
-.rv-zones > small { color: #c9d0dc; font-size: .72rem; letter-spacing: 1.5px; text-transform: uppercase; font-weight: 600; }
-.rv-zchips { display: flex; flex-wrap: wrap; gap: 8px; }
-.rv-zone { padding: 7px 14px; min-height: 34px; border-radius: 999px; background: rgba(255,255,255,.07); border: 1px solid rgba(240,207,159,.3); color: #fff; font: 500 .78rem var(--sans); cursor: pointer; transition: var(--ease); }
-.rv-zone:hover { background: #f0cf9f; color: #090b0e; border-color: #f0cf9f; }
-@media (max-width: 1000px) { .rv-side { width: 250px; } .hero-reveal { width: min(400px, calc(100% - 300px)); } }
-@media (max-width: 900px) {
-  .rv-live { top: calc(74px + env(safe-area-inset-top, 0px)); right: auto; left: 14px; padding: 8px 14px; font-size: .78rem; }
-  .rv-side { left: 14px; right: 14px; width: auto; top: calc(118px + env(safe-area-inset-top, 0px)); bottom: auto; flex-direction: row; gap: 8px; }
-  .rv-stat { flex: 1; min-width: 0; flex-direction: column; align-items: flex-start; gap: 8px; padding: 12px; border-radius: 16px; }
-  .rv-ic { width: 32px; height: 32px; }
-  .rv-ic svg { width: 16px; height: 16px; }
-  .rv-stat b { font-size: 1.25rem; }
-  .rv-stat small { font-size: .68rem; }
-  .rv-zones { display: none; }
-  .hero-reveal { width: auto; }
-}
-@media (max-height: 700px) and (max-width: 900px) { .rv-side { display: none; } }
-@media (prefers-reduced-motion: reduce) { .rv-live, .rv-side { display: none; } }
-</style>
+      /* Hero side widgets */
+      .rv-item { opacity: 0; pointer-events: none; will-change: transform, opacity; }
+      .rv-live { position: absolute; z-index: 8; top: calc(92px + env(safe-area-inset-top, 0px)); right: clamp(18px, 5vw, 80px); display: inline-flex; align-items: center; gap: 10px; padding: 10px 18px; border-radius: 999px; background: rgba(10,12,16,.72); -webkit-backdrop-filter: blur(18px); backdrop-filter: blur(18px); border: 1px solid rgba(240,207,159,.38); color: #fff; font-size: .85rem; }
+      .rv-live b { color: #f3d5a6; font-weight: 700; }
+      .live-dot { width: 8px; height: 8px; border-radius: 50%; background: #7ddf9a; box-shadow: 0 0 0 0 rgba(125,223,154,.6); animation: liveP 2s infinite; }
+      @keyframes liveP { 70% { box-shadow: 0 0 0 10px rgba(125,223,154,0); } 100% { box-shadow: 0 0 0 0 rgba(125,223,154,0); } }
+      .rv-side { position: absolute; z-index: 8; right: clamp(18px, 5vw, 80px); bottom: clamp(28px, 9vh, 90px); width: 300px; display: flex; flex-direction: column; gap: 12px; pointer-events: none; }
+      .rv-stat, .rv-zones { display: flex; background: rgba(10,12,16,.72); -webkit-backdrop-filter: blur(20px); backdrop-filter: blur(20px); border: 1px solid rgba(240,207,159,.32); border-radius: 20px; color: #fff; box-shadow: 0 20px 50px rgba(0,0,0,.45); }
+      .rv-stat { align-items: center; gap: 14px; padding: 14px 18px; }
+      .rv-ic { flex: none; width: 42px; height: 42px; border-radius: 50%; display: grid; place-items: center; background: rgba(240,207,159,.14); }
+      .rv-ic svg { width: 20px; height: 20px; fill: none; stroke: #f0cf9f; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+      .rv-stat b { display: block; font: 500 1.55rem/1 var(--serif); font-feature-settings: "lnum"; color: #f3d5a6; }
+      .rv-stat small { display: block; margin-top: 3px; color: #c9d0dc; font-size: .78rem; line-height: 1.3; }
+      .rv-zones { flex-direction: column; gap: 10px; padding: 14px 16px; }
+      .rv-zones > small { color: #c9d0dc; font-size: .72rem; letter-spacing: 1.5px; text-transform: uppercase; font-weight: 600; }
+      .rv-zchips { display: flex; flex-wrap: wrap; gap: 8px; }
+      .rv-zone { padding: 7px 14px; min-height: 34px; border-radius: 999px; background: rgba(255,255,255,.07); border: 1px solid rgba(240,207,159,.3); color: #fff; font: 500 .78rem var(--sans); cursor: pointer; transition: var(--ease); }
+      .rv-zone:hover { background: #f0cf9f; color: #090b0e; border-color: #f0cf9f; }
+      @media (max-width: 1000px) { .rv-side { width: 250px; } .hero-reveal { width: min(400px, calc(100% - 300px)); } }
+      @media (max-width: 900px) {
+        .rv-live { top: calc(74px + env(safe-area-inset-top, 0px)); right: auto; left: 14px; padding: 8px 14px; font-size: .78rem; }
+        .rv-side { left: 14px; right: 14px; width: auto; top: calc(118px + env(safe-area-inset-top, 0px)); bottom: auto; flex-direction: row; gap: 8px; }
+        .rv-stat { flex: 1; min-width: 0; flex-direction: column; align-items: flex-start; gap: 8px; padding: 12px; border-radius: 16px; }
+        .rv-ic { width: 32px; height: 32px; }
+        .rv-ic svg { width: 16px; height: 16px; }
+        .rv-stat b { font-size: 1.25rem; }
+        .rv-stat small { font-size: .68rem; }
+        .rv-zones { display: none; }
+        .hero-reveal { width: auto; }
+      }
+      @media (max-height: 700px) and (max-width: 900px) { .rv-side { display: none; } }
+      @media (prefers-reduced-motion: reduce) { .rv-live, .rv-side { display: none; } }
+
+      /* ========================================================= */
+      /* NEW ADMIN PANEL SPECIFIC STYLES                          */
+      /* ========================================================= */
+      #admin-view {
+        display: none;
+        padding-top: 100px;
+        min-height: 100vh;
+        background: var(--bg-alt);
+      }
+      #admin-view.active {
+        display: block;
+      }
+      
+      .admin-container {
+        max-width: 1280px;
+        margin: 0 auto;
+        padding: 20px;
+      }
+
+      .admin-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 20px;
+        margin-bottom: 30px;
+        padding-bottom: 20px;
+        border-bottom: 1px solid var(--line-gold);
+      }
+
+      .admin-title {
+        font: 600 2.2rem var(--serif);
+        color: var(--gold);
+      }
+
+      .admin-grid {
+        display: grid;
+        grid-template-columns: 1fr 1.2fr;
+        gap: 32px;
+      }
+
+      @media (max-width: 1024px) {
+        .admin-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      .admin-card {
+        background: var(--card);
+        border: 1px solid var(--line-gold);
+        border-radius: 20px;
+        padding: 28px;
+        box-shadow: 0 15px 40px var(--shadow-color);
+      }
+
+      .admin-card-title {
+        font: 500 1.5rem var(--serif);
+        color: var(--text);
+        margin-bottom: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+
+      .form-group {
+        margin-bottom: 18px;
+      }
+
+      .form-row {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 16px;
+      }
+
+      @media (max-width: 600px) {
+        .form-row {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      .form-group label {
+        display: block;
+        font-size: 0.78rem;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        color: var(--gold);
+        margin-bottom: 6px;
+        font-weight: 600;
+      }
+
+      .form-control {
+        width: 100%;
+        padding: 12px 16px;
+        background: var(--card2);
+        border: 1px solid var(--line);
+        border-radius: 12px;
+        color: var(--text);
+        font: 400 0.9rem var(--sans);
+        outline: none;
+        transition: var(--ease);
+      }
+
+      .form-control:focus {
+        border-color: var(--gold);
+        box-shadow: 0 0 0 3px var(--gold-glow);
+      }
+
+      textarea.form-control {
+        resize: vertical;
+        min-height: 90px;
+      }
+
+      .amenities-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+        gap: 10px;
+        background: var(--card2);
+        padding: 14px;
+        border-radius: 12px;
+        border: 1px solid var(--line);
+      }
+
+      .checkbox-label {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 0.85rem;
+        color: var(--text-muted);
+        cursor: pointer;
+        user-select: none;
+      }
+
+      .checkbox-label input[type="checkbox"] {
+        accent-color: var(--gold);
+        width: 16px;
+        height: 16px;
+        cursor: pointer;
+      }
+
+      .switch-label {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        cursor: pointer;
+      }
+
+      .toggle-switch {
+        position: relative;
+        display: inline-block;
+        width: 46px;
+        height: 24px;
+      }
+
+      .toggle-switch input {
+        opacity: 0;
+        width: 0;
+        height: 0;
+      }
+
+      .toggle-slider {
+        position: absolute;
+        cursor: pointer;
+        inset: 0;
+        background-color: var(--card2);
+        border: 1px solid var(--line);
+        transition: .3s;
+        border-radius: 30px;
+      }
+
+      .toggle-slider:before {
+        position: absolute;
+        content: "";
+        height: 16px;
+        width: 16px;
+        left: 3px;
+        bottom: 3px;
+        background-color: var(--mute);
+        transition: .3s;
+        border-radius: 50%;
+      }
+
+      input:checked + .toggle-slider {
+        background-color: var(--gold);
+        border-color: var(--gold);
+      }
+
+      input:checked + .toggle-slider:before {
+        transform: translateX(22px);
+        background-color: #090b0e;
+      }
+
+      /* Admin Listings Table / Cards */
+      .admin-table-wrap {
+        overflow-x: auto;
+      }
+
+      .admin-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 10px;
+      }
+
+      .admin-table th, .admin-table td {
+        padding: 14px;
+        text-align: left;
+        border-bottom: 1px solid var(--line);
+        font-size: 0.88rem;
+      }
+
+      .admin-table th {
+        color: var(--gold);
+        font-size: 0.75rem;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        font-weight: 700;
+        background: rgba(0,0,0,0.1);
+      }
+
+      .admin-table tr:hover td {
+        background: var(--card2);
+      }
+
+      .admin-img-thumb {
+        width: 50px;
+        height: 50px;
+        border-radius: 8px;
+        object-fit: cover;
+      }
+
+      .status-badge {
+        padding: 4px 10px;
+        border-radius: 20px;
+        font-size: 0.72rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        display: inline-block;
+      }
+      .status-active {
+        background: rgba(46, 204, 113, 0.2);
+        color: var(--success);
+        border: 1px solid var(--success);
+      }
+      .status-inactive {
+        background: rgba(229, 77, 66, 0.2);
+        color: var(--danger);
+        border: 1px solid var(--danger);
+      }
+
+      .action-btns {
+        display: flex;
+        gap: 8px;
+      }
+
+      .btn-icon {
+        padding: 6px 12px;
+        border-radius: 8px;
+        font-size: 0.75rem;
+        border: 1px solid var(--line);
+        background: var(--card2);
+        color: var(--text);
+        cursor: pointer;
+        transition: var(--ease);
+      }
+
+      .btn-icon:hover {
+        border-color: var(--gold);
+        color: var(--gold);
+      }
+
+      .btn-icon.delete:hover {
+        border-color: var(--danger);
+        color: var(--danger);
+      }
+
+      .notification-toast {
+        position: fixed;
+        bottom: 30px;
+        right: 30px;
+        padding: 14px 24px;
+        border-radius: 12px;
+        background: var(--card2);
+        border: 1px solid var(--gold);
+        color: var(--text);
+        box-shadow: 0 10px 30px var(--shadow-color);
+        z-index: 9999;
+        transform: translateY(100px);
+        opacity: 0;
+        transition: var(--ease);
+        pointer-events: none;
+      }
+
+      .notification-toast.show {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    </style>
   </head>
   <body>
 
     <header>
-      <a href="#top" class="logo">Lumen <span>Estate</span></a>
+      <a href="#top" class="logo" id="main-logo-link">Lumen <span>Estate</span></a>
       <nav id="nav">
-        <ul>
+        <ul id="public-nav-links">
           <li><a href="#concept" data-i18n="nav_concept">Concept</a></li>
           <li><a href="#rentals" data-i18n="nav_rentals">Chirii</a></li>
           <li><a href="#locations" data-i18n="nav_map">Hartă & Zone</a></li>
@@ -1341,6 +1632,9 @@
       </nav>
 
       <div class="hdr-right">
+        <!-- Admin Toggle Button -->
+      
+
         <!-- Segmented Language Switcher -->
         <div class="lang-segmented" id="lang-switch" data-lang="ro">
           <div class="lang-slider"></div>
@@ -1348,453 +1642,609 @@
           <button class="lang-option" data-value="ru">RU</button>
         </div>
 
-        <a href="#contact" class="btn" data-i18n="btn_contact">Contact</a>
+        <a href="#contact" class="btn" id="hdr-contact-btn" data-i18n="btn_contact">Contact</a>
         <button class="burger" id="bg" aria-label="Meniu" aria-expanded="false">
           ☰
         </button>
       </div>
     </header>
 
-    <div class="hero-scroll-wrapper" id="top">
-      <div class="hero-sticky-container" id="hero-sticky">
-        <div class="hero-layer hero-sky-layer" id="hero-layer-sky"><div class="sky-glow-orb"></div></div>
-        <div class="hero-layer hero-facade-layer" id="hero-layer-facade"></div>
-        <div class="hero-vignette" id="hero-vignette"></div>
-        <div class="hero-layer hero-interior-layer" id="hero-layer-interior"><div class="interior-img"></div></div>
-        <div class="hero-window-frame" id="hero-frame" aria-hidden="true"></div>
-        <div class="hero-scrim" aria-hidden="true"></div>
-        <div class="hero-canvas-3d" id="hero-canvas-container"></div>
+    <!-- PUBLIC VIEW WRAPPER -->
+    <div id="public-view">
+      
+      <div class="hero-scroll-wrapper" id="top">
+        <div class="hero-sticky-container" id="hero-sticky">
+          <div class="hero-layer hero-sky-layer" id="hero-layer-sky"><div class="sky-glow-orb"></div></div>
+          <div class="hero-layer hero-facade-layer" id="hero-layer-facade"></div>
+          <div class="hero-vignette" id="hero-vignette"></div>
+          <div class="hero-layer hero-interior-layer" id="hero-layer-interior"><div class="interior-img"></div></div>
+          <div class="hero-window-frame" id="hero-frame" aria-hidden="true"></div>
+          <div class="hero-scrim" aria-hidden="true"></div>
+          <div class="hero-canvas-3d" id="hero-canvas-container"></div>
 
-        
-        <div class="rv-live rv-item" aria-live="polite"><i class="live-dot"></i><b id="rv-live-n">12</b><span data-i18n="rv_live">apartamente disponibile acum</span></div>
+          
+          <div class="rv-live rv-item" aria-live="polite"><i class="live-dot"></i><b id="rv-live-n">12</b><span data-i18n="rv_live">apartamente disponibile acum</span></div>
 
-        <div class="rv-side">
-          <div class="rv-stat rv-item"><span class="rv-ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1L3.2 9.5l6.1-.9z"/></svg></span><div><b data-i18n="rv_s1_v">4.9/5</b><small data-i18n="rv_s1_l">214 recenzii verificate</small></div></div>
-          <div class="rv-stat rv-item"><span class="rv-ic"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span><div><b data-i18n="rv_s2_v">24h</b><small data-i18n="rv_s2_l">până la prima vizionare</small></div></div>
-          <div class="rv-stat rv-item"><span class="rv-ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l8 3v6c0 4.5-3.2 7.8-8 9-4.8-1.2-8-4.5-8-9V6z"/><path d="m9 12 2 2 4-4"/></svg></span><div><b data-i18n="rv_s3_v">100%</b><small data-i18n="rv_s3_l">contracte verificate juridic</small></div></div>
-          <div class="rv-zones rv-item"><small data-i18n="rv_zones">Zone populare</small><div class="rv-zchips"><button type="button" class="rv-zone" data-zone="Militari">Militari</button><button type="button" class="rv-zone" data-zone="Drumul Taberei">Drumul Taberei</button><button type="button" class="rv-zone" data-zone="Lujerului">Lujerului</button><button type="button" class="rv-zone" data-zone="Cotroceni">Cotroceni</button></div></div>
-        </div>
-
-        <div class="hero-reveal" id="hero-reveal">
-          <span class="rv-tag" data-i18n="reveal_tag">Apartament-model</span>
-          <h2 data-i18n="reveal_title">Intră direct <em>acasă</em></h2>
-          <ul class="rv-feats">
-            <li><svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg><span data-i18n="reveal_f1">Complet utilat și renovat</span></li>
-            <li><svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg><span data-i18n="reveal_f2">Centrală proprie și aer condiționat</span></li>
-            <li><svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg><span data-i18n="reveal_f3">Metrou și parcare la 5 minute</span></li>
-          </ul>
-          <div class="rv-bottom">
-            <div class="rv-price"><small data-i18n="reveal_from">de la</small><b id="reveal-price">320€</b><small data-i18n="reveal_per">/ lună</small></div>
-            <a class="btn fill" href="#rentals" data-i18n="reveal_cta">Vezi apartamentele</a>
+          <div class="rv-side">
+            <div class="rv-stat rv-item"><span class="rv-ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1L3.2 9.5l6.1-.9z"/></svg></span><div><b data-i18n="rv_s1_v">4.9/5</b><small data-i18n="rv_s1_l">214 recenzii verificate</small></div></div>
+            <div class="rv-stat rv-item"><span class="rv-ic"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span><div><b data-i18n="rv_s2_v">24h</b><small data-i18n="rv_s2_l">până la prima vizionare</small></div></div>
+            <div class="rv-stat rv-item"><span class="rv-ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l8 3v6c0 4.5-3.2 7.8-8 9-4.8-1.2-8-4.5-8-9V6z"/><path d="m9 12 2 2 4-4"/></svg></span><div><b data-i18n="rv_s3_v">100%</b><small data-i18n="rv_s3_l">contracte verificate juridic</small></div></div>
+            <div class="rv-zones rv-item"><small data-i18n="rv_zones">Zone populare</small><div class="rv-zchips"><button type="button" class="rv-zone" data-zone="Militari">Militari</button><button type="button" class="rv-zone" data-zone="Drumul Taberei">Drumul Taberei</button><button type="button" class="rv-zone" data-zone="Lujerului">Lujerului</button><button type="button" class="rv-zone" data-zone="Cotroceni">Cotroceni</button></div></div>
           </div>
-        </div>
 
-        <div class="hero-content" id="hero-hc">
-          <span class="tag-glow" data-i18n="hero_tag">Militari Residence • Sector 6</span>
-          <h1 data-i18n="hero_title">Închirieri premium în <em>Militari Residence</em></h1>
-          <p data-i18n="hero_desc">Apartamente verificate, vizionări în 24 de ore și contract fără surprize.</p>
-          <div class="hs" id="hero-hs">
-            <select id="hz" aria-label="Zonă"></select>
-            <span class="hs-div" aria-hidden="true"></span>
-            <select id="hr" aria-label="Camere">
-              <option value="all" data-i18n="opt_all_rooms">Orice număr de camere</option>
-              <option value="1" data-i18n="opt_1_room">1 cameră</option>
-              <option value="2" data-i18n="opt_2_rooms">2 camere</option>
-              <option value="3" data-i18n="opt_3_rooms">3+ camere</option>
-            </select>
-            <button class="btn fill" id="hgo" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><span data-i18n="btn_search">Caută</span></button>
-          </div>
-        </div>
-
-        <div class="scroll-indicator" id="scroll-hint" aria-hidden="true"><div class="scroll-mouse"></div></div>
-      </div>
-    </div>
-
-
-    <div class="stats">
-      <div class="w">
-        <div class="stats-grid">
-          <div class="stat-card rv" style="--i: 0">
-            <div class="stat-info">
-              <b data-to="380" data-suffix="+">0</b>
-              <span data-i18n="stat_rented">apartamente închiriate</span>
+          <div class="hero-reveal" id="hero-reveal">
+            <span class="rv-tag" data-i18n="reveal_tag">Apartament-model</span>
+            <h2 data-i18n="reveal_title">Intră direct <em>acasă</em></h2>
+            <ul class="rv-feats">
+              <li><svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg><span data-i18n="reveal_f1">Complet utilat și renovat</span></li>
+              <li><svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg><span data-i18n="reveal_f2">Centrală proprie și aer condiționat</span></li>
+              <li><svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg><span data-i18n="reveal_f3">Metrou și parcare la 5 minute</span></li>
+            </ul>
+            <div class="rv-bottom">
+              <div class="rv-price"><small data-i18n="reveal_from">de la</small><b id="reveal-price">320€</b><small data-i18n="reveal_per">/ lună</small></div>
+              <a class="btn fill" href="#rentals" data-i18n="reveal_cta">Vezi apartamentele</a>
             </div>
           </div>
-          <div class="stat-card rv" style="--i: 1">
-            <div class="stat-info">
-              <b data-to="48" data-suffix="h">0</b>
-              <span data-i18n="stat_hours">ore, timp mediu de închiriere</span>
+
+          <div class="hero-content" id="hero-hc">
+            <span class="tag-glow" data-i18n="hero_tag">Militari Residence • Sector 6</span>
+            <h1 data-i18n="hero_title">Închirieri premium în <em>Militari Residence</em></h1>
+            <p data-i18n="hero_desc">Apartamente verificate, vizionări în 24 de ore și contract fără surprize.</p>
+            <div class="hs" id="hero-hs">
+              <select id="hz" aria-label="Zonă"></select>
+              <span class="hs-div" aria-hidden="true"></span>
+              <select id="hr" aria-label="Camere">
+                <option value="all" data-i18n="opt_all_rooms">Orice număr de camere</option>
+                <option value="1" data-i18n="opt_1_room">1 cameră</option>
+                <option value="2" data-i18n="opt_2_rooms">2 camere</option>
+                <option value="3" data-i18n="opt_3_rooms">3+ camere</option>
+              </select>
+              <button class="btn fill" id="hgo" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><span data-i18n="btn_search">Caută</span></button>
             </div>
           </div>
-          <div class="stat-card rv" style="--i: 2">
-            <div class="stat-info">
-              <b data-to="6">0</b>
-              <span data-i18n="stat_zones">zone acoperite în Sector 6</span>
-            </div>
-          </div>
-          <div class="stat-card rv" style="--i: 3">
-            <div class="stat-info">
-              <b data-to="99" data-suffix="%">0</b>
-              <span data-i18n="stat_happy">clienți mulțumiți</span>
-            </div>
-          </div>
+
+          <div class="scroll-indicator" id="scroll-hint" aria-hidden="true"><div class="scroll-mouse"></div></div>
         </div>
       </div>
-    </div>
 
-    <section id="concept">
-      <span class="bignum" aria-hidden="true" style="right: 2%">01</span>
-      <div class="w">
-        <div class="sh rv">
-          <span class="sn" data-i18n="c_subtitle">01 / Conceptul 06</span>
-          <h2 class="st" data-i18n="c_title">De ce să alegi <em>Sectorul 6?</em></h2>
-        </div>
-        <div class="cg rv rv-scale">
-          <div>
-            <p style="color: var(--mute); font-size: 1.05rem" data-i18n="c_text">
-              Sectorul 6 este una dintre cele mai dinamice și verzi zone din
-              București, oferind echilibrul perfect între parcuri, infrastructură modernă și chirii accesibile.
-            </p>
-            <div class="cf rv-stagger">
-              <div>
-                <h4 data-i18n="c_f1_title">Parcuri & Natură</h4>
-                <p data-i18n="c_f1_desc">Parcul Drumul Taberei și Lacul Morii la câteva minute distanță.</p>
+      <div class="stats">
+        <div class="w">
+          <div class="stats-grid">
+            <div class="stat-card rv" style="--i: 0">
+              <div class="stat-info">
+                <b data-to="380" data-suffix="+">0</b>
+                <span data-i18n="stat_rented">apartamente închiriate</span>
               </div>
-              <div>
-                <h4 data-i18n="c_f2_title">Transport rapid</h4>
-                <p data-i18n="c_f2_desc">Metrou M5 direct și tramvaiul 41 express către centru.</p>
+            </div>
+            <div class="stat-card rv" style="--i: 1">
+              <div class="stat-info">
+                <b data-to="48" data-suffix="h">0</b>
+                <span data-i18n="stat_hours">ore, timp mediu de închiriere</span>
               </div>
-              <div>
-                <h4 data-i18n="c_f3_title">Shopping & Lifestyle</h4>
-                <p data-i18n="c_f3_desc">AFI Cotroceni și Plaza România la îndemână.</p>
+            </div>
+            <div class="stat-card rv" style="--i: 2">
+              <div class="stat-info">
+                <b data-to="6">0</b>
+                <span data-i18n="stat_zones">zone acoperite în Sector 6</span>
               </div>
-              <div>
-                <h4 data-i18n="c_f4_title">Prețuri corecte</h4>
-                <p data-i18n="c_f4_desc">Raport excelent calitate-preț pentru studenți și familii.</p>
+            </div>
+            <div class="stat-card rv" style="--i: 3">
+              <div class="stat-info">
+                <b data-to="99" data-suffix="%">0</b>
+                <span data-i18n="stat_happy">clienți mulțumiți</span>
               </div>
             </div>
           </div>
-          <img
-            src="https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=800&q=80"
-            alt="Militari Residence Sector 6"
-            loading="lazy"
-            class="rv rv-right"
-          />
         </div>
       </div>
-    </section>
 
-    <section id="rentals" class="alt">
-      <span class="bignum" aria-hidden="true" style="left: 2%">02</span>
-      <div class="w">
-        <div class="sh rv">
-          <span class="sn" data-i18n="r_subtitle">02 / Oferte chirie</span>
-          <h2 class="st" data-i18n="r_title">Apartamente <em>disponibile</em></h2>
-        </div>
-
-        <div class="fbar rv">
-          <div class="fg">
-            <label for="fz" data-i18n="fltr_zone">Zonă</label>
-            <select id="fz"></select>
+      <!-- Concept Section -->
+      <section id="concept">
+        <span class="bignum" aria-hidden="true" style="right: 2%">01</span>
+        <div class="w">
+          <div class="sh rv">
+            <span class="sn" data-i18n="c_subtitle">01 / Conceptul 06</span>
+            <h2 class="st" data-i18n="c_title">De ce să alegi <em>Sectorul 6?</em></h2>
           </div>
-          <div class="fg">
-            <label data-i18n="fltr_rooms">Camere</label>
-            <div class="chips" id="fr">
-              <button class="chip on" data-r="all" data-i18n="chip_all">Toate</button>
-              <button class="chip" data-r="1">1</button>
-              <button class="chip" data-r="2">2</button>
-              <button class="chip" data-r="3">3+</button>
-            </div>
-          </div>
-          <div class="fg">
-            <label for="fp">
-              <span data-i18n="fltr_price">Preț max:</span>
-              <b id="fpv">700€</b>
-            </label>
-            <input type="range" id="fp" min="300" max="700" step="10" value="700" />
-          </div>
-          <div class="fg">
-            <label for="fs" data-i18n="fltr_sort">Sortare</label>
-            <select id="fs">
-              <option value="new" data-i18n="sort_new">Cele mai noi</option>
-              <option value="pa" data-i18n="sort_pa">Preț crescător</option>
-              <option value="pd" data-i18n="sort_pd">Preț descrescător</option>
-              <option value="ma" data-i18n="sort_ma">Suprafață mare</option>
-            </select>
-          </div>
-          <div class="fg">
-            <label for="curr-switch" data-i18n="fltr_curr">Valută</label>
-            <select id="curr-switch" aria-label="Valută">
-              <option value="EUR">EUR (€)</option>
-              <option value="RON">RON (lei)</option>
-              <option value="USD">USD ($)</option>
-            </select>
-          </div>
-          <div class="fg wide">
-            <label data-i18n="fltr_features">Facilități</label>
-            <div class="chips" id="ff">
-              <button class="chip" data-t="parcare" data-i18n="tag_parcare">Parcare</button>
-              <button class="chip" data-t="balcon" data-i18n="tag_balcon">Balcon</button>
-              <button class="chip" data-t="pet" data-i18n="tag_pet">Pet friendly</button>
-              <button class="chip" data-t="metrou" data-i18n="tag_metrou">Lângă metrou</button>
-              <button class="chip" data-t="centrala" data-i18n="tag_centrala">Centrală proprie</button>
-            </div>
-          </div>
-        </div>
-
-        <div class="fm">
-          <span id="cnt"></span>
-          <button id="rst" data-i18n="btn_reset">Resetează filtrele</button>
-        </div>
-
-        <div class="rg" id="rg"></div>
-        <div class="rg-extra-wrap" id="rg-extra-wrap">
-          <div class="rg-extra-inner">
-            <div class="rg" id="rg-extra"></div>
-          </div>
-        </div>
-
-        <div class="show-more-wrap" id="sm-wrap" style="display: none">
-          <button class="btn" id="btn-more" type="button">Vezi mai multe apartamente</button>
-        </div>
-      </div>
-    </section>
-
-    <section id="locations">
-      <span class="bignum" aria-hidden="true" style="right: 2%">03</span>
-      <div class="w">
-        <div class="sh rv">
-          <span class="sn" data-i18n="m_subtitle">03 / Locație & Hartă</span>
-          <h2 class="st" data-i18n="m_title">Harta interactivă <em>Sector 6</em></h2>
-        </div>
-
-        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; margin-bottom: 24px;" class="rv">
-          <p style="color: var(--mute)" data-i18n="m_desc">
-            Explorează punctele noastre cheie și cartierele acoperite în Sectorul 6 București.
-          </p>
-          <div class="chips" id="map-zone-filter">
-            <button class="chip on" data-zone="" data-i18n="all_zones">Toate zonele</button>
-            <button class="chip" data-zone="Drumul Taberei">Drumul Taberei</button>
-            <button class="chip" data-zone="Cotroceni">Cotroceni</button>
-            <button class="chip" data-zone="Lujerului">Lujerului</button>
-            <button class="chip" data-zone="Militari">Militari</button>
-            <button class="chip" data-zone="Crângași">Crângași</button>
-            <button class="chip" data-zone="Giulești">Giulești</button>
-          </div>
-        </div>
-
-        <div class="mapwrap rv rv-scale">
-          <div class="cmap-shell" id="cmap-shell">
-            <div id="cmap" class="cmap" role="application" aria-label="Hartă"></div>
-            <div class="map-legend" id="map-legend"></div>
-            <button class="map-reset" id="map-reset" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3"/></svg><span></span></button>
-            <div class="map-hint" id="map-hint"></div>
-            <div class="mcard" id="mcard"></div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="how" class="alt">
-      <span class="bignum" aria-hidden="true" style="left: 2%">04</span>
-      <div class="w">
-        <div class="sh rv">
-          <span class="sn" data-i18n="s_subtitle">04 / Proces</span>
-          <h2 class="st" data-i18n="s_title">De la prima discuție <em>la chei</em></h2>
-        </div>
-
-        <div class="cf rv-stagger" style="grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr)); gap: 24px;">
-          <div class="rc">
-            <h4 style="font-size: 2rem; color: var(--gold); margin-bottom: 8px">01</h4>
-            <h3 style="font: 400 1.4rem var(--serif); color: var(--text); margin-bottom: 6px;" data-i18n="step1_title">Alegi</h3>
-            <p style="color: var(--mute); font-size: 0.88rem" data-i18n="step1_desc">Filtrezi ofertele sau ne spui preferințele tale, iar noi îți trimitem selecții potrivite.</p>
-          </div>
-          <div class="rc">
-            <h4 style="font-size: 2rem; color: var(--gold); margin-bottom: 8px">02</h4>
-            <h3 style="font: 400 1.4rem var(--serif); color: var(--text); margin-bottom: 6px;" data-i18n="step2_title">Vizionezi</h3>
-            <p style="color: var(--mute); font-size: 0.88rem" data-i18n="step2_desc">Programăm vizionarea la ora ideală pentru tine, inclusiv în weekend.</p>
-          </div>
-          <div class="rc">
-            <h4 style="font-size: 2rem; color: var(--gold); margin-bottom: 8px">03</h4>
-            <h3 style="font: 400 1.4rem var(--serif); color: var(--text); margin-bottom: 6px;" data-i18n="step3_title">Semnezi</h3>
-            <p style="color: var(--mute); font-size: 0.88rem" data-i18n="step3_desc">Contract clar, transparent, fără comisioane sau clauze ascunse.</p>
-          </div>
-          <div class="rc">
-            <h4 style="font-size: 2rem; color: var(--gold); margin-bottom: 8px">04</h4>
-            <h3 style="font: 400 1.4rem var(--serif); color: var(--text); margin-bottom: 6px;" data-i18n="step4_title">Te muți</h3>
-            <p style="color: var(--mute); font-size: 0.88rem" data-i18n="step4_desc">Primești cheile și asistență continuă pe toată durata chiriei.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="agents">
-      <span class="bignum" aria-hidden="true" style="right: 2%">05</span>
-      <div class="w">
-        <div class="sh rv">
-          <span class="sn" data-i18n="a_subtitle">05 / Echipa noastră</span>
-          <h2 class="st" data-i18n="a_title">Agenții <em>Lumen Estate</em></h2>
-        </div>
-        <div class="agent-grid rv-stagger">
-          <article class="ag">
-            <div class="ag-ph"><img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=700&q=80" alt="Elena Radu" loading="lazy" /><span class="ag-badge">RO · EN</span></div>
-            <div class="ag-b">
-              <h3>Elena Radu</h3>
-              <p class="ag-role" data-i18n="ag1_role">Specialist Drumul Taberei & Cotroceni</p>
-              <div class="ag-stats">
-                <div><b>6</b><small data-i18n="ag_years">ani exp.</small></div>
-                <div><b>128</b><small data-i18n="ag_done">închirieri</small></div>
-                <div><b>4.9</b><small data-i18n="ag_rating">rating</small></div>
-              </div>
-              <div class="ag-actions"><a class="btn" href="https://t.me/" target="_blank" rel="noopener">Telegram</a><a class="btn fill" href="https://wa.me/" target="_blank" rel="noopener">WhatsApp</a></div>
-            </div>
-          </article>
-          <article class="ag">
-            <div class="ag-ph"><img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=700&q=80" alt="Andrei Ionescu" loading="lazy" /><span class="ag-badge">RO · EN · FR</span></div>
-            <div class="ag-b">
-              <h3>Andrei Ionescu</h3>
-              <p class="ag-role" data-i18n="ag2_role">Specialist Lujerului & Militari</p>
-              <div class="ag-stats">
-                <div><b>4</b><small data-i18n="ag_years">ani exp.</small></div>
-                <div><b>96</b><small data-i18n="ag_done">închirieri</small></div>
-                <div><b>4.8</b><small data-i18n="ag_rating">rating</small></div>
-              </div>
-              <div class="ag-actions"><a class="btn" href="https://t.me/" target="_blank" rel="noopener">Telegram</a><a class="btn fill" href="https://wa.me/" target="_blank" rel="noopener">WhatsApp</a></div>
-            </div>
-          </article>
-          <article class="ag">
-            <div class="ag-ph"><img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=700&q=80" alt="Matei Dumitrescu" loading="lazy" /><span class="ag-badge">RO · EN · DE</span></div>
-            <div class="ag-b">
-              <h3>Matei Dumitrescu</h3>
-              <p class="ag-role" data-i18n="ag3_role">Consultant Crângași & Ciurel</p>
-              <div class="ag-stats">
-                <div><b>8</b><small data-i18n="ag_years">ani exp.</small></div>
-                <div><b>154</b><small data-i18n="ag_done">închirieri</small></div>
-                <div><b>5.0</b><small data-i18n="ag_rating">rating</small></div>
-              </div>
-              <div class="ag-actions"><a class="btn" href="https://t.me/" target="_blank" rel="noopener">Telegram</a><a class="btn fill" href="https://wa.me/" target="_blank" rel="noopener">WhatsApp</a></div>
-            </div>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section id="testimonials" class="alt">
-      <span class="bignum" aria-hidden="true" style="left: 2%">06</span>
-      <div class="w">
-        <div class="sh rv">
-          <span class="sn" data-i18n="t_subtitle">06 / Recenzii</span>
-          <h2 class="st" data-i18n="t_title">Ce spun <em>chiriașii noștri</em></h2>
-        </div>
-
-        <div class="rev-grid">
-          <div class="rev-sum rv rv-left">
+          <div class="cg rv rv-scale">
             <div>
-              <div class="rev-score">4.9</div>
-              <div class="stars">★★★★★</div>
-              <p data-i18n="t_score_label">din 5 · 214 recenzii verificate</p>
-            </div>
-            <p data-i18n="t_join">Alătură-te celor 380+ chiriași mulțumiți</p>
-          </div>
-
-          <div class="rv rv-right">
-            <div class="rev-car" id="rev-car">
-              <div class="rev-track" id="rev-track">
-                <div class="rev-slide">
-                  <div class="rev-card">
-                    <div class="rev-top">
-                      <img class="av" src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=150&q=80" alt="Ioana M." />
-                      <div>
-                        <b>Ioana M.</b>
-                        <span data-i18n="tst1_role">Studentă la Politehnică</span>
-                      </div>
-                      <div class="stars" style="margin-left: auto;">★★★★★</div>
-                    </div>
-                    <blockquote data-i18n="tst1_text">
-                      "Am găsit garsoniera perfectă în Drumul Taberei în doar 2 zile! Echipa a fost extrem de amabilă și profesionistă."
-                    </blockquote>
-                  </div>
+              <p style="color: var(--mute); font-size: 1.05rem" data-i18n="c_text">
+                Sectorul 6 este una dintre cele mai dinamice și verzi zone din
+                București, oferind echilibrul perfect între parcuri, infrastructură modernă și chirii accesibile.
+              </p>
+              <div class="cf rv-stagger">
+                <div>
+                  <h4 data-i18n="c_f1_title">Parcuri & Natură</h4>
+                  <p data-i18n="c_f1_desc">Parcul Drumul Taberei și Lacul Morii la câteva minute distanță.</p>
                 </div>
-
-                <div class="rev-slide">
-                  <div class="rev-card">
-                    <div class="rev-top">
-                      <img class="av" src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=150&q=80" alt="Mihai & Ana" />
-                      <div>
-                        <b>Mihai & Ana</b>
-                        <span data-i18n="tst2_role">Chiriași în Lujerului</span>
-                      </div>
-                      <div class="stars" style="margin-left: auto;">★★★★★</div>
-                    </div>
-                    <blockquote data-i18n="tst2_text">
-                      "Fără surprize, fără costuri ascunse. Contractul a fost semnat rapid și pozele au corespuns 100% cu realitatea."
-                    </blockquote>
-                  </div>
+                <div>
+                  <h4 data-i18n="c_f2_title">Transport rapid</h4>
+                  <p data-i18n="c_f2_desc">Metrou M5 direct și tramvaiul 41 express către centru.</p>
+                </div>
+                <div>
+                  <h4 data-i18n="c_f3_title">Shopping & Lifestyle</h4>
+                  <p data-i18n="c_f3_desc">AFI Cotroceni și Plaza România la îndemână.</p>
+                </div>
+                <div>
+                  <h4 data-i18n="c_f4_title">Prețuri corecte</h4>
+                  <p data-i18n="c_f4_desc">Raport excelent calitate-preț pentru studenți și familii.</p>
                 </div>
               </div>
             </div>
+            <img
+              src="https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=800&q=80"
+              alt="Militari Residence Sector 6"
+              loading="lazy"
+              class="rv rv-right"
+            />
+          </div>
+        </div>
+      </section>
 
-            <div class="carousel-controls">
-              <button class="c-btn" id="rev-prev" aria-label="Înapoi">←</button>
-              <div class="dots" id="rev-dots"></div>
-              <button class="c-btn" id="rev-next" aria-label="Înainte">→</button>
+      <section id="rentals" class="alt">
+        <span class="bignum" aria-hidden="true" style="left: 2%">02</span>
+        <div class="w">
+          <div class="sh rv">
+            <span class="sn" data-i18n="r_subtitle">02 / Oferte chirie</span>
+            <h2 class="st" data-i18n="r_title">Apartamente <em>disponibile</em></h2>
+          </div>
+
+          <div class="fbar rv">
+            <div class="fg">
+              <label for="fz" data-i18n="fltr_zone">Zonă</label>
+              <select id="fz"></select>
+            </div>
+            <div class="fg">
+              <label data-i18n="fltr_rooms">Camere</label>
+              <div class="chips" id="fr">
+                <button class="chip on" data-r="all" data-i18n="chip_all">Toate</button>
+                <button class="chip" data-r="1">1</button>
+                <button class="chip" data-r="2">2</button>
+                <button class="chip" data-r="3">3+</button>
+              </div>
+            </div>
+            <div class="fg">
+              <label for="fp">
+                <span data-i18n="fltr_price">Preț max:</span>
+                <b id="fpv">700€</b>
+              </label>
+              <input type="range" id="fp" min="300" max="1500" step="10" value="1500" />
+            </div>
+            <div class="fg">
+              <label for="fs" data-i18n="fltr_sort">Sortare</label>
+              <select id="fs">
+                <option value="new" data-i18n="sort_new">Cele mai noi</option>
+                <option value="pa" data-i18n="sort_pa">Preț crescător</option>
+                <option value="pd" data-i18n="sort_pd">Preț descrescător</option>
+                <option value="ma" data-i18n="sort_ma">Suprafață mare</option>
+              </select>
+            </div>
+            <div class="fg">
+              <label for="curr-switch" data-i18n="fltr_curr">Valută</label>
+              <select id="curr-switch" aria-label="Valută">
+                <option value="EUR">EUR (€)</option>
+                <option value="RON">RON (lei)</option>
+                <option value="USD">USD ($)</option>
+              </select>
+            </div>
+            <div class="fg wide">
+              <label data-i18n="fltr_features">Facilități</label>
+              <div class="chips" id="ff">
+                <button class="chip" data-t="parcare" data-i18n="tag_parcare">Parcare</button>
+                <button class="chip" data-t="balcon" data-i18n="tag_balcon">Balcon</button>
+                <button class="chip" data-t="pet" data-i18n="tag_pet">Pet friendly</button>
+                <button class="chip" data-t="metrou" data-i18n="tag_metrou">Lângă metrou</button>
+                <button class="chip" data-t="centrala" data-i18n="tag_centrala">Centrală proprie</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="fm">
+            <span id="cnt"></span>
+            <button id="rst" data-i18n="btn_reset">Resetează filtrele</button>
+          </div>
+
+          <div class="rg" id="rg"></div>
+          <div class="rg-extra-wrap" id="rg-extra-wrap">
+            <div class="rg-extra-inner">
+              <div class="rg" id="rg-extra"></div>
+            </div>
+          </div>
+
+          <div class="show-more-wrap" id="sm-wrap" style="display: none">
+            <button class="btn" id="btn-more" type="button">Vezi mai multe apartamente</button>
+          </div>
+        </div>
+      </section>
+
+      <section id="locations">
+        <span class="bignum" aria-hidden="true" style="right: 2%">03</span>
+        <div class="w">
+          <div class="sh rv">
+            <span class="sn" data-i18n="m_subtitle">03 / Locație & Hartă</span>
+            <h2 class="st" data-i18n="m_title">Harta interactivă <em>Sector 6</em></h2>
+          </div>
+
+          <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; margin-bottom: 24px;" class="rv">
+            <p style="color: var(--mute)" data-i18n="m_desc">
+              Explorează punctele noastre cheie și cartierele acoperite în Sectorul 6 București.
+            </p>
+            <div class="chips" id="map-zone-filter">
+              <button class="chip on" data-zone="" data-i18n="all_zones">Toate zonele</button>
+              <button class="chip" data-zone="Drumul Taberei">Drumul Taberei</button>
+              <button class="chip" data-zone="Cotroceni">Cotroceni</button>
+              <button class="chip" data-zone="Lujerului">Lujerului</button>
+              <button class="chip" data-zone="Militari">Militari</button>
+              <button class="chip" data-zone="Crângași">Crângași</button>
+              <button class="chip" data-zone="Giulești">Giulești</button>
+            </div>
+          </div>
+
+          <div class="mapwrap rv rv-scale">
+            <div class="cmap-shell" id="cmap-shell">
+              <div id="cmap" class="cmap" role="application" aria-label="Hartă"></div>
+              <div class="map-legend" id="map-legend"></div>
+              <button class="map-reset" id="map-reset" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3"/></svg><span></span></button>
+              <div class="map-hint" id="map-hint"></div>
+              <div class="mcard" id="mcard"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Process Section -->
+      <section id="how" class="alt">
+        <span class="bignum" aria-hidden="true" style="left: 2%">04</span>
+        <div class="w">
+          <div class="sh rv">
+            <span class="sn" data-i18n="s_subtitle">04 / Proces</span>
+            <h2 class="st" data-i18n="s_title">De la prima discuție <em>la chei</em></h2>
+          </div>
+
+          <div class="cf rv-stagger" style="grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr)); gap: 24px;">
+            <div class="rc">
+              <h4 style="font-size: 2rem; color: var(--gold); margin-bottom: 8px">01</h4>
+              <h3 style="font: 400 1.4rem var(--serif); color: var(--text); margin-bottom: 6px;" data-i18n="step1_title">Alegi</h3>
+              <p style="color: var(--mute); font-size: 0.88rem" data-i18n="step1_desc">Filtrezi ofertele sau ne spui preferințele tale, iar noi îți trimitem selecții potrivite.</p>
+            </div>
+            <div class="rc">
+              <h4 style="font-size: 2rem; color: var(--gold); margin-bottom: 8px">02</h4>
+              <h3 style="font: 400 1.4rem var(--serif); color: var(--text); margin-bottom: 6px;" data-i18n="step2_title">Vizionezi</h3>
+              <p style="color: var(--mute); font-size: 0.88rem" data-i18n="step2_desc">Programăm vizionarea la ora ideală pentru tine, inclusiv în weekend.</p>
+            </div>
+            <div class="rc">
+              <h4 style="font-size: 2rem; color: var(--gold); margin-bottom: 8px">03</h4>
+              <h3 style="font: 400 1.4rem var(--serif); color: var(--text); margin-bottom: 6px;" data-i18n="step3_title">Semnezi</h3>
+              <p style="color: var(--mute); font-size: 0.88rem" data-i18n="step3_desc">Contract clar, transparent, fără comisioane sau clauze ascunse.</p>
+            </div>
+            <div class="rc">
+              <h4 style="font-size: 2rem; color: var(--gold); margin-bottom: 8px">04</h4>
+              <h3 style="font: 400 1.4rem var(--serif); color: var(--text); margin-bottom: 6px;" data-i18n="step4_title">Te muți</h3>
+              <p style="color: var(--mute); font-size: 0.88rem" data-i18n="step4_desc">Primești cheile și asistență continuă pe toată durata chiriei.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Agents Section -->
+      <section id="agents">
+        <span class="bignum" aria-hidden="true" style="right: 2%">05</span>
+        <div class="w">
+          <div class="sh rv">
+            <span class="sn" data-i18n="a_subtitle">05 / Echipa noastră</span>
+            <h2 class="st" data-i18n="a_title">Agenții <em>Lumen Estate</em></h2>
+          </div>
+          <div class="agent-grid rv-stagger">
+            <article class="ag">
+              <div class="ag-ph"><img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=700&q=80" alt="Elena Radu" loading="lazy" /><span class="ag-badge">RO · EN</span></div>
+              <div class="ag-b">
+                <h3>Elena Radu</h3>
+                <p class="ag-role" data-i18n="ag1_role">Specialist Drumul Taberei & Cotroceni</p>
+                <div class="ag-stats">
+                  <div><b>6</b><small data-i18n="ag_years">ani exp.</small></div>
+                  <div><b>128</b><small data-i18n="ag_done">închirieri</small></div>
+                  <div><b>4.9</b><small data-i18n="ag_rating">rating</small></div>
+                </div>
+                <div class="ag-actions"><a class="btn" href="https://t.me/" target="_blank" rel="noopener">Telegram</a><a class="btn fill" href="https://wa.me/" target="_blank" rel="noopener">WhatsApp</a></div>
+              </div>
+            </article>
+            <article class="ag">
+              <div class="ag-ph"><img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=700&q=80" alt="Andrei Ionescu" loading="lazy" /><span class="ag-badge">RO · EN · FR</span></div>
+              <div class="ag-b">
+                <h3>Andrei Ionescu</h3>
+                <p class="ag-role" data-i18n="ag2_role">Specialist Lujerului & Militari</p>
+                <div class="ag-stats">
+                  <div><b>4</b><small data-i18n="ag_years">ani exp.</small></div>
+                  <div><b>96</b><small data-i18n="ag_done">închirieri</small></div>
+                  <div><b>4.8</b><small data-i18n="ag_rating">rating</small></div>
+                </div>
+                <div class="ag-actions"><a class="btn" href="https://t.me/" target="_blank" rel="noopener">Telegram</a><a class="btn fill" href="https://wa.me/" target="_blank" rel="noopener">WhatsApp</a></div>
+              </div>
+            </article>
+            <article class="ag">
+              <div class="ag-ph"><img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=700&q=80" alt="Matei Dumitrescu" loading="lazy" /><span class="ag-badge">RO · EN · DE</span></div>
+              <div class="ag-b">
+                <h3>Matei Dumitrescu</h3>
+                <p class="ag-role" data-i18n="ag3_role">Consultant Crângași & Ciurel</p>
+                <div class="ag-stats">
+                  <div><b>8</b><small data-i18n="ag_years">ani exp.</small></div>
+                  <div><b>154</b><small data-i18n="ag_done">închirieri</small></div>
+                  <div><b>5.0</b><small data-i18n="ag_rating">rating</small></div>
+                </div>
+                <div class="ag-actions"><a class="btn" href="https://t.me/" target="_blank" rel="noopener">Telegram</a><a class="btn fill" href="https://wa.me/" target="_blank" rel="noopener">WhatsApp</a></div>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- Testimonials -->
+      <section id="testimonials" class="alt">
+        <span class="bignum" aria-hidden="true" style="left: 2%">06</span>
+        <div class="w">
+          <div class="sh rv">
+            <span class="sn" data-i18n="t_subtitle">06 / Recenzii</span>
+            <h2 class="st" data-i18n="t_title">Ce spun <em>chiriașii noștri</em></h2>
+          </div>
+
+          <div class="rev-grid">
+            <div class="rev-sum rv rv-left">
+              <div>
+                <div class="rev-score">4.9</div>
+                <div class="stars">★★★★★</div>
+                <p data-i18n="t_score_label">din 5 · 214 recenzii verificate</p>
+              </div>
+              <p data-i18n="t_join">Alătură-te celor 380+ chiriași mulțumiți</p>
+            </div>
+
+            <div class="rv rv-right">
+              <div class="rev-car" id="rev-car">
+                <div class="rev-track" id="rev-track">
+                  <div class="rev-slide">
+                    <div class="rev-card">
+                      <div class="rev-top">
+                        <img class="av" src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=150&q=80" alt="Ioana M." />
+                        <div>
+                          <b>Ioana M.</b>
+                          <span data-i18n="tst1_role">Studentă la Politehnică</span>
+                        </div>
+                        <div class="stars" style="margin-left: auto;">★★★★★</div>
+                      </div>
+                      <blockquote data-i18n="tst1_text">
+                        "Am găsit garsoniera perfectă în Drumul Taberei în doar 2 zile! Echipa a fost extrem de amabilă și profesionistă."
+                      </blockquote>
+                    </div>
+                  </div>
+
+                  <div class="rev-slide">
+                    <div class="rev-card">
+                      <div class="rev-top">
+                        <img class="av" src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=150&q=80" alt="Mihai & Ana" />
+                        <div>
+                          <b>Mihai & Ana</b>
+                          <span data-i18n="tst2_role">Chiriași în Lujerului</span>
+                        </div>
+                        <div class="stars" style="margin-left: auto;">★★★★★</div>
+                      </div>
+                      <blockquote data-i18n="tst2_text">
+                        "Fără surprize, fără costuri ascunse. Contractul a fost semnat rapid și pozele au corespuns 100% cu realitatea."
+                      </blockquote>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="carousel-controls">
+                <button class="c-btn" id="rev-prev" aria-label="Înapoi">←</button>
+                <div class="dots" id="rev-dots"></div>
+                <button class="c-btn" id="rev-next" aria-label="Înainte">→</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- FAQ Section -->
+      <section id="faq">
+        <span class="bignum" aria-hidden="true" style="right: 2%">07</span>
+        <div class="w">
+          <div class="sh rv">
+            <span class="sn" data-i18n="f_subtitle">07 / Întrebări frecvente</span>
+            <h2 class="st" data-i18n="f_title">Răspunsuri la <em>întrebări</em></h2>
+          </div>
+
+          <div class="faq-wrap rv">
+            <div class="faq-item">
+              <button class="faq-q" type="button"><span data-i18n="faq1_q">Cât este garanția standard?</span> <span>+</span></button>
+              <div class="faq-ans"><div class="faq-ans-inner"><p data-i18n="faq1_a">De obicei este echivalentul unei luni de chirie, returnabilă la finalul contractului dacă proprietatea este predată în stare bună.</p></div></div>
+            </div>
+            <div class="faq-item">
+              <button class="faq-q" type="button"><span data-i18n="faq2_q">Există comision pentru chiriaș?</span> <span>+</span></button>
+              <div class="faq-ans"><div class="faq-ans-inner"><p data-i18n="faq2_a">Ofertele noastre sunt transparente. Comisionul este specificat clar pentru fiecare proprietate în parte înainte de vizionare.</p></div></div>
+            </div>
+            <div class="faq-item">
+              <button class="faq-q" type="button"><span data-i18n="faq3_q">Pot închiria dacă am animale de companie?</span> <span>+</span></button>
+              <div class="faq-ans"><div class="faq-ans-inner"><p data-i18n="faq3_a">Da! Folosiți filtrul 'Pet friendly' din secțiunea de căutare pentru a vedea proprietățile care acceptă animale.</p></div></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <footer id="contact">
+        <div class="fw">
+          <div>
+            <a href="#top" class="logo">Lumen <span>Estate</span></a>
+            <p style="color: var(--mute); margin: 20px 0;" data-i18n="ft_desc">
+              Agenția ta imobiliară de încredere pentru închirierea rapidă și sigură a apartamentelor din Sectorul 6, București.
+            </p>
+            <p style="color: var(--gold);">📍 Bulevardul Timișoara 26, Sector 6, București</p>
+            <p style="color: var(--mute); font-size: 0.85rem; margin-top: 6px;">📞 +40 721 000 000 · ✉️ contact@lumenestate.ro</p>
+          </div>
+  
+          <form class="cf2" id="cf">
+            <h3 style="font: 400 2rem var(--serif); margin-bottom: 20px; color: var(--text);" data-i18n="form_title">Trimite o solicitare</h3>
+            <input type="text" placeholder="Numele tău" data-i18n-ph="ph_name" required />
+            <input type="tel" placeholder="Telefon / WhatsApp" data-i18n-ph="ph_phone" required />
+            <textarea rows="3" placeholder="Zonă preferată, detalii..." data-i18n-ph="ph_msg"></textarea>
+            <button type="submit" class="btn fill" style="width: 100%; padding: 15px" data-i18n="btn_send">Trimite mesajul</button>
+          </form>
+        </div>
+        <div class="fprefs">
+          <span class="fp-label" data-i18n="pref_label">Preferințe</span>
+          <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Schimbă tema">🌙</button>
+          <button class="btn admin-toggle-btn" id="admin-mode-btn">
+          <span id="admin-btn-text">⚙️ Admin Panel</span>
+        </button>
+        </div>
+      </footer>
+    </div>
+
+    <!-- INTEGRATED ADMIN PANEL VIEW -->
+    <div id="admin-view">
+      <div class="admin-container">
+        <div class="admin-header">
+          <div>
+            <h1 class="admin-title" data-i18n="admin_panel_heading">Адмін-панель квартир</h1>
+            <p style="color: var(--mute); font-size: 0.9rem;" data-i18n="admin_panel_sub">Керуйте об'єктами оренди в Секторі 6 у реальному часі</p>
+          </div>
+          <div style="display: flex; gap: 12px; flex-wrap: wrap;">
+            <button class="btn" id="reset-db-btn" type="button" data-i18n="admin_reset_btn">Скинути до стандартних</button>
+            <button class="btn fill" id="admin-add-new-btn" type="button" data-i18n="admin_new_btn">+ Нова квартира</button>
+          </div>
+        </div>
+
+        <div class="admin-grid">
+          <!-- Form Section -->
+          <div class="admin-card">
+            <div class="admin-card-title">
+              <span id="form-title-text" data-i18n="admin_form_add_title">Додати нову квартиру</span>
+              <button class="btn-icon" id="cancel-edit-btn" style="display: none;" type="button">Esc / Скасувати</button>
+            </div>
+
+            <form id="apartment-admin-form">
+              <input type="hidden" id="adm-id" name="id" />
+
+              <div class="form-group">
+                <label for="adm-title" data-i18n="adm_lbl_title">Назва (title)</label>
+                <input type="text" id="adm-title" class="form-control" placeholder='напр. "2-кімнатна в Секторі 6"' required />
+              </div>
+
+              <div class="form-group">
+                <label for="adm-description" data-i18n="adm_lbl_desc">Повний опис (description)</label>
+                <textarea id="adm-description" class="form-control" placeholder="Затишна квартира з новим ремонтом..." required></textarea>
+              </div>
+
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="adm-price" data-i18n="adm_lbl_price">Ціна (€/міс) (price)</label>
+                  <input type="number" id="adm-price" class="form-control" min="100" max="10000" placeholder="450" required />
+                </div>
+                <div class="form-group">
+                  <label for="adm-sector" data-i18n="adm_lbl_sector">Район / Сектор (sector)</label>
+                  <select id="adm-sector" class="form-control" required>
+                    <option value="Militari">Militari</option>
+                    <option value="Lujerului">Lujerului</option>
+                    <option value="Drumul Taberei">Drumul Taberei</option>
+                    <option value="Cotroceni">Cotroceni</option>
+                    <option value="Crângași">Crângași</option>
+                    <option value="Giulești">Giulești</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="adm-rooms" data-i18n="adm_lbl_rooms">Кімнат (rooms)</label>
+                  <input type="number" id="adm-rooms" class="form-control" min="1" max="10" value="2" required />
+                </div>
+                <div class="form-group">
+                  <label for="adm-area" data-i18n="adm_lbl_area">Площа m² (area)</label>
+                  <input type="number" id="adm-area" class="form-control" min="10" max="500" value="55" required />
+                </div>
+              </div>
+
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="adm-parking-type" data-i18n="adm_lbl_parking_type">Парковка (parking_type)</label>
+                  <select id="adm-parking-type" class="form-control">
+                    <option value="included">Включено (included)</option>
+                    <option value="free">Немає / Безкоштовно (free)</option>
+                    <option value="optional">Окремо (optional)</option>
+                  </select>
+                </div>
+                <div class="form-group" id="parking-price-wrap" style="display: none;">
+                  <label for="adm-parking-price" data-i18n="adm_lbl_parking_price">Ціна парковки (€) (parking_price)</label>
+                  <input type="number" id="adm-parking-price" class="form-control" placeholder="50" />
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label data-i18n="adm_lbl_amenities">Зручності (amenities)</label>
+                <div class="amenities-grid">
+                  <label class="checkbox-label"><input type="checkbox" name="amenities" value="AC"> AC</label>
+                  <label class="checkbox-label"><input type="checkbox" name="amenities" value="Balcony"> Balcony</label>
+                  <label class="checkbox-label"><input type="checkbox" name="amenities" value="Pets allowed"> Pets allowed</label>
+                  <label class="checkbox-label"><input type="checkbox" name="amenities" value="Washing machine"> Washing machine</label>
+                  <label class="checkbox-label"><input type="checkbox" name="amenities" value="metrou"> Lângă metrou</label>
+                  <label class="checkbox-label"><input type="checkbox" name="amenities" value="centrala"> Centrală proprie</label>
+                  <label class="checkbox-label"><input type="checkbox" name="amenities" value="parcare"> Parcare</label>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="adm-images" data-i18n="adm_lbl_images">URL Фотографій (images - через кому)</label>
+                <input type="text" id="adm-images" class="form-control" placeholder="https://..., https://..." required />
+              </div>
+
+              <div class="form-group" style="margin-top: 15px;">
+                <label class="switch-label">
+                  <span data-i18n="adm_lbl_active">Статус активності (is_active)</span>
+                  <div class="toggle-switch">
+                    <input type="checkbox" id="adm-is-active" checked />
+                    <span class="toggle-slider"></span>
+                  </div>
+                </label>
+              </div>
+
+              <button type="submit" class="btn fill" style="width: 100%; margin-top: 15px; padding: 14px;" id="save-apt-btn" data-i18n="adm_save_btn">
+                💾 Зберегти квартиру
+              </button>
+            </form>
+          </div>
+
+          <!-- Listings Table / Management View -->
+          <div class="admin-card">
+            <div class="admin-card-title">
+              <span data-i18n="admin_list_title">Список об'єктів у БД</span>
+              <span style="font-size: 0.85rem; color: var(--gold);" id="admin-count-badge">0 об'єктів</span>
+            </div>
+
+            <div class="admin-table-wrap">
+              <table class="admin-table">
+                <thead>
+                  <tr>
+                    <th>Фото</th>
+                    <th>Назва & Район</th>
+                    <th>Ціна</th>
+                    <th>Статус</th>
+                    <th>Дії</th>
+                  </tr>
+                </thead>
+                <tbody id="admin-table-body">
+                  <!-- Dynamically populated -->
+                </tbody>
+              </table>
             </div>
           </div>
         </div>
       </div>
-    </section>
+    </div>
 
-    <section id="faq">
-      <span class="bignum" aria-hidden="true" style="right: 2%">07</span>
-      <div class="w">
-        <div class="sh rv">
-          <span class="sn" data-i18n="f_subtitle">07 / Întrebări frecvente</span>
-          <h2 class="st" data-i18n="f_title">Răspunsuri la <em>întrebări</em></h2>
-        </div>
-
-        <div class="faq-wrap rv">
-          <div class="faq-item">
-            <button class="faq-q" type="button"><span data-i18n="faq1_q">Cât este garanția standard?</span> <span>+</span></button>
-            <div class="faq-ans"><div class="faq-ans-inner"><p data-i18n="faq1_a">De obicei este echivalentul unei luni de chirie, returnabilă la finalul contractului dacă proprietatea este predată în stare bună.</p></div></div>
-          </div>
-          <div class="faq-item">
-            <button class="faq-q" type="button"><span data-i18n="faq2_q">Există comision pentru chiriaș?</span> <span>+</span></button>
-            <div class="faq-ans"><div class="faq-ans-inner"><p data-i18n="faq2_a">Ofertele noastre sunt transparente. Comisionul este specificat clar pentru fiecare proprietate în parte înainte de vizionare.</p></div></div>
-          </div>
-          <div class="faq-item">
-            <button class="faq-q" type="button"><span data-i18n="faq3_q">Pot închiria dacă am animale de companie?</span> <span>+</span></button>
-            <div class="faq-ans"><div class="faq-ans-inner"><p data-i18n="faq3_a">Da! Folosiți filtrul 'Pet friendly' din secțiunea de căutare pentru a vedea proprietățile care acceptă animale.</p></div></div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <footer id="contact">
-      <div class="fw">
-        <div>
-          <a href="#top" class="logo">Lumen <span>Estate</span></a>
-          <p style="color: var(--mute); margin: 20px 0;" data-i18n="ft_desc">
-            Agenția ta imobiliară de încredere pentru închirierea rapidă și sigură a apartamentelor din Sectorul 6, București.
-          </p>
-          <p style="color: var(--gold);">📍 Bulevardul Timișoara 26, Sector 6, București</p>
-          <p style="color: var(--mute); font-size: 0.85rem; margin-top: 6px;">📞 +40 721 000 000 · ✉️ contact@lumenestate.ro</p>
-        </div>
-
-        <form class="cf2" id="cf">
-          <h3 style="font: 400 2rem var(--serif); margin-bottom: 20px; color: var(--text);" data-i18n="form_title">Trimite o solicitare</h3>
-          <input type="text" placeholder="Numele tău" data-i18n-ph="ph_name" required />
-          <input type="tel" placeholder="Telefon / WhatsApp" data-i18n-ph="ph_phone" required />
-          <textarea rows="3" placeholder="Zonă preferată, detalii..." data-i18n-ph="ph_msg"></textarea>
-          <button type="submit" class="btn fill" style="width: 100%; padding: 15px" data-i18n="btn_send">Trimite mesajul</button>
-        </form>
-      </div>
-      <div class="fprefs">
-        <span class="fp-label" data-i18n="pref_label">Preferințe</span>
-        <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Schimbă tema">🌙</button>
-      </div>
-    </footer>
-
+    <!-- Property Detail Modal Dialog -->
     <dialog id="dlg" aria-label="Detalii apartament"></dialog>
+
+    <!-- Notification Toast -->
+    <div class="notification-toast" id="toast-msg">Об'єкт успішно збережено!</div>
 
     <script>
       const i18n = {
@@ -1913,7 +2363,28 @@
           t_score_label: "din 5 · 214 recenzii verificate",
           t_join: "Alătură-te celor 380+ chiriași mulțumiți",
           tst1_role: "Studentă la Politehnică",
-          tst2_role: "Chiriași în Lujerului"
+          tst2_role: "Chiriași în Lujerului",
+          
+          /* Admin translations */
+          admin_panel_heading: "Panou de Administrare",
+          admin_panel_sub: "Gestionează proprietățile în timp real",
+          admin_reset_btn: "Resetează la Baza Inițială",
+          admin_new_btn: "+ Adaugă Apartament",
+          admin_form_add_title: "Adaugă un apartament nou",
+          admin_form_edit_title: "Editează apartamentul",
+          adm_lbl_title: "Titlu (title)",
+          adm_lbl_desc: "Descriere completă (description)",
+          adm_lbl_price: "Preț chirie (€/lună) (price)",
+          adm_lbl_sector: "Zonă / Sector (sector)",
+          adm_lbl_rooms: "Camere (rooms)",
+          adm_lbl_area: "Suprafață m² (area)",
+          adm_lbl_parking_type: "Parcare (parking_type)",
+          adm_lbl_parking_price: "Preț parcare (€) (parking_price)",
+          adm_lbl_amenities: "Facilități (amenities)",
+          adm_lbl_images: "URL-uri imagini (images - separate prin virgulă)",
+          adm_lbl_active: "Status activare (is_active)",
+          adm_save_btn: "💾 Salvează în Baza de Date",
+          admin_list_title: "Proprietăți în Baza de Date"
         },
         ru: {
           nav_concept: "Концепция",
@@ -2030,11 +2501,31 @@
           t_score_label: "из 5 · 214 проверенных отзывов",
           t_join: "Присоединяйтесь к 380+ довольным арендаторам",
           tst1_role: "Студентка Politehnica",
-          tst2_role: "Арендаторы в Lujerului"
+          tst2_role: "Арендаторы в Lujerului",
+
+          /* Admin translations */
+          admin_panel_heading: "Панель адміна квартир",
+          admin_panel_sub: "Керуйте об'єктами оренди в Секторі 6 у реальному часі",
+          admin_reset_btn: "Скинути до стандартних",
+          admin_new_btn: "+ Нова квартира",
+          admin_form_add_title: "Додати нову квартиру",
+          admin_form_edit_title: "Редагувати квартиру",
+          adm_lbl_title: "Назва (title)",
+          adm_lbl_desc: "Повний опис (description)",
+          adm_lbl_price: "Ціна (€/міс) (price)",
+          adm_lbl_sector: "Район / Сектор (sector)",
+          adm_lbl_rooms: "Кімнат (rooms)",
+          adm_lbl_area: "Площа m² (area)",
+          adm_lbl_parking_type: "Парковка (parking_type)",
+          adm_lbl_parking_price: "Ціна парковки (€) (parking_price)",
+          adm_lbl_amenities: "Зручності (amenities)",
+          adm_lbl_images: "URL Фотографій (images - через кому)",
+          adm_lbl_active: "Статус активності (is_active)",
+          adm_save_btn: "💾 Зберегти квартиру",
+          admin_list_title: "Список об'єктів у БД"
         }
       };
 
-      /* Application Global Currency & Language State */
       let currentLang = "ro";
       let currentCurrency = "EUR";
       const currencyRates = {
@@ -2046,7 +2537,6 @@
       const $ = (s) => document.querySelector(s);
       const $$ = (s) => [...document.querySelectorAll(s)];
 
-      /* Price Currency Formatter Function */
       function formatPrice(priceInEur) {
         const c = currencyRates[currentCurrency];
         const converted = Math.round(priceInEur * c.rate);
@@ -2068,6 +2558,159 @@
         setTheme(currentTheme === "dark" ? "light" : "dark");
       };
       setTheme(localStorage.getItem("lumen_theme") || "dark");
+
+      /* Initial Default Database Schema Data */
+      const defaultImages = [
+        "https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?auto=format&fit=crop&w=800&q=80",
+        "https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?auto=format&fit=crop&w=800&q=80",
+        "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?auto=format&fit=crop&w=800&q=80",
+        "https://images.unsplash.com/photo-1493809842364-78817add7ffb?auto=format&fit=crop&w=800&q=80",
+        "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=800&q=80"
+      ];
+
+      const initialDatabase = [
+        {
+          id: "f3a12b48-1111-4a12-8888-123456789001",
+          title: "Garsonieră modernă Militari",
+          description: "Garsonieră complet utilată, mobilată modern, situată la 5 minute de metrou Preciziei.",
+          price: 350,
+          parking_type: "included",
+          parking_price: null,
+          area: 38,
+          rooms: 1,
+          sector: "Militari",
+          amenities: ["AC", "Balcony", "metrou", "balcon", "centrala"],
+          images: [defaultImages[4]],
+          created_at: new Date(Date.now() - 86400000 * 5).toISOString(),
+          is_active: true,
+          lat: 44.435,
+          lng: 26.012,
+          floor: "3/8"
+        },
+        {
+          id: "f3a12b48-2222-4a12-8888-123456789002",
+          title: "Apartament 2 camere Lujerului",
+          description: "Apartament confortabil, decomandat, ideal pentru cupluri. Bloc reabilitat termic.",
+          price: 400,
+          parking_type: "free",
+          parking_price: null,
+          area: 52,
+          rooms: 2,
+          sector: "Lujerului",
+          amenities: ["AC", "Washing machine", "metrou", "centrala"],
+          images: [defaultImages[1]],
+          created_at: new Date(Date.now() - 86400000 * 4).toISOString(),
+          is_active: true,
+          lat: 44.4348,
+          lng: 26.0352,
+          floor: "2/10"
+        },
+        {
+          id: "f3a12b48-3333-4a12-8888-123456789003",
+          title: "Apartament 2 camere, bloc nou Cotroceni",
+          description: "Finisaje premium, terasă spațioasă, loc de parcare subteran opțional.",
+          price: 420,
+          parking_type: "optional",
+          parking_price: 50,
+          area: 55,
+          rooms: 2,
+          sector: "Cotroceni",
+          amenities: ["AC", "Balcony", "Pets allowed", "parcare", "balcon", "centrala"],
+          images: [defaultImages[2]],
+          created_at: new Date(Date.now() - 86400000 * 3).toISOString(),
+          is_active: true,
+          lat: 44.4305,
+          lng: 26.0528,
+          floor: "5/11"
+        },
+        {
+          id: "f3a12b48-4444-4a12-8888-123456789004",
+          title: "Apartament 3 camere, spațios Cotroceni",
+          description: "Ideal pentru familii, zonă liniștită lângă parc.",
+          price: 460,
+          parking_type: "free",
+          parking_price: null,
+          area: 72,
+          rooms: 3,
+          sector: "Cotroceni",
+          amenities: ["Balcony", "Pets allowed", "balcon", "pet"],
+          images: [defaultImages[3]],
+          created_at: new Date(Date.now() - 86400000 * 2).toISOString(),
+          is_active: true,
+          lat: 44.433,
+          lng: 26.056,
+          floor: "4/8"
+        },
+        {
+          id: "f3a12b48-5555-4a12-8888-123456789005",
+          title: "Studio Militari Residence",
+          description: "Studio cochet în complex nou cu piscină și spații comerciale în apropiere.",
+          price: 330,
+          parking_type: "included",
+          parking_price: null,
+          area: 34,
+          rooms: 1,
+          sector: "Militari",
+          amenities: ["parcare", "centrala", "AC"],
+          images: [defaultImages[4]],
+          created_at: new Date().toISOString(),
+          is_active: true,
+          lat: 44.435,
+          lng: 26.012,
+          floor: "1/4"
+        },
+        {
+          id: "f3a12b48-6666-4a12-8888-123456789006",
+          title: "Apartament 2 camere premium Drumul Taberei",
+          description: "Lângă parcul Moghioroș, recent renovat cu designer de interior.",
+          price: 480,
+          parking_type: "included",
+          parking_price: null,
+          area: 60,
+          rooms: 2,
+          sector: "Drumul Taberei",
+          amenities: ["parcare", "balcon", "metrou", "centrala", "AC", "Washing machine"],
+          images: [defaultImages[1]],
+          created_at: new Date().toISOString(),
+          is_active: true,
+          lat: 44.425,
+          lng: 26.021,
+          floor: "7/10"
+        }
+      ];
+
+      /* LocalStorage Data Manager */
+      function loadListingsData() {
+        const stored = localStorage.getItem("lumen_estates_db");
+        if (stored) {
+          try {
+            return JSON.parse(stored);
+          } catch(e) {
+            console.error("Error parsing stored listings, resetting to default.");
+          }
+        }
+        localStorage.setItem("lumen_estates_db", JSON.stringify(initialDatabase));
+        return [...initialDatabase];
+      }
+
+      function saveListingsData(data) {
+        localStorage.setItem("lumen_estates_db", JSON.stringify(data));
+      }
+
+      let L = loadListingsData();
+
+      /* Get Sector Coordinates Fallback helper */
+      function getSectorCoords(sector) {
+        const coords = {
+          "Militari": { lat: 44.435, lng: 26.012 },
+          "Lujerului": { lat: 44.4348, lng: 26.0352 },
+          "Cotroceni": { lat: 44.4305, lng: 26.0528 },
+          "Drumul Taberei": { lat: 44.425, lng: 26.021 },
+          "Crângași": { lat: 44.453, lng: 26.042 },
+          "Giulești": { lat: 44.460, lng: 26.038 }
+        };
+        return coords[sector] || { lat: 44.435 + (Math.random() - 0.5) * 0.02, lng: 26.02 + (Math.random() - 0.5) * 0.02 };
+      }
 
       /* Segmented Language Switcher Listener */
       const langSegmented = $("#lang-switch");
@@ -2094,49 +2737,29 @@
         if (window.refreshSelects) refreshSelects();
         updateReveal();
         renderListings();
+        renderAdminListTable();
       }
 
-      /* Currency Selector Listener */
       function updateReveal() {
+        const activeL = L.filter(x => x.is_active);
         const el = $("#reveal-price");
-        if (el) el.textContent = formatPrice(Math.min(...L.map((x) => x.p)));
+        if (el && activeL.length) el.textContent = formatPrice(Math.min(...activeL.map((x) => x.price)));
         const n = $("#rv-live-n");
-        if (n) n.textContent = L.length;
+        if (n) n.textContent = activeL.length;
       }
+
       $("#curr-switch").onchange = (e) => {
         currentCurrency = e.target.value;
         renderListings();
         updateReveal();
       };
 
-      const IM = [
-        "https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?auto=format&fit=crop&w=800&q=80",
-        "https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?auto=format&fit=crop&w=800&q=80",
-        "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?auto=format&fit=crop&w=800&q=80",
-        "https://images.unsplash.com/photo-1493809842364-78817add7ffb?auto=format&fit=crop&w=800&q=80",
-        "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=800&q=80"
-      ];
-
-      const L = [
-        { id: 0, n: { ro: "Garsonieră modernă Militari", ru: "Современная студия Militari" }, z: "Militari", lat: 44.435, lng: 26.012, r: 1, m: 38, p: 350, f: "3/8", t: ["metrou", "balcon", "centrala"], img: IM[4] },
-        { id: 1, n: { ro: "Apartament 2 camere", ru: "2-комнатная квартира" }, z: "Lujerului", lat: 44.4348, lng: 26.0352, r: 2, m: 52, p: 400, f: "2/10", t: ["metrou", "centrala"], img: IM[1] },
-        { id: 2, n: { ro: "Apartament 2 camere, bloc nou", ru: "2-комнатная в новостройке" }, z: "Cotroceni", lat: 44.4305, lng: 26.0528, r: 2, m: 55, p: 420, f: "5/11", t: ["parcare", "balcon", "centrala"], img: IM[2] },
-        { id: 3, n: { ro: "Apartament 3 camere, spațios", ru: "Просторная 3-комнатная" }, z: "Cotroceni", lat: 44.433, lng: 26.056, r: 3, m: 72, p: 460, f: "4/8", t: ["balcon", "pet"], img: IM[3] },
-        { id: 4, n: { ro: "Studio Militari Residence", ru: "Студия Militari Residence" }, z: "Militari", lat: 44.435, lng: 26.012, r: 1, m: 34, p: 330, f: "1/4", t: ["parcare", "centrala"], img: IM[4] },
-        { id: 5, n: { ro: "Garsonieră lângă lac", ru: "Студия у озера" }, z: "Crângași", lat: 44.453, lng: 26.042, r: 1, m: 32, p: 320, f: "6/10", t: ["metrou"], img: IM[0] },
-        { id: 6, n: { ro: "Apartament 2 camere premium", ru: "Премиум 2-комнатная" }, z: "Drumul Taberei", lat: 44.425, lng: 26.021, r: 2, m: 60, p: 480, f: "7/10", t: ["parcare", "balcon", "metrou", "centrala"], img: IM[1] },
-        { id: 7, n: { ro: "Apartament 3 camere cu parcare", ru: "3-комнатная с парковкой" }, z: "Giulești", lat: 44.46, lng: 26.038, r: 3, m: 80, p: 520, f: "3/6", t: ["parcare", "pet", "centrala"], img: IM[2] },
-        { id: 8, n: { ro: "Loft 2 camere", ru: "Лофт, 2 комнаты" }, z: "Cotroceni", lat: 44.4285, lng: 26.048, r: 2, m: 64, p: 560, f: "2/5", t: ["balcon", "pet", "metrou"], img: IM[3] },
-        { id: 9, n: { ro: "Penthouse 3 camere", ru: "Пентхаус, 3 комнаты" }, z: "Lujerului", lat: 44.4385, lng: 26.0415, r: 3, m: 95, p: 690, f: "12/12", t: ["parcare", "balcon", "metrou", "centrala"], img: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=80" },
-        { id: 10, n: { ro: "Garsonieră cu balcon", ru: "Студия с балконом" }, z: "Militari", lat: 44.429, lng: 26.0055, r: 1, m: 36, p: 340, f: "5/9", t: ["balcon"], img: IM[0] },
-        { id: 11, n: { ro: "Apartament 2 camere cu vedere", ru: "2-комнатная с видом" }, z: "Crângași", lat: 44.4465, lng: 26.033, r: 2, m: 58, p: 450, f: "8/10", t: ["parcare", "metrou"], img: IM[2] }
-      ];
-
-      const S = { z: "", r: "all", p: 700, t: new Set(), s: "new" };
+      const S = { z: "", r: "all", p: 1500, t: new Set(), s: "new" };
       let showAllListings = false;
-      const zones = [...new Set(L.map((x) => x.z))].sort();
+      let zones = [];
 
       function fillZones() {
+        zones = [...new Set(L.map((x) => x.sector))].sort();
         const o = `<option value="">${currentLang === 'ro' ? 'Toate zonele' : 'Все районы'}</option>` +
           zones.map((z) => `<option value="${z}">${z}</option>`).join("");
         ["#fz", "#hz"].forEach((s) => {
@@ -2148,26 +2771,29 @@
           }
         });
       }
-      fillZones();
 
       function buildCardHTML(x) {
+        const displayTitle = typeof x.title === "object" ? (x.title[currentLang] || x.title.ro) : x.title;
+        const mainImage = Array.isArray(x.images) && x.images.length > 0 ? x.images[0] : (x.img || defaultImages[0]);
+        const amenitiesList = Array.isArray(x.amenities) ? x.amenities : (x.t || []);
+
         return `
-          <article class="rental-card" onclick="openModal(${x.id})">
+          <article class="rental-card" onclick="openModal('${x.id}')">
             <div class="ph">
-              <img src="${x.img}" alt="${x.n[currentLang]}" loading="lazy">
+              <img src="${mainImage}" alt="${displayTitle}" loading="lazy" onerror="this.src='${defaultImages[0]}'">
               <span class="bdg">${currentLang === 'ro' ? 'VERIFICAT' : 'ПРОВЕРЕНО'}</span>
-              <span class="zn">${x.z}</span>
+              <span class="zn">${x.sector || x.z}</span>
             </div>
             <div class="rb">
-              <div class="rp">${formatPrice(x.p)} <span>/ ${currentLang === 'ro' ? 'lună' : 'мес.'}</span></div>
-              <h3>${x.n[currentLang]}</h3>
+              <div class="rp">${formatPrice(x.price)} <span>/ ${currentLang === 'ro' ? 'lună' : 'мес.'}</span></div>
+              <h3>${displayTitle}</h3>
               <div class="rm">
-                <span>${x.r} ${x.r === 1 ? (currentLang === 'ro' ? 'cameră' : 'комната') : (currentLang === 'ro' ? 'camere' : 'комнаты')}</span>
-                <span>${x.m} m²</span>
-                <span>${currentLang === 'ro' ? 'Etaj' : 'Этаж'} ${x.f}</span>
+                <span>${x.rooms} ${x.rooms === 1 ? (currentLang === 'ro' ? 'cameră' : 'комната') : (currentLang === 'ro' ? 'camere' : 'комнаты')}</span>
+                <span>${x.area} m²</span>
+                <span>${currentLang === 'ro' ? 'Etaj' : 'Этаж'} ${x.floor || '2/5'}</span>
               </div>
               <div class="tg">
-                ${x.t.map((t) => `<span>${i18n[currentLang]["tag_" + t] || t}</span>`).join("")}
+                ${amenitiesList.map((t) => `<span>${i18n[currentLang]["tag_" + t] || t}</span>`).join("")}
               </div>
             </div>
           </article>
@@ -2175,17 +2801,20 @@
       }
 
       function renderListings() {
-        let filtered = L.filter((x) =>
-          (!S.z || x.z === S.z) &&
-          (S.r === "all" || (S.r === "3" ? x.r >= 3 : x.r == S.r)) &&
-          x.p <= S.p &&
-          [...S.t].every((t) => x.t.includes(t))
+        let activeListings = L.filter(x => x.is_active);
+
+        let filtered = activeListings.filter((x) =>
+          (!S.z || x.sector === S.z || x.z === S.z) &&
+          (S.r === "all" || (S.r === "3" ? x.rooms >= 3 : x.rooms == S.r)) &&
+          x.price <= S.p &&
+          [...S.t].every((t) => (x.amenities || x.t || []).includes(t))
         );
 
         const sortFns = {
-          pa: (a, b) => a.p - b.p,
-          pd: (a, b) => b.p - a.p,
-          ma: (a, b) => b.m - a.m,
+          pa: (a, b) => a.price - b.price,
+          pd: (a, b) => b.price - a.price,
+          ma: (a, b) => b.area - a.area,
+          new: (a, b) => new Date(b.created_at || 0) - new Date(a.created_at || 0)
         };
         if (sortFns[S.s]) filtered.sort(sortFns[S.s]);
 
@@ -2261,7 +2890,7 @@
         renderListings();
       }));
       $("#rst").onclick = () => {
-        Object.assign(S, { z: "", r: "all", p: 700, s: "new" });
+        Object.assign(S, { z: "", r: "all", p: 1500, s: "new" });
         S.t.clear();
         $$("#fr .chip").forEach(ch => ch.classList.toggle("on", ch.dataset.r === "all"));
         $$("#ff .chip").forEach(ch => ch.classList.remove("on"));
@@ -2270,7 +2899,7 @@
       $("#hgo").onclick = () => {
         S.z = $("#hz").value;
         S.r = $("#hr").value;
-        S.p = 700;
+        S.p = 1500;
         renderListings();
         $("#rentals").scrollIntoView();
       };
@@ -2285,6 +2914,7 @@
         };
       });
 
+      /* Three.js Background Animation */
       function init3DHero() {
         const container = document.getElementById("hero-canvas-container");
         if (!container || typeof THREE === "undefined") return;
@@ -2300,7 +2930,6 @@
         const group = new THREE.Group();
         scene.add(group);
 
-        // м'який круглий «світляк» замість квадратних точок
         const cv = document.createElement("canvas");
         cv.width = cv.height = 128;
         const g = cv.getContext("2d");
@@ -2377,7 +3006,6 @@
         });
       }
 
-
       function initCinematicScrollParallax() {
         if (matchMedia("(prefers-reduced-motion: reduce)").matches) return;
         const wrapper = document.getElementById("top");
@@ -2441,20 +3069,11 @@
         update();
       }
 
-
-      /* ===== Реальна карта: Leaflet + CARTO basemap ===== */
+      /* ===== Leaflet Map Core ===== */
       const LFm = window.LF;
       const MAP = { map: null, pins: null, markers: new Map(), sel: null, tiles: null, sig: "", ready: false, count: null };
       const mapTr = (ro, ru) => (currentLang === "ro" ? ro : ru);
       const curTheme = () => document.documentElement.getAttribute("data-theme") || "dark";
-      /* ──────────────────────────────────────────────────────────────
-         КЛЮЧ ДО КАРТИ (безкоштовний)
-         CARTO з кінця серпня 2026 вимагає API-ключ для плиток карти.
-         Отримати: https://carto.com/basemaps/apikey  (без акаунта, ключ приходить на пошту,
-         безкоштовно до 5 млн запитів плиток на місяць).
-         Вставте ключ між лапками нижче.
-         Поки ключа немає, карта працює на стандартних плитках OpenStreetMap (без ключа, лише для демо).
-         ────────────────────────────────────────────────────────────── */
       const CARTO_KEY = "cb1_4ge4_1_7d1c22cd4cff732cbc34369c";
       const tileUrl = (t) => CARTO_KEY
         ? `https://{s}.basemaps.cartocdn.com/rastertiles/${t === "light" ? "light_all" : "dark_all"}/{z}/{x}/{y}{r}.png?key=${encodeURIComponent(CARTO_KEY)}`
@@ -2462,19 +3081,8 @@
       const TILE_ATTR = CARTO_KEY
         ? '&copy; <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a> &copy; <a href="https://carto.com/attributions" target="_blank" rel="noopener">CARTO</a>'
         : '&copy; <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a> contributors';
-      // Орієнтовний контур Сектора 6 (декоративний)
+
       const SECTOR6 = [[44.4705, 26.0295], [44.469, 26.056], [44.452, 26.0705], [44.438, 26.0715], [44.43, 26.065], [44.4205, 26.054], [44.4085, 26.03], [44.41, 25.978], [44.4235, 25.942], [44.445, 25.94], [44.461, 25.975]];
-      // Квартири з однаковими координатами трохи розсуваємо
-      const MAPPOS = {};
-      (function () {
-        const g = {};
-        L.forEach((it) => { const k = it.lat + "," + it.lng; (g[k] = g[k] || []).push(it); });
-        Object.values(g).forEach((arr) => arr.forEach((it, i) => {
-          if (arr.length === 1) { MAPPOS[it.id] = [it.lat, it.lng]; return; }
-          const a = (i / arr.length) * Math.PI * 2, r = 0.0012;
-          MAPPOS[it.id] = [it.lat + Math.sin(a) * r * 0.8, it.lng + Math.cos(a) * r];
-        }));
-      })();
 
       function mapHud(n) {
         const lg = $("#map-legend");
@@ -2507,14 +3115,19 @@
       };
 
       function showCard(id) {
-        const x = L[id], c = $("#mcard");
-        const rooms = x.r === 1 ? mapTr("cameră", "комната") : mapTr("camere", "комнаты");
-        c.innerHTML = `<img src="${x.img}" alt="${x.n[currentLang]}">
+        const x = L.find(item => String(item.id) === String(id));
+        if (!x) return;
+        const c = $("#mcard");
+        const displayTitle = typeof x.title === "object" ? (x.title[currentLang] || x.title.ro) : x.title;
+        const mainImage = Array.isArray(x.images) && x.images.length > 0 ? x.images[0] : (x.img || defaultImages[0]);
+        const rooms = x.rooms === 1 ? mapTr("cameră", "комната") : mapTr("camere", "комнаты");
+
+        c.innerHTML = `<img src="${mainImage}" alt="${displayTitle}" onerror="this.src='${defaultImages[0]}'">
           <div class="mc-b">
-            <span class="mc-z">${x.z}</span>
-            <h4>${x.n[currentLang]}</h4>
-            <div class="mc-m">${x.r} ${rooms} · ${x.m} m² · ${mapTr("Etaj", "Этаж")} ${x.f}</div>
-            <div class="mc-row"><b>${formatPrice(x.p)}<small> / ${mapTr("lună", "мес.")}</small></b><button type="button" class="btn fill" onclick="openModal(${id})">${mapTr("Detalii", "Подробнее")}</button></div>
+            <span class="mc-z">${x.sector || x.z}</span>
+            <h4>${displayTitle}</h4>
+            <div class="mc-m">${x.rooms} ${rooms} · ${x.area} m² · ${mapTr("Etaj", "Этаж")} ${x.floor || '2/5'}</div>
+            <div class="mc-row"><b>${formatPrice(x.price)}<small> / ${mapTr("lună", "мес.")}</small></b><button type="button" class="btn fill" onclick="openModal('${x.id}')">${mapTr("Detalii", "Подробнее")}</button></div>
           </div>
           <button class="mc-x" type="button" aria-label="×" onclick="hideCard()">×</button>`;
         c.classList.add("show");
@@ -2523,10 +3136,13 @@
 
       function selectListing(id) {
         MAP.sel = id;
-        MAP.markers.forEach((m, mid) => { const e = m.getElement(); if (e) e.classList.toggle("on", mid === id); m.setZIndexOffset(mid === id ? 1000 : 0); });
+        const x = L.find(item => String(item.id) === String(id));
+        if (!x) return;
+        MAP.markers.forEach((m, mid) => { const e = m.getElement(); if (e) e.classList.toggle("on", String(mid) === String(id)); m.setZIndexOffset(String(mid) === String(id) ? 1000 : 0); });
         showCard(id);
         const z = Math.max(MAP.map.getZoom(), 14.25);
-        let c = LFm.latLng(MAPPOS[id]);
+        let pos = [x.lat || getSectorCoords(x.sector).lat, x.lng || getSectorCoords(x.sector).lng];
+        let c = LFm.latLng(pos);
         if (innerWidth < 900) { const p = MAP.map.project(c, z); p.y += 90; c = MAP.map.unproject(p, z); }
         MAP.map.flyTo(c, z, { duration: 0.8 });
       }
@@ -2552,13 +3168,6 @@
         if (!CARTO_KEY) el.classList.add("osm");
         LFm.polygon(SECTOR6, { color: "#c6a378", weight: 1.5, opacity: 0.7, dashArray: "6 8", fillColor: "#c6a378", fillOpacity: 0.04, interactive: false }).addTo(map);
 
-        // назви зон
-        const zs = {};
-        L.forEach((it) => { (zs[it.z] = zs[it.z] || []).push(MAPPOS[it.id]); });
-        Object.entries(zs).forEach(([z, pts]) => {
-          const lat = pts.reduce((a, p) => a + p[0], 0) / pts.length - 0.0042, lng = pts.reduce((a, p) => a + p[1], 0) / pts.length;
-          LFm.marker([lat, lng], { icon: LFm.divIcon({ className: "lx-zone", html: `<span>${z.toUpperCase()}</span>`, iconSize: [0, 0] }), interactive: false, keyboard: false }).addTo(map);
-        });
         MAP.pins = LFm.layerGroup().addTo(map);
 
         el.addEventListener("wheel", (e) => {
@@ -2578,23 +3187,26 @@
         if (!MAP.map) return;
         const keep = new Set();
         list.forEach((it, n) => {
-          keep.add(it.id);
-          let m = MAP.markers.get(it.id);
+          keep.add(String(it.id));
+          let m = MAP.markers.get(String(it.id));
+          const displayTitle = typeof it.title === "object" ? (it.title[currentLang] || it.title.ro) : it.title;
+          const pos = [it.lat || getSectorCoords(it.sector).lat, it.lng || getSectorCoords(it.sector).lng];
+
           if (!m) {
-            const html = `<div class="lx-dot"></div><div class="lx-pin" style="--i:${n % 10}">${formatPrice(it.p)}</div>`;
-            m = LFm.marker(MAPPOS[it.id], { icon: LFm.divIcon({ className: "lx-icon", html, iconSize: [0, 0] }), keyboard: true, title: `${it.n[currentLang]} — ${formatPrice(it.p)}` });
+            const html = `<div class="lx-dot"></div><div class="lx-pin" style="--i:${n % 10}">${formatPrice(it.price)}</div>`;
+            m = LFm.marker(pos, { icon: LFm.divIcon({ className: "lx-icon", html, iconSize: [0, 0] }), keyboard: true, title: `${displayTitle} — ${formatPrice(it.price)}` });
             m.on("click", () => selectListing(it.id));
             m.on("mouseover", () => m.setZIndexOffset(1000));
-            m.on("mouseout", () => m.setZIndexOffset(MAP.sel === it.id ? 1000 : 0));
+            m.on("mouseout", () => m.setZIndexOffset(String(MAP.sel) === String(it.id) ? 1000 : 0));
             m.addTo(MAP.pins);
-            MAP.markers.set(it.id, m);
+            MAP.markers.set(String(it.id), m);
           } else {
             const e = m.getElement();
-            if (e) { const pin = e.querySelector(".lx-pin"); if (pin) pin.textContent = formatPrice(it.p); e.title = `${it.n[currentLang]} — ${formatPrice(it.p)}`; }
+            if (e) { const pin = e.querySelector(".lx-pin"); if (pin) pin.textContent = formatPrice(it.price); e.title = `${displayTitle} — ${formatPrice(it.price)}`; }
           }
         });
-        MAP.markers.forEach((m, id) => { if (!keep.has(id)) { MAP.pins.removeLayer(m); MAP.markers.delete(id); } });
-        if (MAP.sel !== null && !keep.has(MAP.sel)) window.hideCard();
+        MAP.markers.forEach((m, id) => { if (!keep.has(String(id))) { MAP.pins.removeLayer(m); MAP.markers.delete(String(id)); } });
+        if (MAP.sel !== null && !keep.has(String(MAP.sel))) window.hideCard();
         else if (MAP.sel !== null) showCard(MAP.sel);
         mapHud(list.length);
         const sig = list.map((i) => i.id).join(",");
@@ -2611,7 +3223,6 @@
           $("#rentals").scrollIntoView({ behavior: "smooth" });
         };
       });
-
 
       /* Reviews Carousel */
       (function () {
@@ -2644,19 +3255,27 @@
       /* Modal Details Window */
       const dlg = $("#dlg");
       window.openModal = function (id) {
-        const x = L[id];
+        const x = L.find(item => String(item.id) === String(id));
+        if (!x) return;
+        const displayTitle = typeof x.title === "object" ? (x.title[currentLang] || x.title.ro) : x.title;
+        const displayDesc = typeof x.description === "object" ? (x.description[currentLang] || x.description.ro || '') : (x.description || '');
+        const mainImage = Array.isArray(x.images) && x.images.length > 0 ? x.images[0] : (x.img || defaultImages[0]);
+        const amenitiesList = Array.isArray(x.amenities) ? x.amenities : (x.t || []);
+
         dlg.innerHTML = `
           <div class="mg">
-            <div class="mi"><img src="${x.img}" alt="${x.n[currentLang]}"></div>
+            <div class="mi"><img src="${mainImage}" alt="${displayTitle}" onerror="this.src='${defaultImages[0]}'"></div>
             <div class="mb">
               <button class="x" onclick="dlg.close()" style="position:absolute; right:15px; top:15px; border:none; background:none; color:var(--text); font-size:1.5rem; cursor:pointer;">×</button>
-              <h3>${x.n[currentLang]}</h3>
-              <div class="rp" style="color:var(--gold); font-size:1.8rem; margin:10px 0;">${formatPrice(x.p)} <span>/ ${currentLang === 'ro' ? 'lună' : 'мес.'}</span></div>
-              <p style="color:var(--mute)">Sector 6, București. ${x.z}</p>
-              <div style="margin:15px 0;">
-                <div><b>${currentLang === 'ro' ? 'Camere' : 'Комнаты'}:</b> ${x.r}</div>
-                <div><b>${currentLang === 'ro' ? 'Suprafață' : 'Площадь'}:</b> ${x.m} m²</div>
-                <div><b>${currentLang === 'ro' ? 'Etaj' : 'Этаж'}:</b> ${x.f}</div>
+              <h3>${displayTitle}</h3>
+              <div class="rp" style="color:var(--gold); font-size:1.8rem; margin:10px 0;">${formatPrice(x.price)} <span>/ ${currentLang === 'ro' ? 'lună' : 'мес.'}</span></div>
+              <p style="color:var(--mute); margin-bottom: 10px;">Sector 6, București. ${x.sector || x.z}</p>
+              <p style="font-size:0.9rem; color:var(--text-muted); margin-bottom: 15px;">${displayDesc}</p>
+              <div style="margin:15px 0; font-size:0.9rem; display:grid; gap:6px;">
+                <div><b>${currentLang === 'ro' ? 'Camere' : 'Комнаты'}:</b> ${x.rooms}</div>
+                <div><b>${currentLang === 'ro' ? 'Suprafață' : 'Площадь'}:</b> ${x.area} m²</div>
+                <div><b>${currentLang === 'ro' ? 'Parcare' : 'Парковка'}:</b> ${x.parking_type} ${x.parking_price ? `(${x.parking_price}€)` : ''}</div>
+                <div><b>${currentLang === 'ro' ? 'Facilități' : 'Удобства'}:</b> ${amenitiesList.join(", ")}</div>
               </div>
               <button class="btn fill" style="margin-top:20px; width:100%" onclick="dlg.close()">${currentLang === 'ro' ? 'Programează vizionare' : 'Записаться на просмотр'}</button>
             </div>
@@ -2750,7 +3369,7 @@
           setAct(Math.max(0, sel.selectedIndex));
         }
         function build(sel) {
-          if (sel._b) return;
+          if (sel._b || sel.classList.contains("form-control")) return;
           sel.classList.add("csel-native"); sel.tabIndex = -1; sel.setAttribute("aria-hidden", "true");
           const w = document.createElement("div"); w.className = "csel";
           const b = document.createElement("button"); b.type = "button"; b.className = "csel-btn";
@@ -2779,13 +3398,280 @@
         document.addEventListener("pointerdown", (e) => { if (cur && !e.target.closest(".csel-panel") && !cur._b.contains(e.target)) closeDD(); }, true);
         addEventListener("scroll", (e) => { if (cur && !mq.matches && !(e.target.closest && e.target.closest(".csel-panel"))) closeDD(); }, true);
         addEventListener("resize", () => { if (cur) { if (mq.matches) closeDD(); else place(); } });
-        window.refreshSelects = () => { if (cur) closeDD(); $$("select").forEach((s) => { build(s); sync(s); }); };
-        $$("select").forEach(build);
+        window.refreshSelects = () => { if (cur) closeDD(); $$("select:not(.form-control)").forEach((s) => { build(s); sync(s); }); };
+        $$("select:not(.form-control)").forEach(build);
       })();
+
+
+      /* ========================================================= */
+      /* NEW ADMIN PANEL INTEGRATION LOGIC                         */
+      /* ========================================================= */
+      const publicView = $("#public-view");
+      const adminView = $("#admin-view");
+      const adminBtnText = $("#admin-btn-text");
+      const adminToggleBtn = $("#admin-mode-btn");
+      const publicNavLinks = $("#public-nav-links");
+      const parkingTypeSelect = $("#adm-parking-type");
+      const parkingPriceWrap = $("#parking-price-wrap");
+      const toastMsg = $("#toast-msg");
+      const adminForm = $("#apartment-admin-form");
+
+      let isAdminMode = false;
+
+      function showToast(text) {
+        toastMsg.textContent = text;
+        toastMsg.classList.add("show");
+        setTimeout(() => toastMsg.classList.remove("show"), 3000);
+      }
+
+      function toggleAdminView() {
+        isAdminMode = !isAdminMode;
+        if (isAdminMode) {
+          publicView.style.display = "none";
+          adminView.classList.add("active");
+          adminBtnText.textContent = "🌐 Public View";
+          publicNavLinks.style.display = "none";
+          renderAdminListTable();
+          window.scrollTo({ top: 0, behavior: "smooth" });
+        } else {
+          publicView.style.display = "block";
+          adminView.classList.remove("active");
+          adminBtnText.textContent = "⚙️ Admin Panel";
+          publicNavLinks.style.display = "flex";
+          fillZones();
+          renderListings();
+          updateReveal();
+          if (MAP.map) MAP.map.invalidateSize();
+        }
+      }
+
+      adminToggleBtn.onclick = toggleAdminView;
+      $("#main-logo-link").onclick = (e) => {
+        if (isAdminMode) {
+          e.preventDefault();
+          toggleAdminView();
+        }
+      };
+
+      parkingTypeSelect.onchange = () => {
+        if (parkingTypeSelect.value === "optional") {
+          parkingPriceWrap.style.display = "block";
+        } else {
+          parkingPriceWrap.style.display = "none";
+        }
+      };
+
+      // Reset to default sample database
+      $("#reset-db-btn").onclick = () => {
+        if (confirm("Ви впевнені, що хочете скинути дані до початкових моделей?")) {
+          L = [...initialDatabase];
+          saveListingsData(L);
+          renderAdminListTable();
+          renderListings();
+          updateReveal();
+          showToast("Дані успішно скинуто!");
+        }
+      };
+
+      $("#admin-add-new-btn").onclick = () => {
+        resetAdminForm();
+        $("#adm-title").focus();
+      };
+
+      $("#cancel-edit-btn").onclick = () => {
+        resetAdminForm();
+      };
+
+      function resetAdminForm() {
+        adminForm.reset();
+        $("#adm-id").value = "";
+        $("#form-title-text").textContent = i18n[currentLang].admin_form_add_title;
+        $("#cancel-edit-btn").style.display = "none";
+        parkingPriceWrap.style.display = "none";
+        $("#adm-is-active").checked = true;
+      }
+
+      function generateUUID() {
+        return 'f3a12b48-xxxx-4a12-yxxx-'.replace(/[xy]/g, function(c) {
+          var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
+          return v.toString(16);
+        }) + Date.now().toString(16);
+      }
+
+      // Handle Save / Edit Form Submit
+      adminForm.onsubmit = (e) => {
+        e.preventDefault();
+        const id = $("#adm-id").value;
+        const title = $("#adm-title").value.trim();
+        const description = $("#adm-description").value.trim();
+        const price = parseFloat($("#adm-price").value);
+        const sector = $("#adm-sector").value;
+        const rooms = parseInt($("#adm-rooms").value, 10);
+        const area = parseFloat($("#adm-area").value);
+        const parking_type = $("#adm-parking-type").value;
+        const parking_price = parking_type === "optional" ? parseFloat($("#adm-parking-price").value || 0) : null;
+        const is_active = $("#adm-is-active").checked;
+        
+        const checkedAmenities = [];
+        $$('input[name="amenities"]:checked').forEach(cb => checkedAmenities.push(cb.value));
+
+        const rawImages = $("#adm-images").value.split(",").map(s => s.trim()).filter(Boolean);
+        const images = rawImages.length ? rawImages : [defaultImages[0]];
+
+        if (id) {
+          // Edit existing item
+          const index = L.findIndex(item => String(item.id) === String(id));
+          if (index !== -1) {
+            L[index] = {
+              ...L[index],
+              title,
+              description,
+              price,
+              sector,
+              z: sector,
+              rooms,
+              area,
+              parking_type,
+              parking_price,
+              amenities: checkedAmenities,
+              t: checkedAmenities,
+              images,
+              is_active
+            };
+            showToast("Об'єкт оновлено!");
+          }
+        } else {
+          // Add new item matching the exact schema
+          const coords = getSectorCoords(sector);
+          const newItem = {
+            id: generateUUID(),
+            title,
+            description,
+            price,
+            parking_type,
+            parking_price,
+            area,
+            rooms,
+            sector,
+            z: sector,
+            amenities: checkedAmenities,
+            t: checkedAmenities,
+            images,
+            created_at: new Date().toISOString(),
+            is_active,
+            lat: coords.lat,
+            lng: coords.lng,
+            floor: `${Math.floor(Math.random() * 8) + 1}/10`
+          };
+          L.unshift(newItem);
+          showToast("Нову квартиру успішно додано!");
+        }
+
+        saveListingsData(L);
+        renderAdminListTable();
+        resetAdminForm();
+      };
+
+      function renderAdminListTable() {
+        const tbody = $("#admin-table-body");
+        $("#admin-count-badge").textContent = `${L.length} об'єктів`;
+
+        if (!L.length) {
+          tbody.innerHTML = `<tr><td colspan="5" style="text-align:center; padding: 20px; color:var(--mute);">Немає доданих об'єктів</td></tr>`;
+          return;
+        }
+
+        tbody.innerHTML = L.map(item => {
+          const displayTitle = typeof item.title === "object" ? (item.title[currentLang] || item.title.ro) : item.title;
+          const thumb = Array.isArray(item.images) && item.images.length > 0 ? item.images[0] : (item.img || defaultImages[0]);
+          
+          return `
+            <tr>
+              <td>
+                <img src="${thumb}" class="admin-img-thumb" alt="thumb" onerror="this.src='${defaultImages[0]}'">
+              </td>
+              <td>
+                <strong style="color:var(--text);">${displayTitle}</strong><br>
+                <small style="color:var(--mute);">${item.sector || item.z} • ${item.rooms} кімн. • ${item.area}m²</small>
+              </td>
+              <td style="color:var(--gold); font-weight:600;">€${item.price}</td>
+              <td>
+                <span class="status-badge ${item.is_active ? 'status-active' : 'status-inactive'}">
+                  ${item.is_active ? 'Активна' : 'Здана / Схована'}
+                </span>
+              </td>
+              <td>
+                <div class="action-btns">
+                  <button class="btn-icon" type="button" onclick="editListing('${item.id}')" title="Редагувати">✏️</button>
+                  <button class="btn-icon" type="button" onclick="toggleListingActive('${item.id}')" title="Змінити статус">
+                    ${item.is_active ? '👁️' : '🙈'}
+                  </button>
+                  <button class="btn-icon delete" type="button" onclick="deleteListing('${item.id}')" title="Видалити">🗑️</button>
+                </div>
+              </td>
+            </tr>
+          `;
+        }).join("");
+      }
+
+      window.editListing = function(id) {
+        const item = L.find(x => String(x.id) === String(id));
+        if (!item) return;
+
+        $("#adm-id").value = item.id;
+        $("#adm-title").value = typeof item.title === "object" ? (item.title[currentLang] || item.title.ro) : item.title;
+        $("#adm-description").value = typeof item.description === "object" ? (item.description[currentLang] || item.description.ro || '') : (item.description || '');
+        $("#adm-price").value = item.price;
+        $("#adm-sector").value = item.sector || item.z || "Militari";
+        $("#adm-rooms").value = item.rooms;
+        $("#adm-area").value = item.area;
+        $("#adm-parking-type").value = item.parking_type || "included";
+        
+        if (item.parking_type === "optional") {
+          parkingPriceWrap.style.display = "block";
+          $("#adm-parking-price").value = item.parking_price || "";
+        } else {
+          parkingPriceWrap.style.display = "none";
+        }
+
+        const amenitiesList = Array.isArray(item.amenities) ? item.amenities : (item.t || []);
+        $$('input[name="amenities"]').forEach(cb => {
+          cb.checked = amenitiesList.includes(cb.value);
+        });
+
+        const imgs = Array.isArray(item.images) ? item.images : (item.img ? [item.img] : []);
+        $("#adm-images").value = imgs.join(", ");
+        $("#adm-is-active").checked = item.is_active !== false;
+
+        $("#form-title-text").textContent = i18n[currentLang].admin_form_edit_title;
+        $("#cancel-edit-btn").style.display = "inline-block";
+        window.scrollTo({ top: adminView.offsetTop - 80, behavior: "smooth" });
+      };
+
+      window.toggleListingActive = function(id) {
+        const item = L.find(x => String(x.id) === String(id));
+        if (item) {
+          item.is_active = !item.is_active;
+          saveListingsData(L);
+          renderAdminListTable();
+          showToast(`Статус змінено на: ${item.is_active ? 'Активна' : 'Здана/Прихована'}`);
+        }
+      };
+
+      window.deleteListing = function(id) {
+        if (confirm("Ви дійсно бажаєте видалити цей об'єкт із бази даних?")) {
+          L = L.filter(x => String(x.id) !== String(id));
+          saveListingsData(L);
+          renderAdminListTable();
+          showToast("Об'єкт видалено з бази!");
+        }
+      };
+
 
       /* App Startup Listener */
       window.addEventListener("load", () => {
         initMap();
+        fillZones();
         renderListings();
         updateReveal();
         try { initCinematicScrollParallax(); } catch (e) { console.warn(e); }
